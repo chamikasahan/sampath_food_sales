@@ -23,7 +23,7 @@ public class database {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampath_food", "root1", "1234");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampath_food", "chamika", "1234");
                 System.out.println("Connected Successfully");
             } catch (SQLException ex) {
                 Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
