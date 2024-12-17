@@ -39,13 +39,16 @@ public class MainClass {
                 // if any users are not exsist, run the register 1st admin
                 Set1stAdmin newAdmin = new Set1stAdmin();
                 newAdmin.setVisible(true);
+                conn.close();
+                stm.close();
 
             } else {
-                
-                // if any users are  exsist, run the login page for login to the system
 
+                // if any users are  exsist, run the login page for login to the system
                 LoginPage loginpage = new LoginPage();
                 loginpage.setVisible(true);
+                conn.close();
+                stm.close();
 
             }
         } catch (SQLException ex) {

@@ -25,6 +25,10 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class DrawerItem extends JButton {
 
+    public DrawerItem(String best_Selling_Products_, Color color) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void setIndex(int index) {
         this.index = index;
     }

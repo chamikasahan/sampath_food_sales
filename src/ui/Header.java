@@ -30,19 +30,22 @@ public class Header extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(53, 53, 53));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Admin");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 240, 20));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 180, 240, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/testprofile.png"))); // NOI18N
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 145, 126));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 145, 126));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Chamika Sahan");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, 20));
     }// </editor-fold>//GEN-END:initComponents
 
 
