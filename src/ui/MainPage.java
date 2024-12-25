@@ -67,7 +67,7 @@ public class MainPage extends javax.swing.JFrame {
         panelDataset = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        datasetTable = new javax.swing.JTable();
+        supdatasetTable = new javax.swing.JTable();
         panelManageUsers = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         cPassword = new javax.swing.JPasswordField();
@@ -264,7 +264,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel6.setText("Dataset");
 
-        datasetTable.setModel(new javax.swing.table.DefaultTableModel(
+        supdatasetTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -275,7 +275,7 @@ public class MainPage extends javax.swing.JFrame {
                 "TransactionID", "CustomerID", "ProductID", "ProductName", "Quantity", "PriceperUnit", "Date", "TotalPrice", "Region"
             }
         ));
-        jScrollPane2.setViewportView(datasetTable);
+        jScrollPane2.setViewportView(supdatasetTable);
 
         javax.swing.GroupLayout panelDatasetLayout = new javax.swing.GroupLayout(panelDataset);
         panelDataset.setLayout(panelDatasetLayout);
@@ -748,15 +748,79 @@ public class MainPage extends javax.swing.JFrame {
         });
     }
 
+    
+    
+    
     /*
-    method for Update emoployee details
+    ********************************************************************************************************************************************
+                                            Admin Dataset page functions
+    ********************************************************************************************************************************************
+    */
+    ArrayList<DataSetLoad> loadDataset() {
+        Connection conn;
+        Statement st;
+        ResultSet rs;
+        ArrayList<DataSetLoad> loadDatasetTable = new ArrayList<>();
+
+        try {
+
+            conn = database.connect();
+            st = conn.createStatement();
+            String sql = "select TransactionID, CustomerID, ProductID, ProductName, Quantity, PriceperUnit, Date, TotalPrice, Region from supermarket_sales"; 
+        rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+ DataSetLoad dataLoad = new DataSetLoad(
+                rs.getInt("TransactionID"), 
+                rs.getInt("CustomerID"), 
+                rs.getInt("ProductID"), 
+                rs.getString("ProductName"), 
+                rs.getInt("Quantity"), 
+                rs.getFloat("PriceperUnit"), 
+                rs.getDate("Date"), 
+                rs.getFloat("TotalPrice"), 
+                rs.getString("Region")
+            );
+                loadDatasetTable.add(dataLoad);
+            }
+        } catch (SQLException e) {
+
+        }
+        return loadDatasetTable;
+    }
+
+    public void showDataset() {
+        ArrayList<DataSetLoad> loaddb = loadDataset();
+        DefaultTableModel tb = (DefaultTableModel) supdatasetTable.getModel();
+    tb.setRowCount(0); 
+        Object[] row = new Object[9];
+        for (int i = 0; i < loaddb.size(); i++) {
+
+       
+            row[0] = loaddb.get(i).getTransactionId();
+            row[1] = loaddb.get(i).getCustomerID();
+            row[2] = loaddb.get(i).getProductID();
+            row[3] = loaddb.get(i).getProductName();
+            row[4] = loaddb.get(i).getQuantity();
+            row[5] = loaddb.get(i).getPriceperUnit();
+            row[6] = loaddb.get(i).getDate();
+            row[7] = loaddb.get(i).getTotalPrice();
+            row[8] = loaddb.get(i).getRegion();
+            tb.addRow(row);
+        }
+    }
+
     
     
-     */
+    /*
+    ********************************************************************************************************************************************
+                                            Update password page function
+    ********************************************************************************************************************************************
+    */
     public void updatePassword() {
 
         Connection conn;
-        PreparedStatement pst,pst1;
+        PreparedStatement pst, pst1;
         ResultSet rs;
 
         String userName = txtUsername.getText();
@@ -780,21 +844,19 @@ public class MainPage extends javax.swing.JFrame {
 
                         if (newPassword.length() > 6) {
                             if (newPassword.equals(confirmNewPassword)) {
-                                
-                                
-                                
-                              try{  
-                  
-            String sql1 = "update signup_details set password=' "+newPassword+" ' where username=' "+userName+" ' ";
-                              pst1 = conn.prepareStatement(sql1);
-                                     pst1 .executeUpdate();
-                              }catch(Exception e){
-                                  JOptionPane.showMessageDialog(null, e);
-                              }
-                              
-                              
-                              
-                                JOptionPane.showMessageDialog(null, "Password Changed Successfully! ");
+
+                                try {
+
+                                    String sql1 = "update signup_details set password=? where username=?";
+                                    pst1 = conn.prepareStatement(sql1);
+                                    pst1.setString(1, newPassword);
+                                    pst1.setString(2, userName);
+                                    pst1.executeUpdate();
+                                    JOptionPane.showMessageDialog(null, "Password Changed Successfully!");
+                                } catch (Exception e) {
+                                    JOptionPane.showMessageDialog(null, e);
+                                }
+
                             } else {
                                 JOptionPane.showMessageDialog(null, "New password and Confirm Password Does not match");
                             }
@@ -817,7 +879,15 @@ public class MainPage extends javax.swing.JFrame {
         }
 
     }
+    
+    
+    /*
+    ********************************************************************************************************************************************
+                                                           Admin Manage Users page functions
+    ********************************************************************************************************************************************
+    */
 
+    
     /*
          **   Method for register employee
      */
@@ -845,56 +915,7 @@ public class MainPage extends javax.swing.JFrame {
         showuserDetails();
 
     }
-    
-    
-    /*
-    
-    method for load dataset
-    
-    */
-    
-    ArrayList<DataSetLoad> loadDataset (){
-        Connection conn;
-        Statement st;
-        ResultSet rs;
-        ArrayList<DataSetLoad> loadDatasetTable = new ArrayList<>();
-        
-        try {
-            
-            conn = database.connect();
-            st = conn.createStatement();
-            String sql = "select TransactionID, CustomerID, ProductID, ProductName, Quantity,PriceperUnit,Date,TotalPrice,Region";
-            rs = st.executeQuery(sql);
-            
-            while(rs.next()){
-                DataSetLoad  dataLoad = new DataSetLoad(rs.getInt("TransactionID"),rs.getInt("CustomerID"),rs.getInt("ProductID"),rs.getString("ProductName"),rs.getInt("Quantity"), rs.getFloat("PriceperUnit"), rs.getDate("Date"), rs.getFloat("TotalPrice"), rs.getString("Region"));
-                loadDatasetTable.add(dataLoad);
-            }
-        }
-        catch(SQLException e){
-            
-        }
-        return loadDatasetTable;
-    }
-    
-        public void showDataset() {
-        ArrayList<DataSetLoad> loaddb = loadDataset();
-        DefaultTableModel tb = (DefaultTableModel) datasetTable.getModel();
-        Object[] row = new Object[9];
-        for (int i = 0; i < loaddb.size(); i++) {
 
-            row[0] = loaddb.get(i).getTransactionId();
-            row[1] = loaddb.get(i).getCustomerID();
-            row[2] = loaddb.get(i).getProductID();
-            row[3] = loaddb.get(i).getProductName();
-            row[4] = loaddb.get(i).getQuantity();
-            row[5] = loaddb.get(i).getPriceperUnit();
-            row[6] = loaddb.get(i).getDate();
-            row[7] = loaddb.get(i).getTotalPrice();
-            row[8] = loaddb.get(i).getRegion();
-            tb.addRow(row);
-        }
-    }
 
     /*
         
@@ -982,10 +1003,17 @@ public class MainPage extends javax.swing.JFrame {
         }
 
     }
+    
+        /*
+    ********************************************************************************************************************************************
+                                                       End of  Admin Manage Users page functions
+    ********************************************************************************************************************************************
+    */
 
     /*
-         **   Admin Header Side Menu
-    
+    *****************************************************************************************************************  
+    Admin Header Side Menu
+    ***************************************************************************************************************
      */
     public void Adminheader() {
 
@@ -1020,42 +1048,42 @@ public class MainPage extends javax.swing.JFrame {
                     switch (index) {
                         case 0:
                             jTabb.setSelectedIndex(0);
-                           
+
                             drawer.hide();
                             break;
                         case 1:
                             jTabb.setSelectedIndex(1);
-                        
+
                             drawer.hide();
                             break;
                         case 2:
                             jTabb.setSelectedIndex(2);
-                            
+
                             drawer.hide();
                             break;
                         case 3:
                             jTabb.setSelectedIndex(3);
-                    
+
                             drawer.hide();
                             break;
                         case 4:
                             jTabb.setSelectedIndex(4);
-                            
+
                             drawer.hide();
                             break;
                         case 5:
                             jTabb.setSelectedIndex(5);
-                         
+
                             drawer.hide();
                             break;
                         case 6:
                             jTabb.setSelectedIndex(6);
-                    
+
                             drawer.hide();
                             break;
                         case 7:
                             jTabb.setSelectedIndex(7);
-                        
+
                             drawer.hide();
                             break;
                         default:
@@ -1064,7 +1092,6 @@ public class MainPage extends javax.swing.JFrame {
                     code for the login confirmation
                     
                              */
-                      
                             int number = JOptionPane.showConfirmDialog(null, "Are you shure you want to logout ?  You will be returned to Login Screen", "Confirm Logout", JOptionPane.YES_NO_OPTION);
                             if (number == 0) {
                                 LoginPage loginpage = new LoginPage();
@@ -1118,32 +1145,32 @@ public class MainPage extends javax.swing.JFrame {
                     switch (index) {
                         case 0:
                             jTabb.setSelectedIndex(0);
-                           
+
                             drawer.hide();
                             break;
                         case 1:
                             jTabb.setSelectedIndex(1);
-                          
+
                             drawer.hide();
                             break;
                         case 2:
                             jTabb.setSelectedIndex(2);
-                        
+
                             drawer.hide();
                             break;
                         case 3:
                             jTabb.setSelectedIndex(3);
-                
+
                             drawer.hide();
                             break;
                         case 4:
                             jTabb.setSelectedIndex(4);
-             
+
                             drawer.hide();
                             break;
                         case 5:
                             jTabb.setSelectedIndex(7);
-                         
+
                             drawer.hide();
                             break;
                         default:
@@ -1152,7 +1179,6 @@ public class MainPage extends javax.swing.JFrame {
                     code for the login confirmation
                     
                              */
-                       
                             int number = JOptionPane.showConfirmDialog(null, "Are you shure you want to logout ?  You will be returned to Login Screen", "Confirm Logout", JOptionPane.YES_NO_OPTION);
                             if (number == 0) {
                                 LoginPage loginpage = new LoginPage();
@@ -1176,7 +1202,6 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JButton btnRegister;
     private javax.swing.JPasswordField cPassword;
     private javax.swing.JComboBox<String> comboRole;
-    private javax.swing.JTable datasetTable;
     private javax.swing.JTable employeeTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1215,6 +1240,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JPanel panelProduct;
     private javax.swing.JPanel panelSales;
     private javax.swing.JPasswordField password;
+    private javax.swing.JTable supdatasetTable;
     private javax.swing.JPasswordField txtConfirmPassword;
     private javax.swing.JPasswordField txtCurrentPassword;
     private javax.swing.JTextField txtEmail;
