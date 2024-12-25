@@ -56,9 +56,9 @@ public class LoginForm {
                     if (role.equalsIgnoreCase("Admin")) {
                       JOptionPane.showMessageDialog(null, "Logged as Admin", "Success", JOptionPane.PLAIN_MESSAGE);
                      MainPage mp = new MainPage();
+                     mp.Adminheader();
                      mp.setVisible(true);
-                            LoginPage lg = new LoginPage();
-       lg.dispose();
+
        conn.close();
 
 
@@ -68,7 +68,9 @@ public class LoginForm {
                     else {
                           JOptionPane.showMessageDialog(null, "Logged as employee", "Success", JOptionPane.PLAIN_MESSAGE);
                           MainPage main = new MainPage();
+                          main.Empheader();
                           main.setVisible(true);
+                          
                          
                     }
   

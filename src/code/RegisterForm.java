@@ -28,7 +28,7 @@ public class RegisterForm {
         try {
             conn = database.connect();
 
-            String sql = "insert into signup_details (username, role, email, password, confirm_password) values(?,?,?,?,?)";
+            String sql = "insert into signup_details (username, role, email, password) values(?,?,?,?)";
             pst = conn.prepareStatement(sql);
 
             /*
@@ -61,7 +61,6 @@ public class RegisterForm {
                             pst.setString(2, textRole);
                             pst.setString(3, userEmail);
                             pst.setString(4, userPassword);
-                            pst.setString(5, cUserPassword);
                             pst.executeUpdate();
 
                             JOptionPane.showMessageDialog(null, "success", "User Registered Successfully !", JOptionPane.PLAIN_MESSAGE);

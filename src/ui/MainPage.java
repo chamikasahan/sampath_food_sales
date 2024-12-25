@@ -5,8 +5,10 @@
  */
 package ui;
 
+import code.DataSetLoad;
 import code.EmployeeTableLoad;
 import code.RegisterForm;
+import code.UpdateUserPassword;
 import db.database;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -35,10 +37,11 @@ public class MainPage extends javax.swing.JFrame {
      */
     public MainPage() {
         initComponents();
-        header();
+
         loadTable();
-        //btnClear.hide();
+
         showuserDetails();
+        showDataset();
 
     }
 
@@ -48,12 +51,11 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         jTabb = new javax.swing.JTabbedPane();
         panelBSP = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         panelCustomer = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         panelProduct = new javax.swing.JPanel();
@@ -64,6 +66,8 @@ public class MainPage extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         panelDataset = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        datasetTable = new javax.swing.JTable();
         panelManageUsers = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         cPassword = new javax.swing.JPasswordField();
@@ -84,13 +88,16 @@ public class MainPage extends javax.swing.JFrame {
         txtFIndEmployee = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
         panelChangepwd = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        jLabel17 = new javax.swing.JLabel();
-        jPasswordField4 = new javax.swing.JPasswordField();
+        jPanel2 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
-        jPasswordField5 = new javax.swing.JPasswordField();
+        txtConfirmPassword = new javax.swing.JPasswordField();
+        txtUsername = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtNewPassword = new javax.swing.JPasswordField();
+        txtCurrentPassword = new javax.swing.JPasswordField();
+        jLabel17 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,6 +114,10 @@ public class MainPage extends javax.swing.JFrame {
         jLabel8.setText("Sampath Food sales Dashboard");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 20, 550, 70));
 
+        jPanel6.setBackground(new java.awt.Color(53, 53, 53));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 1860, 40));
+
         jTabb.setBackground(new java.awt.Color(51, 51, 51));
 
         panelBSP.setBackground(new java.awt.Color(51, 51, 51));
@@ -121,14 +132,6 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
-        jPanel6.setBackground(new java.awt.Color(53, 53, 53));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 3, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 102, 255));
-        jLabel7.setText("Tab Title");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 110, -1));
-
         javax.swing.GroupLayout panelBSPLayout = new javax.swing.GroupLayout(panelBSP);
         panelBSP.setLayout(panelBSPLayout);
         panelBSPLayout.setHorizontalGroup(
@@ -139,25 +142,24 @@ public class MainPage extends javax.swing.JFrame {
                         .addGap(189, 189, 189)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBSPLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 2330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(2348, 2348, 2348)
                         .addComponent(jButton3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBSPLayout.setVerticalGroup(
             panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBSPLayout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(181, 181, 181)
+                .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(553, Short.MAX_VALUE))
+                .addContainerGap(528, Short.MAX_VALUE))
         );
 
         jTabb.addTab("tab1", panelBSP);
+
+        panelCustomer.setBackground(new java.awt.Color(51, 51, 51));
+        panelCustomer.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel2.setText("Customer analysis");
@@ -181,6 +183,9 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabb.addTab("tab2", panelCustomer);
 
+        panelProduct.setBackground(new java.awt.Color(51, 51, 51));
+        panelProduct.setForeground(new java.awt.Color(255, 255, 255));
+
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel3.setText("product performance");
 
@@ -202,6 +207,9 @@ public class MainPage extends javax.swing.JFrame {
         );
 
         jTabb.addTab("tab3", panelProduct);
+
+        panelBranch.setBackground(new java.awt.Color(51, 51, 51));
+        panelBranch.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel4.setText("Branch perofrmance");
@@ -225,6 +233,9 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabb.addTab("tab4", panelBranch);
 
+        panelSales.setBackground(new java.awt.Color(51, 51, 51));
+        panelSales.setForeground(new java.awt.Color(255, 255, 255));
+
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel5.setText("Sales");
 
@@ -247,8 +258,24 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabb.addTab("tab5", panelSales);
 
+        panelDataset.setBackground(new java.awt.Color(51, 51, 51));
+        panelDataset.setForeground(new java.awt.Color(255, 255, 255));
+
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel6.setText("Dataset");
+
+        datasetTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "TransactionID", "CustomerID", "ProductID", "ProductName", "Quantity", "PriceperUnit", "Date", "TotalPrice", "Region"
+            }
+        ));
+        jScrollPane2.setViewportView(datasetTable);
 
         javax.swing.GroupLayout panelDatasetLayout = new javax.swing.GroupLayout(panelDataset);
         panelDataset.setLayout(panelDatasetLayout);
@@ -257,19 +284,26 @@ public class MainPage extends javax.swing.JFrame {
             .addGroup(panelDatasetLayout.createSequentialGroup()
                 .addGap(189, 189, 189)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1320, Short.MAX_VALUE))
+                .addGap(248, 248, 248)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         panelDatasetLayout.setVerticalGroup(
             panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatasetLayout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(554, Short.MAX_VALUE))
+                .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatasetLayout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDatasetLayout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         jTabb.addTab("tab6", panelDataset);
 
-        panelManageUsers.setBackground(new java.awt.Color(255, 255, 255));
+        panelManageUsers.setBackground(new java.awt.Color(51, 51, 51));
         panelManageUsers.setForeground(new java.awt.Color(255, 255, 255));
         panelManageUsers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -287,10 +321,14 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Confirm Password");
 
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Password");
 
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -299,12 +337,16 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Email");
 
         comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "register as", "Employee", "Admin" }));
 
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Register as: ");
 
         txtUserName.addActionListener(new java.awt.event.ActionListener() {
@@ -313,7 +355,9 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Username");
 
         btnRegister.setBackground(new java.awt.Color(51, 0, 204));
@@ -336,17 +380,21 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        employeeTable.setBackground(new java.awt.Color(255, 255, 255));
+        employeeTable.setForeground(new java.awt.Color(51, 51, 51));
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "id", "Username", "role", "email", "password"
+                "id", "Username", "role", "email"
             }
         ));
         jScrollPane1.setViewportView(employeeTable);
 
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Find Employee using ID");
 
         txtFIndEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -371,6 +419,9 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        btnClear.setBackground(new java.awt.Color(51, 0, 204));
+        btnClear.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setText("Clear");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -415,13 +466,13 @@ public class MainPage extends javax.swing.JFrame {
                             .addComponent(txtFIndEmployee, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(60, 60, 60))
         );
         panelManageUsersLayout.setVerticalGroup(
             panelManageUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelManageUsersLayout.createSequentialGroup()
-                .addGap(133, 133, 133)
+                .addGap(226, 226, 226)
                 .addGroup(panelManageUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jLabel16))
@@ -431,9 +482,9 @@ public class MainPage extends javax.swing.JFrame {
                     .addGroup(panelManageUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtFIndEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
                 .addGroup(panelManageUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelManageUsersLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -449,27 +500,30 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addGroup(panelManageUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(169, 169, 169))
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelManageUsersLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)))
+                .addGroup(panelManageUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(183, 183, 183))
         );
 
         jTabb.addTab("tab7", panelManageUsers);
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel11.setText("New Password");
+        panelChangepwd.setBackground(new java.awt.Color(51, 51, 51));
+        panelChangepwd.setForeground(new java.awt.Color(255, 255, 255));
 
-        jPasswordField3.setText("jPasswordField1");
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Change Password", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(51, 102, 255))); // NOI18N
+        jPanel2.setForeground(new java.awt.Color(51, 51, 51));
 
-        jLabel17.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel17.setText("Confirm New Password");
-
-        jPasswordField4.setText("jPasswordField1");
-
+        jButton6.setBackground(new java.awt.Color(0, 193, 0));
+        jButton6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Update Password");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -477,50 +531,89 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField5.setText("jPasswordField1");
+        txtConfirmPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConfirmPasswordActionPerformed(evt);
+            }
+        });
 
+        jLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel19.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Username");
+
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
         jLabel18.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Old Password");
+
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("New Password");
+
+        jLabel17.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel17.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Confirm New Password");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCurrentPassword)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtConfirmPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNewPassword)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCurrentPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout panelChangepwdLayout = new javax.swing.GroupLayout(panelChangepwd);
         panelChangepwd.setLayout(panelChangepwdLayout);
         panelChangepwdLayout.setHorizontalGroup(
             panelChangepwdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelChangepwdLayout.createSequentialGroup()
-                .addGroup(panelChangepwdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelChangepwdLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelChangepwdLayout.createSequentialGroup()
-                        .addGap(603, 603, 603)
-                        .addGroup(panelChangepwdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addComponent(jPasswordField5, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelChangepwdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel17)
-                                .addComponent(jLabel11)
-                                .addComponent(jPasswordField4)
-                                .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(895, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelChangepwdLayout.createSequentialGroup()
+                .addContainerGap(861, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(599, 599, 599))
         );
         panelChangepwdLayout.setVerticalGroup(
             panelChangepwdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelChangepwdLayout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addGap(155, 155, 155)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         jTabb.addTab("tab8", panelChangepwd);
@@ -580,7 +673,8 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFIndEmployeeActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        updatePassword();
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void txtFIndEmployeeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFIndEmployeeKeyReleased
@@ -613,6 +707,10 @@ public class MainPage extends javax.swing.JFrame {
     private void panelManageUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelManageUsersMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_panelManageUsersMouseClicked
+
+    private void txtConfirmPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtConfirmPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -651,6 +749,76 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     /*
+    method for Update emoployee details
+    
+    
+     */
+    public void updatePassword() {
+
+        Connection conn;
+        PreparedStatement pst,pst1;
+        ResultSet rs;
+
+        String userName = txtUsername.getText();
+        String currentPassword = txtCurrentPassword.getText();
+        String newPassword = txtNewPassword.getText();
+        String confirmNewPassword = txtConfirmPassword.getText();
+
+        try {
+
+            conn = database.connect();
+            String sql = "select * from signup_details where username =?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, userName);
+            rs = pst.executeQuery();
+
+            if (!currentPassword.isEmpty() && !newPassword.isEmpty() && !confirmNewPassword.isEmpty()) {
+
+                if (rs.next()) {
+
+                    if (rs.getString("password").equals(currentPassword)) {
+
+                        if (newPassword.length() > 6) {
+                            if (newPassword.equals(confirmNewPassword)) {
+                                
+                                
+                                
+                              try{  
+                  
+            String sql1 = "update signup_details set password=' "+newPassword+" ' where username=' "+userName+" ' ";
+                              pst1 = conn.prepareStatement(sql1);
+                                     pst1 .executeUpdate();
+                              }catch(Exception e){
+                                  JOptionPane.showMessageDialog(null, e);
+                              }
+                              
+                              
+                              
+                                JOptionPane.showMessageDialog(null, "Password Changed Successfully! ");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "New password and Confirm Password Does not match");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Password should be more than 6 digits");
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Enter correct old Password");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Username");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Fields are required !");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    /*
          **   Method for register employee
      */
     public void registerValidation() {
@@ -677,15 +845,61 @@ public class MainPage extends javax.swing.JFrame {
         showuserDetails();
 
     }
+    
+    
+    /*
+    
+    method for load dataset
+    
+    */
+    
+    ArrayList<DataSetLoad> loadDataset (){
+        Connection conn;
+        Statement st;
+        ResultSet rs;
+        ArrayList<DataSetLoad> loadDatasetTable = new ArrayList<>();
+        
+        try {
+            
+            conn = database.connect();
+            st = conn.createStatement();
+            String sql = "select TransactionID, CustomerID, ProductID, ProductName, Quantity,PriceperUnit,Date,TotalPrice,Region";
+            rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+                DataSetLoad  dataLoad = new DataSetLoad(rs.getInt("TransactionID"),rs.getInt("CustomerID"),rs.getInt("ProductID"),rs.getString("ProductName"),rs.getInt("Quantity"), rs.getFloat("PriceperUnit"), rs.getDate("Date"), rs.getFloat("TotalPrice"), rs.getString("Region"));
+                loadDatasetTable.add(dataLoad);
+            }
+        }
+        catch(SQLException e){
+            
+        }
+        return loadDatasetTable;
+    }
+    
+        public void showDataset() {
+        ArrayList<DataSetLoad> loaddb = loadDataset();
+        DefaultTableModel tb = (DefaultTableModel) datasetTable.getModel();
+        Object[] row = new Object[9];
+        for (int i = 0; i < loaddb.size(); i++) {
+
+            row[0] = loaddb.get(i).getTransactionId();
+            row[1] = loaddb.get(i).getCustomerID();
+            row[2] = loaddb.get(i).getProductID();
+            row[3] = loaddb.get(i).getProductName();
+            row[4] = loaddb.get(i).getQuantity();
+            row[5] = loaddb.get(i).getPriceperUnit();
+            row[6] = loaddb.get(i).getDate();
+            row[7] = loaddb.get(i).getTotalPrice();
+            row[8] = loaddb.get(i).getRegion();
+            tb.addRow(row);
+        }
+    }
 
     /*
         
-        ** method for load table
+        ** method for load employee table
      */
-//        public void loadTable(){
-//            
-//            new EmployeeTableLoad(employeeTable);
-//        }
     ArrayList<EmployeeTableLoad> loadTable() {
         Connection conn;
         Statement st;
@@ -704,7 +918,7 @@ public class MainPage extends javax.swing.JFrame {
                 loadtable.add(load);
 
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -713,24 +927,9 @@ public class MainPage extends javax.swing.JFrame {
 
     }
 
-//    Print table 
-    /*
-    try{
-    employeeTable.print(jTable.printmMode.FIT_WIDTH)
-    }
-    catch(Exception e) {
-    JOptionPane.showMessageDialog(null, e);
-    
-    }
-    
-    
-    
-    
-     */
     public void showuserDetails() {
         ArrayList<EmployeeTableLoad> show = loadTable();
         DefaultTableModel tb = (DefaultTableModel) employeeTable.getModel();
-        System.out.println("dtdgdrfg");
         Object[] row = new Object[4];
         for (int i = 0; i < show.size(); i++) {
 
@@ -785,10 +984,10 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     /*
-         **   Method for Side bar 
+         **   Admin Header Side Menu
     
      */
-    public void header() {
+    public void Adminheader() {
 
         drawer = Drawer.newDrawer(this)
                 .drawerBackground(Color.white)
@@ -821,34 +1020,42 @@ public class MainPage extends javax.swing.JFrame {
                     switch (index) {
                         case 0:
                             jTabb.setSelectedIndex(0);
+                           
                             drawer.hide();
                             break;
                         case 1:
                             jTabb.setSelectedIndex(1);
+                        
                             drawer.hide();
                             break;
                         case 2:
                             jTabb.setSelectedIndex(2);
+                            
                             drawer.hide();
                             break;
                         case 3:
                             jTabb.setSelectedIndex(3);
+                    
                             drawer.hide();
                             break;
                         case 4:
                             jTabb.setSelectedIndex(4);
+                            
                             drawer.hide();
                             break;
                         case 5:
                             jTabb.setSelectedIndex(5);
+                         
                             drawer.hide();
                             break;
                         case 6:
                             jTabb.setSelectedIndex(6);
+                    
                             drawer.hide();
                             break;
                         case 7:
                             jTabb.setSelectedIndex(7);
+                        
                             drawer.hide();
                             break;
                         default:
@@ -857,6 +1064,7 @@ public class MainPage extends javax.swing.JFrame {
                     code for the login confirmation
                     
                              */
+                      
                             int number = JOptionPane.showConfirmDialog(null, "Are you shure you want to logout ?  You will be returned to Login Screen", "Confirm Logout", JOptionPane.YES_NO_OPTION);
                             if (number == 0) {
                                 LoginPage loginpage = new LoginPage();
@@ -875,12 +1083,100 @@ public class MainPage extends javax.swing.JFrame {
 
     }
 
+    /*
+         **   Employee Header Side Menu
+    
+     */
+    public void Empheader() {
+
+        drawer = Drawer.newDrawer(this)
+                .drawerBackground(Color.white)
+                .background(Color.black)
+                .headerHeight(160)
+                .closeOnPress(true)
+                //                .backgroundTransparent(0.3f)
+                .leftDrawer(true)
+                .header(new Header())
+                .headerHeight(220)
+                .itemHeight(70)
+                .itemAlignLeft(true)
+                .separator(30, Color.white)
+                .addChild(new DrawerItem("Best Selling Products ").effectColor(Color.blue).icon(new ImageIcon(getClass().getResource("/assets/product.png"))).build())
+                .addChild(new DrawerItem("Customer Analysis ").effectColor(Color.blue).icon(new ImageIcon(getClass().getResource("/assets/customer_analysis.png"))).build())
+                .addChild(new DrawerItem("Product Performance ").effectColor(Color.blue).icon(new ImageIcon(getClass().getResource("/assets/product_per.png"))).build())
+                .addChild(new DrawerItem("Branch Performance ").effectColor(Color.blue).icon(new ImageIcon(getClass().getResource("/assets/branch.png"))).build())
+                .addChild(new DrawerItem("Sales ").effectColor(Color.blue).icon(new ImageIcon(getClass().getResource("/assets/sales.png"))).build())
+                .separator(220, Color.white)
+                .addChild(new DrawerItem("Change Password ").effectColor(Color.blue).icon(new ImageIcon(getClass().getResource("/assets/change_pwd.png"))).build())
+                .addFooter(new DrawerItem("Log out ").effectColor(Color.blue).icon(new ImageIcon(getClass().getResource("/assets/exit.png"))).build())
+                /*
+                Action event for the drawerItems
+                
+                 */
+                .event((int index, DrawerItem item) -> {
+
+                    switch (index) {
+                        case 0:
+                            jTabb.setSelectedIndex(0);
+                           
+                            drawer.hide();
+                            break;
+                        case 1:
+                            jTabb.setSelectedIndex(1);
+                          
+                            drawer.hide();
+                            break;
+                        case 2:
+                            jTabb.setSelectedIndex(2);
+                        
+                            drawer.hide();
+                            break;
+                        case 3:
+                            jTabb.setSelectedIndex(3);
+                
+                            drawer.hide();
+                            break;
+                        case 4:
+                            jTabb.setSelectedIndex(4);
+             
+                            drawer.hide();
+                            break;
+                        case 5:
+                            jTabb.setSelectedIndex(7);
+                         
+                            drawer.hide();
+                            break;
+                        default:
+
+                            /*
+                    code for the login confirmation
+                    
+                             */
+                       
+                            int number = JOptionPane.showConfirmDialog(null, "Are you shure you want to logout ?  You will be returned to Login Screen", "Confirm Logout", JOptionPane.YES_NO_OPTION);
+                            if (number == 0) {
+                                LoginPage loginpage = new LoginPage();
+
+                                loginpage.setVisible(true);
+                                this.dispose();
+
+                            } else {
+
+                                drawer.hide();
+                            }
+                            break;
+                    }
+                })
+                .build();
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnRegister;
     private javax.swing.JPasswordField cPassword;
     private javax.swing.JComboBox<String> comboRole;
+    private javax.swing.JTable datasetTable;
     private javax.swing.JTable employeeTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -896,20 +1192,19 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JPasswordField jPasswordField4;
-    private javax.swing.JPasswordField jPasswordField5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabb;
     private javax.swing.JPanel panelBSP;
     private javax.swing.JPanel panelBranch;
@@ -920,9 +1215,13 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JPanel panelProduct;
     private javax.swing.JPanel panelSales;
     private javax.swing.JPasswordField password;
+    private javax.swing.JPasswordField txtConfirmPassword;
+    private javax.swing.JPasswordField txtCurrentPassword;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFIndEmployee;
+    private javax.swing.JPasswordField txtNewPassword;
     private javax.swing.JTextField txtUserName;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
 }
