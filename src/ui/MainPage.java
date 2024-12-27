@@ -1003,7 +1003,7 @@ clearFields();
     }//GEN-LAST:event_btnUpdateDataActionPerformed
 
     private void btnDeleteDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDataActionPerformed
-        // TODO add your handling code here:
+        deleteData();
     }//GEN-LAST:event_btnDeleteDataActionPerformed
 
     /**
@@ -1138,6 +1138,35 @@ clearFields();
         
     }
     
+        
+    /*
+    -------------------  Delete dataset frrom mysql
+     */
+    public void deleteData(){
+        Connection conn;
+        PreparedStatement pst;
+                String transactionId = txtTransacId.getText();
+
+        try {
+            conn = database.connect();
+          pst = conn.prepareStatement("Delete from supermarket_sales where TransactionID=?");
+
+            if (transactionId.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "ID Cannot be Empty", "Error", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+                pst.setString(1, transactionId);
+
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Dataset Deleted !");
+                           showDataset();
+            }
+
+        } catch (SQLException e) {
+            
+        }
+    }
     
     /*
     -------------------  Update dataset frrom mysql
