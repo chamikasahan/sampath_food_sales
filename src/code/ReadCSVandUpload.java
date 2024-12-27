@@ -131,9 +131,9 @@ public class ReadCSVandUpload extends javax.swing.JFrame {
                             pst.setDate(6, date);  // date
    
                            
-                                                       Float total = Float.parseFloat(val[7].toString().trim()); // p p unit
-                            pst.setFloat(7, total);
-                            pst.setString(8, val[8]);
+                                                       Float total = Float.parseFloat(val[7].toString().trim());
+                            pst.setFloat(7, total);   //total
+                            pst.setString(8, val[8]);  //region
                            
                             pst.executeUpdate();
 

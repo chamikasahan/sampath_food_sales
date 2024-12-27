@@ -31,19 +31,13 @@ public class RegisterForm {
             String sql = "insert into signup_details (username, role, email, password) values(?,?,?,?)";
             pst = conn.prepareStatement(sql);
 
-            /*
-            ** check fileds are empty or not
-             */
+           
             if (!userName.equals(" ") && !userEmail.equals(" ") && userRole != 0 && !userPassword.equals(" ") && !cUserPassword.equals(" ")) {
 
-                /*
-            ** check password Length
-                 */
+             
                 if (userPassword.length() > 6) {
 
-                    /*
-            ** check password and confirm password match or not
-                     */
+              
                     if (userPassword.equals(cUserPassword)) {
 
                         /*

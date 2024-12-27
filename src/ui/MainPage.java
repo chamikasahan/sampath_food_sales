@@ -5,6 +5,7 @@
  */
 package ui;
 
+import code.AddNewData;
 import code.DataSetLoad;
 import code.EmployeeTableLoad;
 import code.RegisterForm;
@@ -17,7 +18,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,10 +68,6 @@ public class MainPage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         panelSales = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        panelDataset = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        supdatasetTable = new javax.swing.JTable();
         panelManageUsers = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         cPassword = new javax.swing.JPasswordField();
@@ -98,6 +98,30 @@ public class MainPage extends javax.swing.JFrame {
         txtNewPassword = new javax.swing.JPasswordField();
         txtCurrentPassword = new javax.swing.JPasswordField();
         jLabel17 = new javax.swing.JLabel();
+        panelDataset = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        supdatasetTable = new javax.swing.JTable();
+        btnDeleteData = new javax.swing.JButton();
+        txtRegion = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        txtTotalPrice = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        dateChoose = new com.toedter.calendar.JDateChooser();
+        jLabel25 = new javax.swing.JLabel();
+        txtPperUnit = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        txtPQuantity = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        txtPName = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        txtPId = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        txtCusId = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        txtTransacId = new javax.swing.JTextField();
+        btnRegister2 = new javax.swing.JButton();
+        btnUpdateData = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -257,51 +281,6 @@ public class MainPage extends javax.swing.JFrame {
         );
 
         jTabb.addTab("tab5", panelSales);
-
-        panelDataset.setBackground(new java.awt.Color(51, 51, 51));
-        panelDataset.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel6.setText("Dataset");
-
-        supdatasetTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "TransactionID", "CustomerID", "ProductID", "ProductName", "Quantity", "PriceperUnit", "Date", "TotalPrice", "Region"
-            }
-        ));
-        jScrollPane2.setViewportView(supdatasetTable);
-
-        javax.swing.GroupLayout panelDatasetLayout = new javax.swing.GroupLayout(panelDataset);
-        panelDataset.setLayout(panelDatasetLayout);
-        panelDatasetLayout.setHorizontalGroup(
-            panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDatasetLayout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(248, 248, 248)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        panelDatasetLayout.setVerticalGroup(
-            panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDatasetLayout.createSequentialGroup()
-                .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDatasetLayout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelDatasetLayout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(181, Short.MAX_VALUE))
-        );
-
-        jTabb.addTab("tab6", panelDataset);
 
         panelManageUsers.setBackground(new java.awt.Color(51, 51, 51));
         panelManageUsers.setForeground(new java.awt.Color(255, 255, 255));
@@ -618,6 +597,243 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabb.addTab("tab8", panelChangepwd);
 
+        panelDataset.setBackground(new java.awt.Color(51, 51, 51));
+        panelDataset.setForeground(new java.awt.Color(255, 255, 255));
+
+        supdatasetTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "TransactionID", "CustomerID", "ProductID", "ProductName", "Quantity", "PriceperUnit", "Date", "TotalPrice", "Region"
+            }
+        ));
+        supdatasetTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                supdatasetTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(supdatasetTable);
+
+        btnDeleteData.setBackground(new java.awt.Color(201, 0, 0));
+        btnDeleteData.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnDeleteData.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteData.setText("Delete Data");
+        btnDeleteData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteDataActionPerformed(evt);
+            }
+        });
+
+        txtRegion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRegionActionPerformed(evt);
+            }
+        });
+
+        jLabel27.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel27.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Region");
+
+        txtTotalPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalPriceActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel26.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Total Price");
+
+        dateChoose.setBackground(new java.awt.Color(51, 51, 51));
+        dateChoose.setForeground(new java.awt.Color(51, 51, 51));
+        dateChoose.setDateFormatString("yyyy-MM-dd");
+
+        jLabel25.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel25.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Date");
+
+        txtPperUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPperUnitActionPerformed(evt);
+            }
+        });
+
+        jLabel24.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel24.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Product Per Unit");
+
+        txtPQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPQuantityActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel23.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Quantity");
+
+        txtPName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPNameActionPerformed(evt);
+            }
+        });
+
+        jLabel22.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel22.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Product Name");
+
+        txtPId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPIdActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel21.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Product Id");
+
+        txtCusId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCusIdActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel20.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Customer Id");
+
+        jLabel28.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel28.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Transaction Id");
+
+        txtTransacId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTransacIdActionPerformed(evt);
+            }
+        });
+
+        btnRegister2.setBackground(new java.awt.Color(51, 0, 204));
+        btnRegister2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnRegister2.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister2.setText("Add Data");
+        btnRegister2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegister2ActionPerformed(evt);
+            }
+        });
+
+        btnUpdateData.setBackground(new java.awt.Color(0, 193, 0));
+        btnUpdateData.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnUpdateData.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateData.setText("Update Data");
+        btnUpdateData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateDataActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelDatasetLayout = new javax.swing.GroupLayout(panelDataset);
+        panelDataset.setLayout(panelDatasetLayout);
+        panelDatasetLayout.setHorizontalGroup(
+            panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatasetLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelDatasetLayout.createSequentialGroup()
+                        .addComponent(btnRegister2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdateData, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDeleteData, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel20)
+                        .addComponent(txtCusId)
+                        .addComponent(jLabel21)
+                        .addComponent(txtPId)
+                        .addComponent(jLabel22)
+                        .addComponent(txtPName)
+                        .addComponent(jLabel23)
+                        .addComponent(txtPQuantity)
+                        .addComponent(jLabel24)
+                        .addComponent(txtPperUnit)
+                        .addComponent(jLabel25)
+                        .addComponent(jLabel26)
+                        .addComponent(txtTotalPrice)
+                        .addComponent(jLabel27)
+                        .addComponent(txtRegion)
+                        .addComponent(dateChoose, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                        .addComponent(jLabel28)
+                        .addComponent(txtTransacId)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
+        );
+        panelDatasetLayout.setVerticalGroup(
+            panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatasetLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatasetLayout.createSequentialGroup()
+                .addContainerGap(61, Short.MAX_VALUE)
+                .addComponent(jLabel28)
+                .addGap(9, 9, 9)
+                .addComponent(txtTransacId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel20)
+                .addGap(9, 9, 9)
+                .addComponent(txtCusId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel21)
+                .addGap(9, 9, 9)
+                .addComponent(txtPId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel22)
+                .addGap(9, 9, 9)
+                .addComponent(txtPName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel23)
+                .addGap(9, 9, 9)
+                .addComponent(txtPQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel24)
+                .addGap(9, 9, 9)
+                .addComponent(txtPperUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dateChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel26)
+                .addGap(9, 9, 9)
+                .addComponent(txtTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel27)
+                .addGap(10, 10, 10)
+                .addComponent(txtRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeleteData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegister2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
+        );
+
+        jTabb.addTab("tab6", panelDataset);
+
         jPanel1.add(jTabb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1920, 940));
 
         jButton1.setBackground(new java.awt.Color(53, 53, 53));
@@ -712,6 +928,59 @@ public class MainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConfirmPasswordActionPerformed
 
+    private void txtCusIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCusIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCusIdActionPerformed
+
+    private void txtPIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPIdActionPerformed
+
+    private void txtPNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPNameActionPerformed
+
+    private void txtPQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPQuantityActionPerformed
+
+    private void txtPperUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPperUnitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPperUnitActionPerformed
+
+    private void txtTotalPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalPriceActionPerformed
+
+    private void txtRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRegionActionPerformed
+
+    private void btnDeleteDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDataActionPerformed
+        addData();
+        
+    }//GEN-LAST:event_btnDeleteDataActionPerformed
+
+    private void txtTransacIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransacIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTransacIdActionPerformed
+
+    private void supdatasetTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supdatasetTableMouseClicked
+             boolean tableeditDisable = supdatasetTable.isEditing();
+        if (tableeditDisable == false) {
+            JOptionPane.showMessageDialog(null, "Cant Edit this Table", " Warning", JOptionPane.WARNING_MESSAGE);
+            
+        }
+    }//GEN-LAST:event_supdatasetTableMouseClicked
+
+    private void btnRegister2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegister2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegister2ActionPerformed
+
+    private void btnUpdateDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateDataActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -748,14 +1017,14 @@ public class MainPage extends javax.swing.JFrame {
         });
     }
 
-    
-    
-    
     /*
     ********************************************************************************************************************************************
                                             Admin Dataset page functions
     ********************************************************************************************************************************************
-    */
+     */
+ /*
+    -------------------  load dataset to table
+     */
     ArrayList<DataSetLoad> loadDataset() {
         Connection conn;
         Statement st;
@@ -766,21 +1035,21 @@ public class MainPage extends javax.swing.JFrame {
 
             conn = database.connect();
             st = conn.createStatement();
-            String sql = "select TransactionID, CustomerID, ProductID, ProductName, Quantity, PriceperUnit, Date, TotalPrice, Region from supermarket_sales"; 
-        rs = st.executeQuery(sql);
+            String sql = "select TransactionID, CustomerID, ProductID, ProductName, Quantity, PriceperUnit, Date, TotalPrice, Region from supermarket_sales";
+            rs = st.executeQuery(sql);
 
             while (rs.next()) {
- DataSetLoad dataLoad = new DataSetLoad(
-                rs.getInt("TransactionID"), 
-                rs.getInt("CustomerID"), 
-                rs.getInt("ProductID"), 
-                rs.getString("ProductName"), 
-                rs.getInt("Quantity"), 
-                rs.getFloat("PriceperUnit"), 
-                rs.getDate("Date"), 
-                rs.getFloat("TotalPrice"), 
-                rs.getString("Region")
-            );
+                DataSetLoad dataLoad = new DataSetLoad(
+                        rs.getInt("TransactionID"),
+                        rs.getInt("CustomerID"),
+                        rs.getInt("ProductID"),
+                        rs.getString("ProductName"),
+                        rs.getInt("Quantity"),
+                        rs.getFloat("PriceperUnit"),
+                        rs.getDate("Date"),
+                        rs.getFloat("TotalPrice"),
+                        rs.getString("Region")
+                );
                 loadDatasetTable.add(dataLoad);
             }
         } catch (SQLException e) {
@@ -792,11 +1061,12 @@ public class MainPage extends javax.swing.JFrame {
     public void showDataset() {
         ArrayList<DataSetLoad> loaddb = loadDataset();
         DefaultTableModel tb = (DefaultTableModel) supdatasetTable.getModel();
-    tb.setRowCount(0); 
+        
+
+        tb.setRowCount(0);
         Object[] row = new Object[9];
         for (int i = 0; i < loaddb.size(); i++) {
 
-       
             row[0] = loaddb.get(i).getTransactionId();
             row[1] = loaddb.get(i).getCustomerID();
             row[2] = loaddb.get(i).getProductID();
@@ -810,13 +1080,56 @@ public class MainPage extends javax.swing.JFrame {
         }
     }
 
+    /*
+    -------------------  Add dataset to mysql
+     */
+    public void addData() {
+
+        if (txtCusId.getText().isEmpty() || txtPId.getText().isEmpty() || txtPName.getText().isEmpty() || txtPQuantity.getText().isEmpty() || txtPperUnit.getText().isEmpty() || dateChoose.getDate() == null || txtTotalPrice.getText().isEmpty() || txtRegion.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Fields are required!", " Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int customerId, productId, productQty;
+        String productName, Region;
+        float PricepUnit, pTotal;
+
+        Date productDate;
+        customerId = Integer.parseInt(txtCusId.getText());
+        productId = Integer.parseInt(txtPId.getText());
+        productName = txtPName.getText();
+        productQty = Integer.parseInt(txtPQuantity.getText());
+        PricepUnit = Float.parseFloat(txtPperUnit.getText());
+        productDate = dateChoose.getDate();
+
+
+        pTotal = Float.parseFloat(txtTotalPrice.getText());
+        Region = txtRegion.getText();
+
+        new AddNewData(customerId, productId, productName, productQty, PricepUnit, productDate, pTotal, Region);
+        showDataset();
+
+        
+    }
+    
+    
+    /*
+    -------------------  Update dataset frrom mysql
+     */
+
+    public void updateDataset(){
+        
+    }
+    
+    
     
     
     /*
     ********************************************************************************************************************************************
                                             Update password page function
     ********************************************************************************************************************************************
-    */
+     */
     public void updatePassword() {
 
         Connection conn;
@@ -879,16 +1192,13 @@ public class MainPage extends javax.swing.JFrame {
         }
 
     }
-    
-    
+
     /*
     ********************************************************************************************************************************************
                                                            Admin Manage Users page functions
     ********************************************************************************************************************************************
-    */
-
-    
-    /*
+     */
+ /*
          **   Method for register employee
      */
     public void registerValidation() {
@@ -1003,14 +1313,14 @@ public class MainPage extends javax.swing.JFrame {
         }
 
     }
-    
-        /*
+
+    /*
     ********************************************************************************************************************************************
                                                        End of  Admin Manage Users page functions
     ********************************************************************************************************************************************
-    */
+     */
 
-    /*
+ /*
     *****************************************************************************************************************  
     Admin Header Side Menu
     ***************************************************************************************************************
@@ -1199,9 +1509,13 @@ public class MainPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDeleteData;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JButton btnRegister2;
+    private javax.swing.JButton btnUpdateData;
     private javax.swing.JPasswordField cPassword;
     private javax.swing.JComboBox<String> comboRole;
+    private com.toedter.calendar.JDateChooser dateChoose;
     private javax.swing.JTable employeeTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1219,10 +1533,18 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1243,9 +1565,17 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JTable supdatasetTable;
     private javax.swing.JPasswordField txtConfirmPassword;
     private javax.swing.JPasswordField txtCurrentPassword;
+    private javax.swing.JTextField txtCusId;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFIndEmployee;
     private javax.swing.JPasswordField txtNewPassword;
+    private javax.swing.JTextField txtPId;
+    private javax.swing.JTextField txtPName;
+    private javax.swing.JTextField txtPQuantity;
+    private javax.swing.JTextField txtPperUnit;
+    private javax.swing.JTextField txtRegion;
+    private javax.swing.JTextField txtTotalPrice;
+    private javax.swing.JTextField txtTransacId;
     private javax.swing.JTextField txtUserName;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
