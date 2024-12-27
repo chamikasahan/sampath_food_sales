@@ -9,6 +9,7 @@ import code.AddNewData;
 import code.DataSetLoad;
 import code.EmployeeTableLoad;
 import code.RegisterForm;
+import code.UpdateData;
 import code.UpdateUserPassword;
 import db.database;
 import java.awt.Color;
@@ -101,7 +102,7 @@ public class MainPage extends javax.swing.JFrame {
         panelDataset = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         supdatasetTable = new javax.swing.JTable();
-        btnDeleteData = new javax.swing.JButton();
+        btnClearData = new javax.swing.JButton();
         txtRegion = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         txtTotalPrice = new javax.swing.JTextField();
@@ -120,8 +121,9 @@ public class MainPage extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         txtTransacId = new javax.swing.JTextField();
-        btnRegister2 = new javax.swing.JButton();
+        btnAddData = new javax.swing.JButton();
         btnUpdateData = new javax.swing.JButton();
+        btnDeleteData = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -618,13 +620,13 @@ public class MainPage extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(supdatasetTable);
 
-        btnDeleteData.setBackground(new java.awt.Color(201, 0, 0));
-        btnDeleteData.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnDeleteData.setForeground(new java.awt.Color(255, 255, 255));
-        btnDeleteData.setText("Delete Data");
-        btnDeleteData.addActionListener(new java.awt.event.ActionListener() {
+        btnClearData.setBackground(new java.awt.Color(103, 178, 255));
+        btnClearData.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnClearData.setForeground(new java.awt.Color(255, 255, 255));
+        btnClearData.setText("Clear data");
+        btnClearData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteDataActionPerformed(evt);
+                btnClearDataActionPerformed(evt);
             }
         });
 
@@ -725,13 +727,13 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
-        btnRegister2.setBackground(new java.awt.Color(51, 0, 204));
-        btnRegister2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnRegister2.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegister2.setText("Add Data");
-        btnRegister2.addActionListener(new java.awt.event.ActionListener() {
+        btnAddData.setBackground(new java.awt.Color(51, 0, 204));
+        btnAddData.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnAddData.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddData.setText("Add Data");
+        btnAddData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegister2ActionPerformed(evt);
+                btnAddDataActionPerformed(evt);
             }
         });
 
@@ -745,6 +747,16 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        btnDeleteData.setBackground(new java.awt.Color(201, 0, 0));
+        btnDeleteData.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnDeleteData.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteData.setText("Delete Data");
+        btnDeleteData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDatasetLayout = new javax.swing.GroupLayout(panelDataset);
         panelDataset.setLayout(panelDatasetLayout);
         panelDatasetLayout.setHorizontalGroup(
@@ -753,7 +765,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelDatasetLayout.createSequentialGroup()
-                        .addComponent(btnRegister2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddData, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnUpdateData, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -765,10 +777,10 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(txtPId)
                         .addComponent(jLabel22)
                         .addComponent(txtPName)
-                        .addComponent(jLabel23)
-                        .addComponent(txtPQuantity)
-                        .addComponent(jLabel24)
-                        .addComponent(txtPperUnit)
+                        .addGroup(panelDatasetLayout.createSequentialGroup()
+                            .addComponent(jLabel23)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel24))
                         .addComponent(jLabel25)
                         .addComponent(jLabel26)
                         .addComponent(txtTotalPrice)
@@ -776,7 +788,12 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(txtRegion)
                         .addComponent(dateChoose, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                         .addComponent(jLabel28)
-                        .addComponent(txtTransacId)))
+                        .addComponent(txtTransacId)
+                        .addGroup(panelDatasetLayout.createSequentialGroup()
+                            .addComponent(txtPQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPperUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnClearData, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(97, 97, 97))
@@ -805,13 +822,13 @@ public class MainPage extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(txtPName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel23)
+                .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24))
                 .addGap(9, 9, 9)
-                .addComponent(txtPQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel24)
-                .addGap(9, 9, 9)
-                .addComponent(txtPperUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPperUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -824,12 +841,14 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(jLabel27)
                 .addGap(10, 10, 10)
                 .addComponent(txtRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(38, 38, 38)
+                .addComponent(btnClearData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeleteData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegister2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdateData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                    .addComponent(btnAddData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37))
         );
 
         jTabb.addTab("tab6", panelDataset);
@@ -956,30 +975,36 @@ public class MainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRegionActionPerformed
 
-    private void btnDeleteDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDataActionPerformed
-        addData();
+    private void btnClearDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearDataActionPerformed
+clearFields();
         
-    }//GEN-LAST:event_btnDeleteDataActionPerformed
+    }//GEN-LAST:event_btnClearDataActionPerformed
 
     private void txtTransacIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransacIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTransacIdActionPerformed
 
     private void supdatasetTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supdatasetTableMouseClicked
-             boolean tableeditDisable = supdatasetTable.isEditing();
-        if (tableeditDisable == false) {
-            JOptionPane.showMessageDialog(null, "Cant Edit this Table", " Warning", JOptionPane.WARNING_MESSAGE);
-            
-        }
+
+
+        getSelecDatatRow();
+
+
+
+
     }//GEN-LAST:event_supdatasetTableMouseClicked
 
-    private void btnRegister2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegister2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegister2ActionPerformed
+    private void btnAddDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDataActionPerformed
+       addData();
+    }//GEN-LAST:event_btnAddDataActionPerformed
 
     private void btnUpdateDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDataActionPerformed
-        // TODO add your handling code here:
+        updateDataset();
     }//GEN-LAST:event_btnUpdateDataActionPerformed
+
+    private void btnDeleteDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1119,11 +1144,90 @@ public class MainPage extends javax.swing.JFrame {
      */
 
     public void updateDataset(){
+          if (txtTransacId.getText().isEmpty() || txtCusId.getText().isEmpty() || txtPId.getText().isEmpty() || txtPName.getText().isEmpty() || txtPQuantity.getText().isEmpty() || txtPperUnit.getText().isEmpty() || dateChoose.getDate() == null || txtTotalPrice.getText().isEmpty() || txtRegion.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Fields are required!", " Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+          
+                  int transacId, customerId, productId, productQty;
+        String productName, Region;
+        float PricepUnit, pTotal;
+
+        Date productDate;
         
+        transacId = Integer.parseInt(txtTransacId.getText());
+        customerId = Integer.parseInt(txtCusId.getText());
+        productId = Integer.parseInt(txtPId.getText());
+        productName = txtPName.getText();
+        productQty = Integer.parseInt(txtPQuantity.getText());
+        PricepUnit = Float.parseFloat(txtPperUnit.getText());
+        productDate = dateChoose.getDate();
+
+
+        pTotal = Float.parseFloat(txtTotalPrice.getText());
+        Region = txtRegion.getText();
+        
+                new UpdateData(transacId, customerId, productId, productName, productQty, PricepUnit, productDate, pTotal, Region);
+                        showDataset();
+    
     }
     
     
+        /*
+    -------------------  get sekected row and set it to fields
+     */
+    public void getSelecDatatRow() {
+        DefaultTableModel tb = (DefaultTableModel) supdatasetTable.getModel();
+
+int transacId, cusId, prodId,pQty;
+String pName, prodRegion;
+float pPerUnit, prodTotal;
+Date prodDate;
+
+
+
+transacId = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 0);
+cusId = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 1);
+prodId = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 2);
+pName = (String) tb.getValueAt(supdatasetTable.getSelectedRow(), 3);
+pQty = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 4);
+pPerUnit = (float) tb.getValueAt(supdatasetTable.getSelectedRow(), 5);
+prodDate = (Date) tb.getValueAt(supdatasetTable.getSelectedRow(), 6);
+prodTotal = (float) tb.getValueAt(supdatasetTable.getSelectedRow(), 7);
+prodRegion = (String) tb.getValueAt(supdatasetTable.getSelectedRow(), 8);
+
+
+
+txtTransacId.setText(String.valueOf(transacId));
+txtCusId.setText(String.valueOf(cusId));
+txtPId.setText(String.valueOf(prodId));
+txtPName.setText(pName);
+txtPQuantity.setText(String.valueOf(pQty));
+txtPperUnit.setText(String.valueOf(pPerUnit));
+dateChoose.setDate(prodDate);
+txtTotalPrice.setText(String.valueOf(prodTotal));
+txtRegion.setText(prodRegion);
+    }
     
+    
+        
+        /*
+    -------------------  Clear All fields
+     */
+    
+    public void clearFields(){
+        txtTransacId.setText(" ");
+txtCusId.setText(" ");
+txtPId.setText(" ");
+txtPName.setText(" ");
+txtPQuantity.setText(" ");
+txtPperUnit.setText(" ");
+dateChoose.setDate(null);
+txtTotalPrice.setText(" ");
+txtRegion.setText(" ");
+        
+    }
     
     /*
     ********************************************************************************************************************************************
@@ -1508,10 +1612,11 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddData;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnClearData;
     private javax.swing.JButton btnDeleteData;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JButton btnRegister2;
     private javax.swing.JButton btnUpdateData;
     private javax.swing.JPasswordField cPassword;
     private javax.swing.JComboBox<String> comboRole;
