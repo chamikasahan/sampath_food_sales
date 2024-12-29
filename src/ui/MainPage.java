@@ -15,7 +15,6 @@ import code.UpdateData;
 import db.database;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,16 +26,18 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javaswingdev.chart.ModelPieChart;
+import javaswingdev.chart.PieChart;
 import javaswingdev.drawer.Drawer;
 import javaswingdev.drawer.DrawerController;
 import javaswingdev.drawer.DrawerItem;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 
 
@@ -82,7 +83,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        panelGraph = new javax.swing.JPanel();
+        pieChart1 = new javaswingdev.chart.PieChart();
         panelCustomer = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         panelProduct = new javax.swing.JPanel();
@@ -233,20 +234,6 @@ public class MainPage extends javax.swing.JFrame {
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("Month");
 
-        panelGraph.setBackground(new java.awt.Color(51, 51, 51));
-        panelGraph.setForeground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout panelGraphLayout = new javax.swing.GroupLayout(panelGraph);
-        panelGraph.setLayout(panelGraphLayout);
-        panelGraphLayout.setHorizontalGroup(
-            panelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 642, Short.MAX_VALUE)
-        );
-        panelGraphLayout.setVerticalGroup(
-            panelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout panelBSPLayout = new javax.swing.GroupLayout(panelBSP);
         panelBSP.setLayout(panelBSPLayout);
         panelBSPLayout.setHorizontalGroup(
@@ -254,32 +241,31 @@ public class MainPage extends javax.swing.JFrame {
             .addGroup(panelBSPLayout.createSequentialGroup()
                 .addGap(78, 78, 78)
                 .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBSPLayout.createSequentialGroup()
-                        .addGap(4083, 4083, 4083)
-                        .addComponent(jButton3))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelBSPLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboFromYear, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel29)
-                        .addGap(18, 18, 18)
-                        .addComponent(comboFromMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboFromDate, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6)
-                    .addComponent(panelGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBSPLayout.createSequentialGroup()
+                        .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelBSPLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboFromYear, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel29)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboFromMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboFromDate, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelBSPLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(pieChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(3381, 3381, 3381)
+                        .addComponent(jButton3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBSPLayout.setVerticalGroup(
             panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBSPLayout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelBSPLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
@@ -294,9 +280,11 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(comboFromMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(comboFromDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(panelGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pieChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
 
         jTabb.addTab("tab1", panelBSP);
@@ -1258,7 +1246,6 @@ private void loadDays(String selectedYear, String selectedMonth) {
 }
 
 
-
 private void showBestSellingProduct() {
     Connection conn;
     PreparedStatement pst;
@@ -1266,29 +1253,29 @@ private void showBestSellingProduct() {
 
     try {
         conn = database.connect();
-        
+
+        // Get selected year, month, and day
         String selectedYear = (String) comboFromYear.getSelectedItem();
         String selectedMonth = (String) comboFromMonth.getSelectedItem();
         String selectedDay = (String) comboFromDate.getSelectedItem();
 
- 
         String fromDateString = selectedYear + "-01-01";
-        String toDateString = selectedYear + "-12-31"; 
+        String toDateString = selectedYear + "-12-31";
 
+        // Adjust date range based on user selections
         if (selectedMonth != null) {
             fromDateString = selectedYear + "-" + selectedMonth + "-01";
-            toDateString = selectedYear + "-" + selectedMonth + "-31"; 
+            toDateString = selectedYear + "-" + selectedMonth + "-31";
         }
 
         if (selectedDay != null) {
             fromDateString = selectedYear + "-" + selectedMonth + "-" + selectedDay;
-            toDateString = fromDateString; 
+            toDateString = fromDateString;
         }
 
-
-
-
-        String sql = "SELECT ProductName, SUM(Quantity) as TotalQuantity " +
+        // SQL query to get the best-selling products
+        String sql = "SELECT ProductName, SUM(Quantity) as TotalQuantity, " +
+                     "SUM(TotalPrice) as TotalRevenue, AVG(PriceperUnit) as AvgPrice " +
                      "FROM supermarket_sales " +
                      "WHERE Date BETWEEN ? AND ? " +
                      "GROUP BY ProductName " +
@@ -1299,51 +1286,47 @@ private void showBestSellingProduct() {
         pst.setString(2, toDateString);
         rs = pst.executeQuery();
 
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        // Log if data is found
         boolean hasData = false;
+        System.out.println("Query executed successfully. Checking results...");
+
+       // Clear the existing pie chart data
+        pieChart1.clearData();// Assuming pieChart1 has a clear method to reset data
 
         while (rs.next()) {
             String productName = rs.getString("ProductName");
             int totalQuantity = rs.getInt("TotalQuantity");
 
+            // Log data fetched from the database
+            System.out.println("Product: " + productName + ", Quantity: " + totalQuantity);
 
-            dataset.setValue(productName, totalQuantity);
+            // Use a color generator or pick custom colors
+            Color pieColor = new Color((int)(Math.random() * 0x1000000));
+
+    
+            pieChart1.addData(new ModelPieChart(productName, totalQuantity, pieColor));
             hasData = true;
         }
 
         if (!hasData) {
-
+            System.out.println("No data found for the selected date range.");
             JOptionPane.showMessageDialog(null, "No data found for the selected date range.", "Information", JOptionPane.INFORMATION_MESSAGE);
-            return;
+
         }
 
 
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Best Selling Products",
-                dataset,             
-                true,               
-                true,
-                false
-        );
 
-        ChartPanel chartPanel = new ChartPanel(chart);
-
-
-
-        panelGraph.setLayout(new BorderLayout());
-        panelGraph.removeAll();
-        panelGraph.add(chartPanel, BorderLayout.CENTER);
-        panelGraph.revalidate(); 
-        panelGraph.repaint();   
-
-
+        // Close resources
         rs.close();
         pst.close();
         conn.close();
+
     } catch (Exception e) {
         e.printStackTrace();
     }
 }
+
+
 
 
     
@@ -1992,11 +1975,11 @@ private void showBestSellingProduct() {
     private javax.swing.JPanel panelChangepwd;
     private javax.swing.JPanel panelCustomer;
     private javax.swing.JPanel panelDataset;
-    private javax.swing.JPanel panelGraph;
     private javax.swing.JPanel panelManageUsers;
     private javax.swing.JPanel panelProduct;
     private javax.swing.JPanel panelSales;
     private javax.swing.JPasswordField password;
+    private javaswingdev.chart.PieChart pieChart1;
     private javax.swing.JTable supdatasetTable;
     private javax.swing.JPasswordField txtConfirmPassword;
     private javax.swing.JPasswordField txtCurrentPassword;
