@@ -7,20 +7,21 @@ package ui;
 
 import code.AddNewData;
 import code.DataSetLoad;
+
 import code.EmployeeTableLoad;
 import code.RegisterForm;
 import code.UpdateData;
-import code.UpdateUserPassword;
+
 import db.database;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
@@ -32,6 +33,12 @@ import javaswingdev.drawer.DrawerItem;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
+
 
 public class MainPage extends javax.swing.JFrame {
 
@@ -43,10 +50,16 @@ public class MainPage extends javax.swing.JFrame {
     public MainPage() {
         initComponents();
 
+        //load the employee table
         loadTable();
 
         showuserDetails();
+        // show  dataset on the table
         showDataset();
+
+        // showYear 
+        showYear();
+        
 
     }
 
@@ -56,11 +69,20 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jTabb = new javax.swing.JTabbedPane();
         panelBSP = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        comboFromDate = new javax.swing.JComboBox<>();
+        comboFromYear = new javax.swing.JComboBox<>();
+        comboFromMonth = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        panelGraph = new javax.swing.JPanel();
         panelCustomer = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         panelProduct = new javax.swing.JPanel();
@@ -124,7 +146,6 @@ public class MainPage extends javax.swing.JFrame {
         btnAddData = new javax.swing.JButton();
         btnUpdateData = new javax.swing.JButton();
         btnDeleteData = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -140,16 +161,25 @@ public class MainPage extends javax.swing.JFrame {
         jLabel8.setText("Sampath Food sales Dashboard");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 20, 550, 70));
 
+        jButton1.setBackground(new java.awt.Color(53, 53, 53));
+        jButton1.setForeground(new java.awt.Color(198, 198, 198));
+        jButton1.setText("        |  |   |      ");
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 40));
+
         jPanel6.setBackground(new java.awt.Color(53, 53, 53));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 1860, 40));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 1860, 90));
 
         jTabb.setBackground(new java.awt.Color(51, 51, 51));
 
         panelBSP.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setText("BSP");
 
         jButton3.setText("jButton3");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -158,18 +188,90 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Best Selling Products");
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("From");
+
+        comboFromDate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFromDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFromDateActionPerformed(evt);
+            }
+        });
+
+        comboFromYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFromYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFromYearActionPerformed(evt);
+            }
+        });
+
+        comboFromMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFromMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFromMonthActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Year");
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Day");
+
+        jLabel29.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel29.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Month");
+
+        panelGraph.setBackground(new java.awt.Color(51, 51, 51));
+        panelGraph.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout panelGraphLayout = new javax.swing.GroupLayout(panelGraph);
+        panelGraph.setLayout(panelGraphLayout);
+        panelGraphLayout.setHorizontalGroup(
+            panelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 642, Short.MAX_VALUE)
+        );
+        panelGraphLayout.setVerticalGroup(
+            panelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 519, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelBSPLayout = new javax.swing.GroupLayout(panelBSP);
         panelBSP.setLayout(panelBSPLayout);
         panelBSPLayout.setHorizontalGroup(
             panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBSPLayout.createSequentialGroup()
+                .addGap(78, 78, 78)
                 .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBSPLayout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4083, 4083, 4083)
+                        .addComponent(jButton3))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelBSPLayout.createSequentialGroup()
-                        .addGap(2348, 2348, 2348)
-                        .addComponent(jButton3)))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboFromYear, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel29)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboFromMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboFromDate, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
+                    .addComponent(panelGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBSPLayout.setVerticalGroup(
@@ -177,9 +279,24 @@ public class MainPage extends javax.swing.JFrame {
             .addGroup(panelBSPLayout.createSequentialGroup()
                 .addGap(181, 181, 181)
                 .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelBSPLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(528, Short.MAX_VALUE))
+                .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboFromYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboFromMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboFromDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addComponent(panelGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jTabb.addTab("tab1", panelBSP);
@@ -584,17 +701,17 @@ public class MainPage extends javax.swing.JFrame {
         panelChangepwd.setLayout(panelChangepwdLayout);
         panelChangepwdLayout.setHorizontalGroup(
             panelChangepwdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelChangepwdLayout.createSequentialGroup()
-                .addContainerGap(861, Short.MAX_VALUE)
+            .addGroup(panelChangepwdLayout.createSequentialGroup()
+                .addGap(692, 692, 692)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(599, 599, 599))
+                .addContainerGap(768, Short.MAX_VALUE))
         );
         panelChangepwdLayout.setVerticalGroup(
             panelChangepwdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelChangepwdLayout.createSequentialGroup()
-                .addGap(155, 155, 155)
+                .addGap(136, 136, 136)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
 
         jTabb.addTab("tab8", panelChangepwd);
@@ -786,13 +903,13 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(txtTotalPrice)
                         .addComponent(jLabel27)
                         .addComponent(txtRegion)
-                        .addComponent(dateChoose, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                         .addComponent(jLabel28)
                         .addComponent(txtTransacId)
                         .addGroup(panelDatasetLayout.createSequentialGroup()
                             .addComponent(txtPQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPperUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                            .addComponent(txtPperUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dateChoose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnClearData, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -854,18 +971,6 @@ public class MainPage extends javax.swing.JFrame {
         jTabb.addTab("tab6", panelDataset);
 
         jPanel1.add(jTabb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1920, 940));
-
-        jButton1.setBackground(new java.awt.Color(53, 53, 53));
-        jButton1.setForeground(new java.awt.Color(198, 198, 198));
-        jButton1.setText("| | |");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1910, 990));
 
@@ -976,8 +1081,8 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRegionActionPerformed
 
     private void btnClearDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearDataActionPerformed
-clearFields();
-        
+        clearFields();
+
     }//GEN-LAST:event_btnClearDataActionPerformed
 
     private void txtTransacIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransacIdActionPerformed
@@ -986,16 +1091,13 @@ clearFields();
 
     private void supdatasetTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supdatasetTableMouseClicked
 
-
         getSelecDatatRow();
-
-
 
 
     }//GEN-LAST:event_supdatasetTableMouseClicked
 
     private void btnAddDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDataActionPerformed
-       addData();
+        addData();
     }//GEN-LAST:event_btnAddDataActionPerformed
 
     private void btnUpdateDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDataActionPerformed
@@ -1005,6 +1107,30 @@ clearFields();
     private void btnDeleteDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDataActionPerformed
         deleteData();
     }//GEN-LAST:event_btnDeleteDataActionPerformed
+
+    private void comboFromYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromYearActionPerformed
+      
+        String selectedYear = (String) comboFromYear.getSelectedItem();
+        if (selectedYear != null) {
+            showMonth(selectedYear);
+            
+            showBestSellingProduct();
+        }
+
+    }//GEN-LAST:event_comboFromYearActionPerformed
+
+    private void comboFromMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromMonthActionPerformed
+  String selectedYear = (String) comboFromYear.getSelectedItem();
+    String selectedMonth = (String) comboFromMonth.getSelectedItem();
+    if (selectedYear != null && selectedMonth != null) {
+        loadDays(selectedYear, selectedMonth);
+                      showBestSellingProduct();
+    }
+    }//GEN-LAST:event_comboFromMonthActionPerformed
+
+    private void comboFromDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromDateActionPerformed
+         showBestSellingProduct();
+    }//GEN-LAST:event_comboFromDateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1042,6 +1168,187 @@ clearFields();
         });
     }
 
+    /*
+    ********************************************************************************************************************************************
+                                             Best Selling Product  page functions
+    ********************************************************************************************************************************************
+     */
+    private void showYear() {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
+
+        try {
+
+            conn = database.connect();
+            String sql = "SELECT DISTINCT YEAR(Date) as Year FROM supermarket_sales ORDER BY Year";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            comboFromYear.removeAllItems();
+
+            while (rs.next()) {
+                int year = rs.getInt("Year");
+                comboFromYear.addItem(year + "");
+
+            }
+            rs.close();
+            pst.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+private void showMonth(String selectedYear) {
+    Connection conn;
+    PreparedStatement pst;
+    ResultSet rs;
+
+    try {
+        conn = database.connect();
+        String sql = "SELECT DISTINCT MONTH(Date) as Month FROM supermarket_sales WHERE YEAR(Date) = ? ORDER BY Month";
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, Integer.parseInt(selectedYear)); 
+        rs = pst.executeQuery();
+        
+        comboFromMonth.removeAllItems();
+      
+        while (rs.next()) {
+            int month = rs.getInt("Month");
+            comboFromMonth.addItem(String.format("%02d", month)); 
+          
+        }
+        rs.close();
+        pst.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+
+    
+private void loadDays(String selectedYear, String selectedMonth) {
+    Connection conn;
+    PreparedStatement pst;
+    ResultSet rs;
+
+    try {
+        conn = database.connect();
+   
+        String sql = "SELECT DISTINCT DAY(Date) as Day FROM supermarket_sales WHERE YEAR(Date) = ? AND MONTH(Date) = ? ORDER BY Day";
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, Integer.parseInt(selectedYear)); 
+        pst.setInt(2, Integer.parseInt(selectedMonth)); 
+        rs = pst.executeQuery();
+
+        comboFromDate.removeAllItems();
+ 
+
+        while (rs.next()) {
+            int dayNumber = rs.getInt("Day");
+            comboFromDate.addItem(dayNumber +""); 
+        
+        }
+        rs.close();
+        pst.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+
+
+private void showBestSellingProduct() {
+    Connection conn;
+    PreparedStatement pst;
+    ResultSet rs;
+
+    try {
+        conn = database.connect();
+        
+        String selectedYear = (String) comboFromYear.getSelectedItem();
+        String selectedMonth = (String) comboFromMonth.getSelectedItem();
+        String selectedDay = (String) comboFromDate.getSelectedItem();
+
+ 
+        String fromDateString = selectedYear + "-01-01";
+        String toDateString = selectedYear + "-12-31"; 
+
+        if (selectedMonth != null) {
+            fromDateString = selectedYear + "-" + selectedMonth + "-01";
+            toDateString = selectedYear + "-" + selectedMonth + "-31"; 
+        }
+
+        if (selectedDay != null) {
+            fromDateString = selectedYear + "-" + selectedMonth + "-" + selectedDay;
+            toDateString = fromDateString; 
+        }
+
+
+
+
+        String sql = "SELECT ProductName, SUM(Quantity) as TotalQuantity " +
+                     "FROM supermarket_sales " +
+                     "WHERE Date BETWEEN ? AND ? " +
+                     "GROUP BY ProductName " +
+                     "ORDER BY TotalQuantity DESC";
+
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, fromDateString);
+        pst.setString(2, toDateString);
+        rs = pst.executeQuery();
+
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        boolean hasData = false;
+
+        while (rs.next()) {
+            String productName = rs.getString("ProductName");
+            int totalQuantity = rs.getInt("TotalQuantity");
+
+
+            dataset.setValue(productName, totalQuantity);
+            hasData = true;
+        }
+
+        if (!hasData) {
+
+            JOptionPane.showMessageDialog(null, "No data found for the selected date range.", "Information", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Best Selling Products",
+                dataset,             
+                true,               
+                true,
+                false
+        );
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+
+
+
+        panelGraph.setLayout(new BorderLayout());
+        panelGraph.removeAll();
+        panelGraph.add(chartPanel, BorderLayout.CENTER);
+        panelGraph.revalidate(); 
+        panelGraph.repaint();   
+
+
+        rs.close();
+        pst.close();
+        conn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+    
+    
+    
     /*
     ********************************************************************************************************************************************
                                             Admin Dataset page functions
@@ -1086,7 +1393,6 @@ clearFields();
     public void showDataset() {
         ArrayList<DataSetLoad> loaddb = loadDataset();
         DefaultTableModel tb = (DefaultTableModel) supdatasetTable.getModel();
-        
 
         tb.setRowCount(0);
         Object[] row = new Object[9];
@@ -1128,28 +1434,25 @@ clearFields();
         PricepUnit = Float.parseFloat(txtPperUnit.getText());
         productDate = dateChoose.getDate();
 
-
         pTotal = Float.parseFloat(txtTotalPrice.getText());
         Region = txtRegion.getText();
 
         new AddNewData(customerId, productId, productName, productQty, PricepUnit, productDate, pTotal, Region);
         showDataset();
 
-        
     }
-    
-        
+
     /*
     -------------------  Delete dataset frrom mysql
      */
-    public void deleteData(){
+    public void deleteData() {
         Connection conn;
         PreparedStatement pst;
-                String transactionId = txtTransacId.getText();
+        String transactionId = txtTransacId.getText();
 
         try {
             conn = database.connect();
-          pst = conn.prepareStatement("Delete from supermarket_sales where TransactionID=?");
+            pst = conn.prepareStatement("Delete from supermarket_sales where TransactionID=?");
 
             if (transactionId.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "ID Cannot be Empty", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1160,31 +1463,30 @@ clearFields();
                 pst.executeUpdate();
 
                 JOptionPane.showMessageDialog(null, "Dataset Deleted !");
-                           showDataset();
+                showDataset();
             }
 
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     /*
     -------------------  Update dataset frrom mysql
      */
-
-    public void updateDataset(){
-          if (txtTransacId.getText().isEmpty() || txtCusId.getText().isEmpty() || txtPId.getText().isEmpty() || txtPName.getText().isEmpty() || txtPQuantity.getText().isEmpty() || txtPperUnit.getText().isEmpty() || dateChoose.getDate() == null || txtTotalPrice.getText().isEmpty() || txtRegion.getText().isEmpty()) {
+    public void updateDataset() {
+        if (txtTransacId.getText().isEmpty() || txtCusId.getText().isEmpty() || txtPId.getText().isEmpty() || txtPName.getText().isEmpty() || txtPQuantity.getText().isEmpty() || txtPperUnit.getText().isEmpty() || dateChoose.getDate() == null || txtTotalPrice.getText().isEmpty() || txtRegion.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(null, "Fields are required!", " Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-          
-                  int transacId, customerId, productId, productQty;
+
+        int transacId, customerId, productId, productQty;
         String productName, Region;
         float PricepUnit, pTotal;
 
         Date productDate;
-        
+
         transacId = Integer.parseInt(txtTransacId.getText());
         customerId = Integer.parseInt(txtCusId.getText());
         productId = Integer.parseInt(txtPId.getText());
@@ -1193,71 +1495,62 @@ clearFields();
         PricepUnit = Float.parseFloat(txtPperUnit.getText());
         productDate = dateChoose.getDate();
 
-
         pTotal = Float.parseFloat(txtTotalPrice.getText());
         Region = txtRegion.getText();
-        
-                new UpdateData(transacId, customerId, productId, productName, productQty, PricepUnit, productDate, pTotal, Region);
-                        showDataset();
-    
+
+        new UpdateData(transacId, customerId, productId, productName, productQty, PricepUnit, productDate, pTotal, Region);
+        showDataset();
+
     }
-    
-    
-        /*
+
+    /*
     -------------------  get sekected row and set it to fields
      */
     public void getSelecDatatRow() {
         DefaultTableModel tb = (DefaultTableModel) supdatasetTable.getModel();
 
-int transacId, cusId, prodId,pQty;
-String pName, prodRegion;
-float pPerUnit, prodTotal;
-Date prodDate;
+        int transacId, cusId, prodId, pQty;
+        String pName, prodRegion;
+        float pPerUnit, prodTotal;
+        Date prodDate;
 
+        transacId = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 0);
+        cusId = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 1);
+        prodId = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 2);
+        pName = (String) tb.getValueAt(supdatasetTable.getSelectedRow(), 3);
+        pQty = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 4);
+        pPerUnit = (float) tb.getValueAt(supdatasetTable.getSelectedRow(), 5);
+        prodDate = (Date) tb.getValueAt(supdatasetTable.getSelectedRow(), 6);
+        prodTotal = (float) tb.getValueAt(supdatasetTable.getSelectedRow(), 7);
+        prodRegion = (String) tb.getValueAt(supdatasetTable.getSelectedRow(), 8);
 
-
-transacId = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 0);
-cusId = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 1);
-prodId = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 2);
-pName = (String) tb.getValueAt(supdatasetTable.getSelectedRow(), 3);
-pQty = (int) tb.getValueAt(supdatasetTable.getSelectedRow(), 4);
-pPerUnit = (float) tb.getValueAt(supdatasetTable.getSelectedRow(), 5);
-prodDate = (Date) tb.getValueAt(supdatasetTable.getSelectedRow(), 6);
-prodTotal = (float) tb.getValueAt(supdatasetTable.getSelectedRow(), 7);
-prodRegion = (String) tb.getValueAt(supdatasetTable.getSelectedRow(), 8);
-
-
-
-txtTransacId.setText(String.valueOf(transacId));
-txtCusId.setText(String.valueOf(cusId));
-txtPId.setText(String.valueOf(prodId));
-txtPName.setText(pName);
-txtPQuantity.setText(String.valueOf(pQty));
-txtPperUnit.setText(String.valueOf(pPerUnit));
-dateChoose.setDate(prodDate);
-txtTotalPrice.setText(String.valueOf(prodTotal));
-txtRegion.setText(prodRegion);
+        txtTransacId.setText(String.valueOf(transacId));
+        txtCusId.setText(String.valueOf(cusId));
+        txtPId.setText(String.valueOf(prodId));
+        txtPName.setText(pName);
+        txtPQuantity.setText(String.valueOf(pQty));
+        txtPperUnit.setText(String.valueOf(pPerUnit));
+        dateChoose.setDate(prodDate);
+        txtTotalPrice.setText(String.valueOf(prodTotal));
+        txtRegion.setText(prodRegion);
     }
-    
-    
-        
-        /*
+
+    /*
     -------------------  Clear All fields
      */
-    
-    public void clearFields(){
+    public void clearFields() {
         txtTransacId.setText(" ");
-txtCusId.setText(" ");
-txtPId.setText(" ");
-txtPName.setText(" ");
-txtPQuantity.setText(" ");
-txtPperUnit.setText(" ");
-dateChoose.setDate(null);
-txtTotalPrice.setText(" ");
-txtRegion.setText(" ");
-        
+        txtCusId.setText(" ");
+        txtPId.setText(" ");
+        txtPName.setText(" ");
+        txtPQuantity.setText(" ");
+        txtPperUnit.setText(" ");
+        dateChoose.setDate(null);
+        txtTotalPrice.setText(" ");
+        txtRegion.setText(" ");
+
     }
-    
+
     /*
     ********************************************************************************************************************************************
                                             Update password page function
@@ -1515,17 +1808,17 @@ txtRegion.setText(" ");
                             drawer.hide();
                             break;
                         case 5:
-                            jTabb.setSelectedIndex(5);
+                            jTabb.setSelectedIndex(7);
 
                             drawer.hide();
                             break;
                         case 6:
-                            jTabb.setSelectedIndex(6);
+                            jTabb.setSelectedIndex(5);
 
                             drawer.hide();
                             break;
                         case 7:
-                            jTabb.setSelectedIndex(7);
+                            jTabb.setSelectedIndex(6);
 
                             drawer.hide();
                             break;
@@ -1612,7 +1905,7 @@ txtRegion.setText(" ");
                             drawer.hide();
                             break;
                         case 5:
-                            jTabb.setSelectedIndex(7);
+                            jTabb.setSelectedIndex(6);
 
                             drawer.hide();
                             break;
@@ -1648,6 +1941,9 @@ txtRegion.setText(" ");
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnUpdateData;
     private javax.swing.JPasswordField cPassword;
+    private javax.swing.JComboBox<String> comboFromDate;
+    private javax.swing.JComboBox<String> comboFromMonth;
+    private javax.swing.JComboBox<String> comboFromYear;
     private javax.swing.JComboBox<String> comboRole;
     private com.toedter.calendar.JDateChooser dateChoose;
     private javax.swing.JTable employeeTable;
@@ -1659,6 +1955,7 @@ txtRegion.setText(" ");
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1676,9 +1973,12 @@ txtRegion.setText(" ");
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1692,6 +1992,7 @@ txtRegion.setText(" ");
     private javax.swing.JPanel panelChangepwd;
     private javax.swing.JPanel panelCustomer;
     private javax.swing.JPanel panelDataset;
+    private javax.swing.JPanel panelGraph;
     private javax.swing.JPanel panelManageUsers;
     private javax.swing.JPanel panelProduct;
     private javax.swing.JPanel panelSales;

@@ -121,7 +121,7 @@ public class ReadCSVandUpload extends javax.swing.JFrame {
                             Float price = Float.parseFloat(val[5].toString().trim()); // p p unit
                             pst.setFloat(5, price);
                             
-                            SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
+                            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy"); 
                             java.util.Date javaDate = sdf.parse(val[6]);
 
                             long j1 = javaDate.getTime();
