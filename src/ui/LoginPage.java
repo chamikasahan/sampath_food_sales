@@ -204,7 +204,7 @@ public class LoginPage extends javax.swing.JFrame {
         String role = (String) loginCombo.getSelectedItem();
         
         
-                new LoginForm(username,role,password);
+                new LoginForm(username,role,password, this);
 
                    
 

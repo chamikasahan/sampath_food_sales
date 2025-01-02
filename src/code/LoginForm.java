@@ -31,7 +31,7 @@ public class LoginForm {
     
     */
 
-    public LoginForm(String username, String role, String password) {
+    public LoginForm(String username, String role, String password, LoginPage loginPage) {
 
               try {
             conn = database.connect();
@@ -57,7 +57,9 @@ public class LoginForm {
                       JOptionPane.showMessageDialog(null, "Logged as Admin", "Success", JOptionPane.PLAIN_MESSAGE);
                      MainPage mp = new MainPage();
                      mp.Adminheader();
+
                      mp.setVisible(true);
+                                          loginPage.dispose();
 
        conn.close();
 
@@ -70,7 +72,7 @@ public class LoginForm {
                           MainPage main = new MainPage();
                           main.Empheader();
                           main.setVisible(true);
-                          
+                                               loginPage.dispose();
                          
                     }
   
