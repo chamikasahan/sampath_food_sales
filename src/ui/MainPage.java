@@ -43,12 +43,13 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.annotations.CategoryTextAnnotation;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.ui.TextAnchor;
-
 
 public class MainPage extends javax.swing.JFrame {
 
@@ -71,14 +72,14 @@ public class MainPage extends javax.swing.JFrame {
         showYear();
 
         // show best selling product pie chart 
- showBestSellingProduct();
- 
-         // show Customer Analysis  pie chart 
+        showBestSellingProduct();
+
+        // show Customer Analysis  pie chart 
         showCustomerSegmentation();
-        
+
         showProductPerformanceChart();
 
-        
+        showBranchTransactionsBarChart();
 
     }
 
@@ -161,10 +162,25 @@ public class MainPage extends javax.swing.JFrame {
         comboFromMonthProductP = new javax.swing.JComboBox<>();
         jLabel51 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
-        testingLbl = new javax.swing.JLabel();
         panelProductPerformance = new javax.swing.JPanel();
         panelBranch = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        comboToDateBP = new javax.swing.JComboBox<>();
+        jLabel53 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        comboFromDateBP = new javax.swing.JComboBox<>();
+        jLabel57 = new javax.swing.JLabel();
+        comboToMonthBP = new javax.swing.JComboBox<>();
+        comboFromYearBP = new javax.swing.JComboBox<>();
+        jLabel58 = new javax.swing.JLabel();
+        comboToYearBP = new javax.swing.JComboBox<>();
+        jLabel59 = new javax.swing.JLabel();
+        comboFromMonthBP = new javax.swing.JComboBox<>();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        panelBranchP = new javax.swing.JPanel();
         panelSales = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         panelManageUsers = new javax.swing.JPanel();
@@ -898,9 +914,6 @@ public class MainPage extends javax.swing.JFrame {
         jLabel52.setForeground(new java.awt.Color(255, 255, 255));
         jLabel52.setText("Year");
 
-        testingLbl.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        testingLbl.setText("Check one");
-
         panelProductPerformance.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout panelProductLayout = new javax.swing.GroupLayout(panelProduct);
@@ -933,7 +946,6 @@ public class MainPage extends javax.swing.JFrame {
                                 .addComponent(jLabel49)
                                 .addGap(540, 540, 540)
                                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(testingLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelProductLayout.createSequentialGroup()
                                 .addComponent(jLabel50)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -983,9 +995,7 @@ public class MainPage extends javax.swing.JFrame {
                                     .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(comboToMonthProductP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(comboToYearProductP, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(108, 108, 108)
-                        .addComponent(testingLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboToYearProductP, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelProductLayout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(panelProductPerformance, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -997,24 +1007,182 @@ public class MainPage extends javax.swing.JFrame {
         panelBranch.setBackground(new java.awt.Color(51, 51, 51));
         panelBranch.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel4.setText("Branch perofrmance");
+        comboToDateBP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboToDateBP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboToDateBPActionPerformed(evt);
+            }
+        });
+
+        jLabel53.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel53.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel53.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel53.setText("Year");
+
+        jButton10.setBackground(new java.awt.Color(0, 200, 0));
+        jButton10.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(255, 255, 255));
+        jButton10.setText("Filter");
+        jButton10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton10.setBorderPainted(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jLabel54.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel54.setText("Branch Performance");
+
+        jLabel55.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel55.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel55.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel55.setText("From");
+
+        jLabel56.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel56.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel56.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel56.setText("To");
+
+        comboFromDateBP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFromDateBP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFromDateBPActionPerformed(evt);
+            }
+        });
+
+        jLabel57.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel57.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel57.setText("Year");
+
+        comboToMonthBP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboToMonthBP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboToMonthBPActionPerformed(evt);
+            }
+        });
+
+        comboFromYearBP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFromYearBP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFromYearBPActionPerformed(evt);
+            }
+        });
+
+        jLabel58.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel58.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel58.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel58.setText("Day");
+
+        comboToYearBP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboToYearBP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboToYearBPActionPerformed(evt);
+            }
+        });
+
+        jLabel59.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel59.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel59.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel59.setText("Day");
+
+        comboFromMonthBP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFromMonthBP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFromMonthBPActionPerformed(evt);
+            }
+        });
+
+        jLabel60.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel60.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel60.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel60.setText("Month");
+
+        jLabel61.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel61.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel61.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel61.setText("Month");
+
+        panelBranchP.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout panelBranchLayout = new javax.swing.GroupLayout(panelBranch);
         panelBranch.setLayout(panelBranchLayout);
         panelBranchLayout.setHorizontalGroup(
             panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBranchLayout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1320, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel54)
+                    .addGroup(panelBranchLayout.createSequentialGroup()
+                        .addComponent(jLabel53)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboFromYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel60)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboFromMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel58)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboFromDateBP, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel55)
+                    .addGroup(panelBranchLayout.createSequentialGroup()
+                        .addComponent(jLabel56)
+                        .addGap(540, 540, 540)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBranchLayout.createSequentialGroup()
+                        .addComponent(jLabel57)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboToYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel61)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboToMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel59)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboToDateBP, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(236, 236, 236)
+                        .addComponent(panelBranchP, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         panelBranchLayout.setVerticalGroup(
             panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBranchLayout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(554, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jLabel54)
+                .addGap(51, 51, 51)
+                .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelBranchLayout.createSequentialGroup()
+                        .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(comboFromDateBP, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboFromMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboFromYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(comboToDateBP, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboToMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(comboToYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelBranchP, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabb.addTab("tab4", panelBranch);
@@ -1740,27 +1908,26 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteDataActionPerformed
 
     private void comboFromYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromYearActionPerformed
-      
+
         String selectedYear = (String) comboFromYear.getSelectedItem();
         if (selectedYear != null) {
             showMonth(selectedYear);
-            
-         
+
         }
 
     }//GEN-LAST:event_comboFromYearActionPerformed
 
     private void comboFromMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromMonthActionPerformed
-  String selectedYear = (String) comboFromYear.getSelectedItem();
-    String selectedMonth = (String) comboFromMonth.getSelectedItem();
-    if (selectedYear != null && selectedMonth != null) {
-        loadDays(selectedYear, selectedMonth);
-                    
-    }
+        String selectedYear = (String) comboFromYear.getSelectedItem();
+        String selectedMonth = (String) comboFromMonth.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
     }//GEN-LAST:event_comboFromMonthActionPerformed
 
     private void comboFromDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromDateActionPerformed
-         
+
     }//GEN-LAST:event_comboFromDateActionPerformed
 
     private void supdatasetTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supdatasetTableMouseClicked
@@ -1770,33 +1937,32 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_supdatasetTableMouseClicked
 
     private void comboToYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToYearActionPerformed
-                String selectedYear = (String) comboToYear.getSelectedItem();
+        String selectedYear = (String) comboToYear.getSelectedItem();
         if (selectedYear != null) {
             showMonth(selectedYear);
-            
-         
+
         }
     }//GEN-LAST:event_comboToYearActionPerformed
 
     private void comboToMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToMonthActionPerformed
-         String selectedYear = (String) comboToYear.getSelectedItem();
-    String selectedMonth = (String) comboToMonth.getSelectedItem();
-    if (selectedYear != null && selectedMonth != null) {
-        loadDays(selectedYear, selectedMonth);
-                  
-    }
+        String selectedYear = (String) comboToYear.getSelectedItem();
+        String selectedMonth = (String) comboToMonth.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
     }//GEN-LAST:event_comboToMonthActionPerformed
 
     private void comboToDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToDateActionPerformed
-      
+
     }//GEN-LAST:event_comboToDateActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       showBestSellingProduct();
-String fromDate = comboFromYear.getSelectedItem() + "-" + comboFromMonth.getSelectedItem() + "-" + comboFromDate.getSelectedItem();
-String toDate = comboToYear.getSelectedItem() + "-" + comboToMonth.getSelectedItem() + "-" + comboToDate.getSelectedItem();
+        showBestSellingProduct();
+        String fromDate = comboFromYear.getSelectedItem() + "-" + comboFromMonth.getSelectedItem() + "-" + comboFromDate.getSelectedItem();
+        String toDate = comboToYear.getSelectedItem() + "-" + comboToMonth.getSelectedItem() + "-" + comboToDate.getSelectedItem();
 
-showBSPTable(fromDate, toDate);
+        showBSPTable(fromDate, toDate);
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -1805,39 +1971,37 @@ showBSPTable(fromDate, toDate);
     }//GEN-LAST:event_comboFromDateCustomActionPerformed
 
     private void comboFromYearCustomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromYearCustomActionPerformed
-          String selectedYear = (String) comboFromYearCustom.getSelectedItem();
+        String selectedYear = (String) comboFromYearCustom.getSelectedItem();
         if (selectedYear != null) {
             showMonth(selectedYear);
-            
-         
+
         }
     }//GEN-LAST:event_comboFromYearCustomActionPerformed
 
     private void comboToYearCustomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToYearCustomActionPerformed
-                 String selectedYear = (String) comboToYearCustom.getSelectedItem();
+        String selectedYear = (String) comboToYearCustom.getSelectedItem();
         if (selectedYear != null) {
             showMonth(selectedYear);
-            
-         
+
         }
     }//GEN-LAST:event_comboToYearCustomActionPerformed
 
     private void comboFromMonthCustomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromMonthCustomActionPerformed
         String selectedYear = (String) comboFromYearCustom.getSelectedItem();
-    String selectedMonth = (String) comboFromMonthCustom.getSelectedItem();
-    if (selectedYear != null && selectedMonth != null) {
-        loadDays(selectedYear, selectedMonth);
-                    
-    }
+        String selectedMonth = (String) comboFromMonthCustom.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
     }//GEN-LAST:event_comboFromMonthCustomActionPerformed
 
     private void comboToMonthCustomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToMonthCustomActionPerformed
-               String selectedYear = (String) comboToYearCustom.getSelectedItem();
-    String selectedMonth = (String) comboToMonthCustom.getSelectedItem();
-    if (selectedYear != null && selectedMonth != null) {
-        loadDays(selectedYear, selectedMonth);
-                    
-    }
+        String selectedYear = (String) comboToYearCustom.getSelectedItem();
+        String selectedMonth = (String) comboToMonthCustom.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
     }//GEN-LAST:event_comboToMonthCustomActionPerformed
 
     private void comboToDateCustomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToDateCustomActionPerformed
@@ -1845,10 +2009,10 @@ showBSPTable(fromDate, toDate);
     }//GEN-LAST:event_comboToDateCustomActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       
+
         showCustomerSegmentation();
         String fromDate = comboFromYearCustom.getSelectedItem() + "-" + comboFromMonthCustom.getSelectedItem() + "-" + comboFromDateCustom.getSelectedItem();
-String toDate = comboToYearCustom.getSelectedItem() + "-" + comboToMonthCustom.getSelectedItem() + "-" + comboToDateCustom.getSelectedItem();
+        String toDate = comboToYearCustom.getSelectedItem() + "-" + comboToMonthCustom.getSelectedItem() + "-" + comboToDateCustom.getSelectedItem();
         showTopCustomerTable(fromDate, toDate);
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1857,12 +2021,12 @@ String toDate = comboToYearCustom.getSelectedItem() + "-" + comboToMonthCustom.g
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void comboToMonthProductPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToMonthProductPActionPerformed
-               String selectedYear = (String) comboToYearProductP.getSelectedItem();
-    String selectedMonth = (String) comboToMonthProductP.getSelectedItem();
-    if (selectedYear != null && selectedMonth != null) {
-        loadDays(selectedYear, selectedMonth);
-                    
-    }
+        String selectedYear = (String) comboToYearProductP.getSelectedItem();
+        String selectedMonth = (String) comboToMonthProductP.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
     }//GEN-LAST:event_comboToMonthProductPActionPerformed
 
     private void comboToDateProductPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToDateProductPActionPerformed
@@ -1879,31 +2043,75 @@ String toDate = comboToYearCustom.getSelectedItem() + "-" + comboToMonthCustom.g
     }//GEN-LAST:event_comboFromDateProductPActionPerformed
 
     private void comboFromYearProductPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromYearProductPActionPerformed
-           String selectedYear = (String) comboFromYearProductP.getSelectedItem();
+        String selectedYear = (String) comboFromYearProductP.getSelectedItem();
         if (selectedYear != null) {
             showMonth(selectedYear);
-            
-         
+
         }
     }//GEN-LAST:event_comboFromYearProductPActionPerformed
 
     private void comboToYearProductPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToYearProductPActionPerformed
-                String selectedYear = (String) comboToYearProductP.getSelectedItem();
+        String selectedYear = (String) comboToYearProductP.getSelectedItem();
         if (selectedYear != null) {
             showMonth(selectedYear);
-            
-         
+
         }
     }//GEN-LAST:event_comboToYearProductPActionPerformed
 
     private void comboFromMonthProductPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromMonthProductPActionPerformed
-               String selectedYear = (String) comboFromYearProductP.getSelectedItem();
-    String selectedMonth = (String) comboFromMonthProductP.getSelectedItem();
-    if (selectedYear != null && selectedMonth != null) {
-        loadDays(selectedYear, selectedMonth);
-                    
-    }
+        String selectedYear = (String) comboFromYearProductP.getSelectedItem();
+        String selectedMonth = (String) comboFromMonthProductP.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
     }//GEN-LAST:event_comboFromMonthProductPActionPerformed
+
+    private void comboToDateBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToDateBPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboToDateBPActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        showBranchTransactionsBarChart();
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void comboFromDateBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromDateBPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboFromDateBPActionPerformed
+
+    private void comboToMonthBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToMonthBPActionPerformed
+        String selectedYear = (String) comboToYearBP.getSelectedItem();
+        String selectedMonth = (String) comboToMonthBP.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
+    }//GEN-LAST:event_comboToMonthBPActionPerformed
+
+    private void comboFromYearBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromYearBPActionPerformed
+        String selectedYear = (String) comboFromYearBP.getSelectedItem();
+        if (selectedYear != null) {
+            showMonth(selectedYear);
+
+        }
+    }//GEN-LAST:event_comboFromYearBPActionPerformed
+
+    private void comboToYearBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToYearBPActionPerformed
+        String selectedYear = (String) comboToYearBP.getSelectedItem();
+        if (selectedYear != null) {
+            showMonth(selectedYear);
+
+        }
+    }//GEN-LAST:event_comboToYearBPActionPerformed
+
+    private void comboFromMonthBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromMonthBPActionPerformed
+        String selectedYear = (String) comboFromYearBP.getSelectedItem();
+        String selectedMonth = (String) comboFromMonthBP.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
+    }//GEN-LAST:event_comboFromMonthBPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1940,17 +2148,12 @@ String toDate = comboToYearCustom.getSelectedItem() + "-" + comboToMonthCustom.g
             }
         });
     }
-    
-
-
 
     /*
     ********************************************************************************************************************************************
                                              Best Selling Product  page functions
     ********************************************************************************************************************************************
      */
-    
-       
     // ** Get Year from mysql to  FromYear Combobox
     private void showYear() {
         Connection conn;
@@ -1965,33 +2168,40 @@ String toDate = comboToYearCustom.getSelectedItem() + "-" + comboToMonthCustom.g
             rs = pst.executeQuery();
 
             // remove all items from all tabs combo Year boxes 
-            
             //** BSP page combo
             comboFromYear.removeAllItems();
-                        comboToYear.removeAllItems();
-                   //** cAnalysis page combo     
+            comboToYear.removeAllItems();
+            //** cAnalysis page combo     
             comboFromYearCustom.removeAllItems();
             comboToYearCustom.removeAllItems();
 
-                // Product performance combo
+            // Product performance combo
             comboFromYearProductP.removeAllItems();
             comboToYearProductP.removeAllItems();
-            
+
+            // Branch performance combo
+            comboFromYearBP.removeAllItems();
+            comboToYearBP.removeAllItems();
+
             while (rs.next()) {
                 int year = rs.getInt("Year");
-                
-                 // Add available years from mysql to all tabs combo Year boxes 
-                             //** BSP page combo
-                comboFromYear.addItem(year + "");
-                         comboToYear.addItem(year + "");
 
-                            //** cAnalysis page combo
-                       comboFromYearCustom.addItem(year + "");
+                // Add available years from mysql to all tabs combo Year boxes 
+                //** BSP page combo
+                comboFromYear.addItem(year + "");
+                comboToYear.addItem(year + "");
+
+                //** cAnalysis page combo
+                comboFromYearCustom.addItem(year + "");
                 comboToYearCustom.addItem(year + "");
- 
+
                 //product performance combo
                 comboFromYearProductP.addItem(year + "");
                 comboToYearProductP.addItem(year + "");
+
+                //Branch performance combo
+                comboFromYearBP.addItem(year + "");
+                comboToYearBP.addItem(year + "");
             }
             rs.close();
             pst.close();
@@ -2000,449 +2210,436 @@ String toDate = comboToYearCustom.getSelectedItem() + "-" + comboToMonthCustom.g
         }
 
     }
- 
+
     // ** Get Month from mysql to  FromMonth Combobox
-private void showMonth(String selectedYear) {
-    Connection conn;
-    PreparedStatement pst;
-    ResultSet rs;
+    private void showMonth(String selectedYear) {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
 
-    try {
-        conn = database.connect();
-        String sql = "SELECT DISTINCT MONTH(Date) as Month FROM supermarket_sales WHERE YEAR(Date) = ? ORDER BY Month";
-        pst = conn.prepareStatement(sql);
-        pst.setInt(1, Integer.parseInt(selectedYear)); 
-        rs = pst.executeQuery();
-        
-                    // remove all items from all tabs combo Month boxes 
-            
+        try {
+            conn = database.connect();
+            String sql = "SELECT DISTINCT MONTH(Date) as Month FROM supermarket_sales WHERE YEAR(Date) = ? ORDER BY Month";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(selectedYear));
+            rs = pst.executeQuery();
+
+            // remove all items from all tabs combo Month boxes 
             //** BSP page combo
-        comboFromMonth.removeAllItems();
-      comboToMonth.removeAllItems();
-      
-           //** cAnalysis page combo
-           comboFromMonthCustom.removeAllItems();
-           comboToMonthCustom.removeAllItems();
- 
-           //** Productperformance page combo
-           comboFromMonthProductP.removeAllItems();
-           comboToMonthProductP.removeAllItems();
-        while (rs.next()) {
-            int month = rs.getInt("Month");
-            
-                    // Add available Month from mysql to all tabs combo Month boxes 
-                        //** BSP page combo
-            comboFromMonth.addItem(String.format("%02d", month)); 
-            comboToMonth.addItem(String.format("%02d", month));
-            
-                       //** cAnalysis page combo
-                       comboFromMonthCustom.addItem(String.format("%02d", month));
-                       comboToMonthCustom.addItem(String.format("%02d", month));
+            comboFromMonth.removeAllItems();
+            comboToMonth.removeAllItems();
 
-                       //** ProductPerformance page combo
-                       comboFromMonthProductP.addItem(String.format("%02d", month));
-                       comboToMonthProductP.addItem(String.format("%02d", month));
+            //** cAnalysis page combo
+            comboFromMonthCustom.removeAllItems();
+            comboToMonthCustom.removeAllItems();
+
+            //** Productperformance page combo
+            comboFromMonthProductP.removeAllItems();
+            comboToMonthProductP.removeAllItems();
+
+            //**  Branch performance page combo
+            comboFromMonthBP.removeAllItems();
+            comboToMonthBP.removeAllItems();
+            while (rs.next()) {
+                int month = rs.getInt("Month");
+
+                // Add available Month from mysql to all tabs combo Month boxes 
+                //** BSP page combo
+                comboFromMonth.addItem(String.format("%02d", month));
+                comboToMonth.addItem(String.format("%02d", month));
+
+                //** cAnalysis page combo
+                comboFromMonthCustom.addItem(String.format("%02d", month));
+                comboToMonthCustom.addItem(String.format("%02d", month));
+
+                //** ProductPerformance page combo
+                comboFromMonthProductP.addItem(String.format("%02d", month));
+                comboToMonthProductP.addItem(String.format("%02d", month));
+
+                //** Branch Performance page combo
+                comboFromMonthBP.addItem(String.format("%02d", month));
+                comboToMonthBP.addItem(String.format("%02d", month));
+            }
+            rs.close();
+            pst.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        rs.close();
-        pst.close();
-    } catch (SQLException ex) {
-        Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
     }
-}
-   
+
     // ** Get Day  from mysql to  From Day  Combobox
-    
-private void loadDays(String selectedYear, String selectedMonth) {
-    Connection conn;
-    PreparedStatement pst;
-    ResultSet rs;
+    private void loadDays(String selectedYear, String selectedMonth) {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
 
-    try {
-        conn = database.connect();
-   
-        String sql = "SELECT DISTINCT DAY(Date) as Day FROM supermarket_sales WHERE YEAR(Date) = ? AND MONTH(Date) = ? ORDER BY Day";
-        pst = conn.prepareStatement(sql);
-        pst.setInt(1, Integer.parseInt(selectedYear)); 
-        pst.setInt(2, Integer.parseInt(selectedMonth)); 
-        rs = pst.executeQuery();
+        try {
+            conn = database.connect();
 
-             // remove all items from all tabs combo Month boxes 
-          //** BSP page combo
-        comboFromDate.removeAllItems();
+            String sql = "SELECT DISTINCT DAY(Date) as Day FROM supermarket_sales WHERE YEAR(Date) = ? AND MONTH(Date) = ? ORDER BY Day";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(selectedYear));
+            pst.setInt(2, Integer.parseInt(selectedMonth));
+            rs = pst.executeQuery();
 
-        comboToDate.removeAllItems();
-        
-         //** cAnalysis page combo
+            // remove all items from all tabs combo Month boxes 
+            //** BSP page combo
+            comboFromDate.removeAllItems();
 
-         comboFromDateCustom.removeAllItems();
-         comboToDateCustom.removeAllItems();
+            comboToDate.removeAllItems();
 
-         //** ProductPerformance page combo
+            //** cAnalysis page combo
+            comboFromDateCustom.removeAllItems();
+            comboToDateCustom.removeAllItems();
 
-         comboFromDateProductP.removeAllItems();
-         comboToDateProductP.removeAllItems();
-         
-        while (rs.next()) {
-            int dayNumber = rs.getInt("Day");
-            
-                    // Add available Day from mysql to all tabs combo Day boxes 
-                    
-              //** BSP page combo
-            comboFromDate.addItem(dayNumber +""); 
-                    comboToDate.addItem(dayNumber +""); 
+            //** ProductPerformance page combo
+            comboFromDateProductP.removeAllItems();
+            comboToDateProductP.removeAllItems();
 
-                                         //** cAnalysis page combo
-                    comboFromDateCustom.addItem(dayNumber +""); 
-                    comboToDateCustom.addItem(dayNumber +""); 
+            //** Branch Performance page combo
+            comboFromDateBP.removeAllItems();
+            comboToDateBP.removeAllItems();
 
-                                         //** ProductPerformance page combo
-                    comboFromDateProductP.addItem(dayNumber +""); 
-                    comboToDateProductP.addItem(dayNumber +""); 
-                    
+            while (rs.next()) {
+                int dayNumber = rs.getInt("Day");
 
+                // Add available Day from mysql to all tabs combo Day boxes 
+                //** BSP page combo
+                comboFromDate.addItem(dayNumber + "");
+                comboToDate.addItem(dayNumber + "");
+
+                //** cAnalysis page combo
+                comboFromDateCustom.addItem(dayNumber + "");
+                comboToDateCustom.addItem(dayNumber + "");
+
+                //** ProductPerformance page combo
+                comboFromDateProductP.addItem(dayNumber + "");
+                comboToDateProductP.addItem(dayNumber + "");
+
+                //** Branch Performance page combo
+                comboFromDateBP.addItem(dayNumber + "");
+                comboToDateBP.addItem(dayNumber + "");
+
+            }
+            rs.close();
+            pst.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        rs.close();
-        pst.close();
-    } catch (SQLException ex) {
-        Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
     }
-}
 
 //** Method for show details on the Pie chart
+    private void showBestSellingProduct() {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
 
-private void showBestSellingProduct() {
-    Connection conn;
-    PreparedStatement pst;
-    ResultSet rs;
+        try {
+            conn = database.connect();
 
-    try {
-        conn = database.connect();
+            // Get selected "From" and "To" dates
+            String fromYear = (String) comboFromYear.getSelectedItem();
+            String fromMonth = (String) comboFromMonth.getSelectedItem();
+            String fromDay = (String) comboFromDate.getSelectedItem();
 
-        // Get selected "From" and "To" dates
-        String fromYear = (String) comboFromYear.getSelectedItem();
-        String fromMonth = (String) comboFromMonth.getSelectedItem();
-        String fromDay = (String) comboFromDate.getSelectedItem();
+            String toYear = (String) comboToYear.getSelectedItem();
+            String toMonth = (String) comboToMonth.getSelectedItem();
+            String toDay = (String) comboToDate.getSelectedItem();
 
-        String toYear = (String) comboToYear.getSelectedItem();
-        String toMonth = (String) comboToMonth.getSelectedItem();
-        String toDay = (String) comboToDate.getSelectedItem();
-
-       
-        if (fromYear == null || toYear == null) {
-            return; 
-        }
-
-   
-        String fromDateString = fromYear + "-01-01";
-        if (fromMonth != null) {
-            fromDateString = fromYear + "-" + fromMonth + "-01";
-            if (fromDay != null) {
-                fromDateString = fromYear + "-" + fromMonth + "-" + fromDay;
+            if (fromYear == null || toYear == null) {
+                return;
             }
-        }
 
-        
-        String toDateString = toYear + "-12-31"; 
-        if (toMonth != null) {
-            toDateString = toYear + "-" + toMonth + "-31";
-            if (toDay != null) {
-                toDateString = toYear + "-" + toMonth + "-" + toDay;
+            String fromDateString = fromYear + "-01-01";
+            if (fromMonth != null) {
+                fromDateString = fromYear + "-" + fromMonth + "-01";
+                if (fromDay != null) {
+                    fromDateString = fromYear + "-" + fromMonth + "-" + fromDay;
+                }
             }
+
+            String toDateString = toYear + "-12-31";
+            if (toMonth != null) {
+                toDateString = toYear + "-" + toMonth + "-31";
+                if (toDay != null) {
+                    toDateString = toYear + "-" + toMonth + "-" + toDay;
+                }
+            }
+
+            if (fromDateString.compareTo(toDateString) > 0) {
+                JOptionPane.showMessageDialog(null, "Invalid date range: 'From' date must be earlier than 'To' date.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // SQL query for the best-selling products
+            String sql = "SELECT ProductName, SUM(Quantity) as TotalQuantity, "
+                    + "SUM(TotalPrice) as TotalRevenue, AVG(PriceperUnit) as AvgPrice "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ? "
+                    + "GROUP BY ProductName "
+                    + "ORDER BY TotalQuantity DESC";
+
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, fromDateString);
+            pst.setString(2, toDateString);
+            rs = pst.executeQuery();
+
+            // Clear the existing pie chart data
+            pieChart1.clearData();
+
+            boolean hasData = false;
+
+            int totalCount = 0;
+            while (rs.next()) {
+                String productName = rs.getString("ProductName");
+                int totalQuantity = rs.getInt("TotalQuantity");
+
+                // Add data to pie chart
+                Color pieColor = new Color((int) (Math.random() * 0x1000000));
+                pieChart1.addData(new ModelPieChart(productName, totalQuantity, pieColor));
+                hasData = true;
+                totalCount += totalQuantity;
+            }
+
+            if (!hasData) {
+                JOptionPane.showMessageDialog(null, "No data found for the selected date range.", "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            String title = " " + fromDay + "-" + fromMonth + "-" + fromYear + " To " + toDay + "-" + toMonth + "-" + toYear;
+            dtRange.setText(title);
+
+            bsCount.setText("" + totalCount + " Items");
+
+            rs.close();
+            pst.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-       
-        if (fromDateString.compareTo(toDateString) > 0) {
-            JOptionPane.showMessageDialog(null, "Invalid date range: 'From' date must be earlier than 'To' date.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // SQL query for the best-selling products
-        String sql = "SELECT ProductName, SUM(Quantity) as TotalQuantity, " +
-                     "SUM(TotalPrice) as TotalRevenue, AVG(PriceperUnit) as AvgPrice " +
-                     "FROM supermarket_sales " +
-                     "WHERE Date BETWEEN ? AND ? " +
-                     "GROUP BY ProductName " +
-                     "ORDER BY TotalQuantity DESC";
-
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, fromDateString);
-        pst.setString(2, toDateString);
-        rs = pst.executeQuery();
-
-        // Clear the existing pie chart data
-        pieChart1.clearData();
-
-        boolean hasData = false;
-
-        int totalCount = 0;
-        while (rs.next()) {
-            String productName = rs.getString("ProductName");
-            int totalQuantity = rs.getInt("TotalQuantity");
-
-            // Add data to pie chart
-            Color pieColor = new Color((int) (Math.random() * 0x1000000));
-            pieChart1.addData(new ModelPieChart(productName, totalQuantity, pieColor));
-            hasData = true;
-            totalCount += totalQuantity;
-        }
-
-        if (!hasData) {
-            JOptionPane.showMessageDialog(null, "No data found for the selected date range.", "Information", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        String title = " " + fromDay +"-" + fromMonth +"-" + fromYear + " To " + toDay +"-" + toMonth +"-" + toYear;
-   dtRange.setText(title);
-        
-        bsCount.setText(""+totalCount + " Items");
-    
-        rs.close();
-        pst.close();
-        conn.close();
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
-
 
 // **  Load BSP on the array 
+    ArrayList<BspTableLoad> loadBestSellingProducts(String fromDate, String toDate) {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
+        ArrayList<BspTableLoad> bestSellingProducts = new ArrayList<>();
 
-ArrayList<BspTableLoad> loadBestSellingProducts(String fromDate, String toDate) {
-    Connection conn;
-    PreparedStatement pst;
-    ResultSet rs;
-    ArrayList<BspTableLoad> bestSellingProducts = new ArrayList<>();
+        try {
+            conn = database.connect();
+            String sql = "SELECT ProductName, "
+                    + "SUM(Quantity) AS TotalQuantitySold, "
+                    + "SUM(TotalPrice) AS TotalRevenue, "
+                    + "COUNT(TransactionID) AS TotalTransactions, "
+                    + "COUNT(DISTINCT CustomerID) AS CustomerCount, "
+                    + "(SUM(TotalPrice) / (SELECT SUM(TotalPrice) FROM supermarket_sales)) * 100 AS RevenueContribution "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ? "
+                    + "GROUP BY ProductName "
+                    + "ORDER BY TotalRevenue DESC";
 
-    try {
-        conn = database.connect();
-String sql = "SELECT ProductName, " +
-             "SUM(Quantity) AS TotalQuantitySold, " +
-             "SUM(TotalPrice) AS TotalRevenue, " +
-             "COUNT(TransactionID) AS TotalTransactions, " +
-             "COUNT(DISTINCT CustomerID) AS CustomerCount, " +
-             "(SUM(TotalPrice) / (SELECT SUM(TotalPrice) FROM supermarket_sales)) * 100 AS RevenueContribution " +
-             "FROM supermarket_sales " +
-             "WHERE Date BETWEEN ? AND ? " +
-             "GROUP BY ProductName " +
-             "ORDER BY TotalRevenue DESC";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, fromDate);
+            pst.setString(2, toDate);
+            rs = pst.executeQuery();
 
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, fromDate);
-        pst.setString(2, toDate);
-        rs = pst.executeQuery();
+            while (rs.next()) {
+                BspTableLoad product = new BspTableLoad(
+                        rs.getString("ProductName"),
+                        rs.getInt("TotalQuantitySold"),
+                        rs.getFloat("TotalRevenue"),
+                        rs.getInt("TotalTransactions"),
+                        rs.getInt("CustomerCount"),
+                        rs.getFloat("RevenueContribution")
+                );
+                bestSellingProducts.add(product);
+            }
 
-        while (rs.next()) {
-            BspTableLoad product = new BspTableLoad(
-                rs.getString("ProductName"),
-                rs.getInt("TotalQuantitySold"),
-                rs.getFloat("TotalRevenue"),
-                rs.getInt("TotalTransactions"),
-                rs.getInt("CustomerCount"),
-              
-                rs.getFloat("RevenueContribution")
-            );
-            bestSellingProducts.add(product);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        
-        
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return bestSellingProducts;
     }
-    return bestSellingProducts;
-}
-
-
 
 //** show BSP on the table
+    public void showBSPTable(String fromDate, String toDate) {
+        ArrayList<BspTableLoad> productList = loadBestSellingProducts(fromDate, toDate);
+        DefaultTableModel tableModel = (DefaultTableModel) BSPTable.getModel();
 
-public void showBSPTable(String fromDate, String toDate) {
-    ArrayList<BspTableLoad> productList = loadBestSellingProducts(fromDate, toDate);
-    DefaultTableModel tableModel = (DefaultTableModel) BSPTable.getModel();
+        tableModel.setRowCount(0); // Clear existing rows
+        Object[] row = new Object[7];
 
-    tableModel.setRowCount(0); // Clear existing rows
-    Object[] row = new Object[7];
+        for (BspTableLoad product : productList) {
+            row[0] = product.getProductName();
+            row[1] = product.getTotalQuantitySold();
+            row[2] = product.getTotalRevenue();
+            row[3] = product.getTotalTransactions();
+            row[4] = product.getCustomerCount();
 
-    for (BspTableLoad product : productList) {
-        row[0] = product.getProductName();
-        row[1] = product.getTotalQuantitySold();
-        row[2] = product.getTotalRevenue();
-        row[3] = product.getTotalTransactions();
-        row[4] = product.getCustomerCount();
-      
-        row[5] = String.format("%.2f", product.getRevenueContribution()); // Format to 2 decimal places
-        tableModel.addRow(row);
-        
+            row[5] = String.format("%.2f", product.getRevenueContribution()); // Format to 2 decimal places
+            tableModel.addRow(row);
+
+        }
 
     }
 
-}
-
-        /*
+    /*
     ********************************************************************************************************************************************
                                              Customer Analysis  page functions
     ********************************************************************************************************************************************
      */
+    private void showCustomerSegmentation() {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
 
+        try {
+            conn = database.connect();
 
-private void showCustomerSegmentation() {
-    Connection conn;
-    PreparedStatement pst;
-    ResultSet rs;
+            // Get selected "From" and "To" dates
+            String fromYear = (String) comboFromYearCustom.getSelectedItem();
+            String fromMonth = (String) comboFromMonthCustom.getSelectedItem();
+            String fromDay = (String) comboFromDateCustom.getSelectedItem();
 
-    try {
-        conn = database.connect();
+            String toYear = (String) comboToYearCustom.getSelectedItem();
+            String toMonth = (String) comboToMonthCustom.getSelectedItem();
+            String toDay = (String) comboToDateCustom.getSelectedItem();
 
-        // Get selected "From" and "To" dates
-        String fromYear = (String) comboFromYearCustom.getSelectedItem();
-        String fromMonth = (String) comboFromMonthCustom.getSelectedItem();
-        String fromDay = (String) comboFromDateCustom.getSelectedItem();
-
-        String toYear = (String) comboToYearCustom.getSelectedItem();
-        String toMonth = (String) comboToMonthCustom.getSelectedItem();
-        String toDay = (String) comboToDateCustom.getSelectedItem();
-
-        if (fromYear == null || toYear == null) {
-            return; 
-        }
-
-        
-        String fromDateString = fromYear + "-01-01";
-        if (fromMonth != null) {
-            fromDateString = fromYear + "-" + fromMonth + "-01";
-            if (fromDay != null) {
-                fromDateString = fromYear + "-" + fromMonth + "-" + fromDay;
+            if (fromYear == null || toYear == null) {
+                return;
             }
-        }
 
-     
-        String toDateString = toYear + "-12-31"; 
-        if (toMonth != null) {
-            toDateString = toYear + "-" + toMonth + "-31";
-            if (toDay != null) {
-                toDateString = toYear + "-" + toMonth + "-" + toDay;
+            String fromDateString = fromYear + "-01-01";
+            if (fromMonth != null) {
+                fromDateString = fromYear + "-" + fromMonth + "-01";
+                if (fromDay != null) {
+                    fromDateString = fromYear + "-" + fromMonth + "-" + fromDay;
+                }
             }
-        }
 
-        if (fromDateString.compareTo(toDateString) > 0) {
-            JOptionPane.showMessageDialog(null, "Invalid date range: 'From' date must be earlier than 'To' date.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // SQL query for customer segmentation by region
-        String sql = "SELECT Region, COUNT(DISTINCT CustomerID) as CustomerCount " +
-                     "FROM supermarket_sales " +
-                     "WHERE Date BETWEEN ? AND ? " +
-                     "GROUP BY Region " +
-                     "ORDER BY CustomerCount DESC";
-
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, fromDateString);
-        pst.setString(2, toDateString);
-        rs = pst.executeQuery();
-
-        // Clear existing pie chart data
-        pieChart2.clearData(); 
-
-        boolean hasData = false;
-
-        int totalCustomer=0;
-        String largestSegment="";
-        int maxCustomerCount=0;
-        while (rs.next()) {
-            String region = rs.getString("Region");
-            int customerCount = rs.getInt("CustomerCount");
-            
-
-            // Add data to pie chart
-            Color pieColor = new Color((int) (Math.random() * 0x1000000));
-            pieChart2.addData(new ModelPieChart(region, customerCount, pieColor));
-            hasData = true;
-            
-            totalCustomer += customerCount;
-            
-            if (customerCount>maxCustomerCount) {
-                
-                maxCustomerCount = customerCount;
-                largestSegment = region;
+            String toDateString = toYear + "-12-31";
+            if (toMonth != null) {
+                toDateString = toYear + "-" + toMonth + "-31";
+                if (toDay != null) {
+                    toDateString = toYear + "-" + toMonth + "-" + toDay;
+                }
             }
+
+            if (fromDateString.compareTo(toDateString) > 0) {
+                JOptionPane.showMessageDialog(null, "Invalid date range: 'From' date must be earlier than 'To' date.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // SQL query for customer segmentation by region
+            String sql = "SELECT Region, COUNT(DISTINCT CustomerID) as CustomerCount "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ? "
+                    + "GROUP BY Region "
+                    + "ORDER BY CustomerCount DESC";
+
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, fromDateString);
+            pst.setString(2, toDateString);
+            rs = pst.executeQuery();
+
+            // Clear existing pie chart data
+            pieChart2.clearData();
+
+            boolean hasData = false;
+
+            int totalCustomer = 0;
+            String largestSegment = "";
+            int maxCustomerCount = 0;
+            while (rs.next()) {
+                String region = rs.getString("Region");
+                int customerCount = rs.getInt("CustomerCount");
+
+                // Add data to pie chart
+                Color pieColor = new Color((int) (Math.random() * 0x1000000));
+                pieChart2.addData(new ModelPieChart(region, customerCount, pieColor));
+                hasData = true;
+
+                totalCustomer += customerCount;
+
+                if (customerCount > maxCustomerCount) {
+
+                    maxCustomerCount = customerCount;
+                    largestSegment = region;
+                }
+            }
+
+            if (!hasData) {
+                JOptionPane.showMessageDialog(null, "No data found for customer segmentation in the selected date range.", "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            String title = " " + fromDay + "-" + fromMonth + "-" + fromYear + " To " + toDay + "-" + toMonth + "-" + toYear;
+            dtDateRange.setText(title);
+
+            lblLargestSeg.setText("" + totalCustomer);
+
+            lblLargestSeg.setText(largestSegment + " (" + maxCustomerCount + " customers) ");
+
+            rs.close();
+            pst.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        if (!hasData) {
-            JOptionPane.showMessageDialog(null, "No data found for customer segmentation in the selected date range.", "Information", JOptionPane.INFORMATION_MESSAGE);
-        }
-        
-        
-        String title = " " + fromDay +"-" + fromMonth +"-" + fromYear + " To " + toDay +"-" + toMonth +"-" + toYear;
-        dtDateRange.setText(title);
-        
-        lblLargestSeg.setText(""+totalCustomer);
-        
-        lblLargestSeg.setText(largestSegment + " (" +maxCustomerCount + " customers) ");
-
-        rs.close();
-        pst.close();
-        conn.close();
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
 
-
-
-
-    ArrayList<CustomerTableLoad> loadTopCustomer(String fromDate, String toDate){
+    ArrayList<CustomerTableLoad> loadTopCustomer(String fromDate, String toDate) {
         Connection conn;
         PreparedStatement pst;
         ResultSet rs;
         ArrayList<CustomerTableLoad> topCustomer = new ArrayList<>();
-        
+
         try {
             conn = database.connect();
-        String sql = "SELECT CustomerID, " +
-                     "COUNT(TransactionID) AS TotalTransactions, " +
-                     "SUM(TotalPrice) AS TotalSpending " +
-                     "FROM supermarket_sales " +
-                     "WHERE Date BETWEEN ? AND ? " +
-                     "GROUP BY CustomerID " +
-                     "ORDER BY TotalSpending DESC " +
-                     "LIMIT 10";
-        
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, fromDate);
-        pst.setString(2, toDate);
-        rs = pst.executeQuery();
-        
-        while(rs.next()) {
-            CustomerTableLoad ctl = new CustomerTableLoad(
-                    rs.getInt("CustomerID"),
-                    rs.getInt("TotalTransactions"),
-                    rs.getFloat("TotalSpending")
-                    );
-            topCustomer.add(ctl);
-        }
-        }
-        catch(Exception e){
+            String sql = "SELECT CustomerID, "
+                    + "COUNT(TransactionID) AS TotalTransactions, "
+                    + "SUM(TotalPrice) AS TotalSpending "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ? "
+                    + "GROUP BY CustomerID "
+                    + "ORDER BY TotalSpending DESC "
+                    + "LIMIT 10";
+
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, fromDate);
+            pst.setString(2, toDate);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                CustomerTableLoad ctl = new CustomerTableLoad(
+                        rs.getInt("CustomerID"),
+                        rs.getInt("TotalTransactions"),
+                        rs.getFloat("TotalSpending")
+                );
+                topCustomer.add(ctl);
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
         return topCustomer;
     }
-public void showTopCustomerTable(String fromDate, String toDate){
-    ArrayList<CustomerTableLoad> customerList = loadTopCustomer(fromDate, toDate);
-    DefaultTableModel tb = (DefaultTableModel) tableCustomSeg.getModel();
-    tb.setRowCount(0);
 
-    Object[] row = new Object[3];
-    for (CustomerTableLoad customer : customerList) {
-        row[0] = customer.getCustomerId();
-        row[1] = customer.getTransactions();
-        row[2] = customer.getTotalSpending();
-        tb.addRow(row);
+    public void showTopCustomerTable(String fromDate, String toDate) {
+        ArrayList<CustomerTableLoad> customerList = loadTopCustomer(fromDate, toDate);
+        DefaultTableModel tb = (DefaultTableModel) tableCustomSeg.getModel();
+        tb.setRowCount(0);
+
+        Object[] row = new Object[3];
+        for (CustomerTableLoad customer : customerList) {
+            row[0] = customer.getCustomerId();
+            row[1] = customer.getTransactions();
+            row[2] = customer.getTotalSpending();
+            tb.addRow(row);
+        }
+
     }
-    
 
-}
-    
 
     /*
     ********************************************************************************************************************************************
@@ -2452,83 +2649,155 @@ public void showTopCustomerTable(String fromDate, String toDate){
  /*
     -------------------  Chart function
      */
+    private void showProductPerformanceChart() {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
 
+        try {
+            conn = database.connect();
 
+            // Get selected "From" and "To" dates
+            String fromDate = comboFromYearProductP.getSelectedItem() + "-" + comboFromMonthProductP.getSelectedItem() + "-" + comboFromDateProductP.getSelectedItem();
+            String toDate = comboToYearProductP.getSelectedItem() + "-" + comboToMonthProductP.getSelectedItem() + "-" + comboToDateProductP.getSelectedItem();
 
-private void showProductPerformanceChart() {
-    Connection conn;
-    PreparedStatement pst;
-    ResultSet rs;
+            String sql = "SELECT ProductName, SUM(TotalPrice) AS TotalRevenue, SUM(Quantity) AS TotalQuantity "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ? "
+                    + "GROUP BY ProductName "
+                    + "ORDER BY TotalRevenue DESC";
 
-    try {
-        conn = database.connect();
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, fromDate);
+            pst.setString(2, toDate);
+            rs = pst.executeQuery();
 
-        // Get selected "From" and "To" dates
-        String fromDate = comboFromYearProductP.getSelectedItem() + "-" + comboFromMonthProductP.getSelectedItem() + "-" + comboFromDateProductP.getSelectedItem();
-        String toDate = comboToYearProductP.getSelectedItem() + "-" + comboToMonthProductP.getSelectedItem() + "-" + comboToDateProductP.getSelectedItem();
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        String sql = "SELECT ProductName, SUM(TotalPrice) AS TotalRevenue, SUM(Quantity) AS TotalQuantity " +
-                     "FROM supermarket_sales " +
-                     "WHERE Date BETWEEN ? AND ? " +
-                     "GROUP BY ProductName " +
-                     "ORDER BY TotalRevenue DESC";
+            while (rs.next()) {
+                String productName = rs.getString("ProductName");
+                double totalRevenue = rs.getDouble("TotalRevenue");
+                int totalQuantity = rs.getInt("TotalQuantity");
 
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, fromDate);
-        pst.setString(2, toDate);
-        rs = pst.executeQuery();
+                // Add data to dataset for both metrics
+                dataset.addValue(totalRevenue, "Total Revenue", productName);
+                dataset.addValue(totalQuantity, "Total Quantity", productName);
+            }
 
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            JFreeChart chart = ChartFactory.createLineChart(
+                    "Product Performance", // Chart title
 
-        while (rs.next()) {
-            String productName = rs.getString("ProductName");
-            double totalRevenue = rs.getDouble("TotalRevenue");
-            int totalQuantity = rs.getInt("TotalQuantity");
+                    "Products", // X-axis Label
+                    "Values", // Y-axis Label
+                    dataset // Dataset
+            );
 
-            // Add data to dataset for both metrics
-            dataset.addValue(totalRevenue, "Total Revenue", productName);
-            dataset.addValue(totalQuantity, "Total Quantity", productName);
-        }
-
-        JFreeChart chart = ChartFactory.createLineChart(
-                "Product Performance",       // Chart title
- 
-                "Products",                  // X-axis Label
-                "Values",                    // Y-axis Label
-                dataset                      // Dataset
-        );
-
-        // Add a subtitle
-chart.addSubtitle(new TextTitle("Analyze the performance of products over the selected date range."));
+            // Add a subtitle
+            chart.addSubtitle(new TextTitle("Analyze the performance of products over the selected date range."));
 
 // Customize the plot
-CategoryPlot plot = chart.getCategoryPlot();
-plot.setRangeGridlinesVisible(true);  
-plot.setBackgroundPaint(Color.LIGHT_GRAY); 
+            CategoryPlot plot = chart.getCategoryPlot();
+            plot.setRangeGridlinesVisible(true);
+            plot.setBackgroundPaint(Color.LIGHT_GRAY);
 
+            // Remove the previous chart
+            panelProductPerformance.removeAll();
 
+            // Add chart panel to  Product Performance tab
+            ChartPanel chartPanel = new ChartPanel(chart);
+            chartPanel.setPreferredSize(new Dimension(800, 400));
+            panelProductPerformance.add(chartPanel, BorderLayout.CENTER);
 
+            // Refresh the panel
+            panelProductPerformance.revalidate();
+            panelProductPerformance.repaint();
 
-
-        // Remove the previous chart
-        panelProductPerformance.removeAll();
-
-        // Add chart panel to  Product Performance tab
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(800, 400));
-        panelProductPerformance.add(chartPanel, BorderLayout.CENTER);
-
-        // Refresh the panel
-        panelProductPerformance.revalidate();
-        panelProductPerformance.repaint();
-
-        rs.close();
-        pst.close();
-        conn.close();
-    } catch (Exception e) {
-        e.printStackTrace();
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
+
+
+    /*
+    ********************************************************************************************************************************************
+                                            Branch Performance page functions
+    ********************************************************************************************************************************************
+     */
+ /*
+    -------------------  Bar Chart function
+     */
+    private void showBranchTransactionsBarChart() {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
+
+        try {
+            conn = database.connect();
+
+            // SQL Query to fetch the number of transactions grouped by region
+            String sql = "SELECT Region, COUNT(`TransactionID`) AS TransactionCount "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ? "
+                    + "GROUP BY Region";
+
+            // Get selected date range
+            String fromDate = comboFromYearBP.getSelectedItem() + "-"
+                    + comboFromMonthBP.getSelectedItem() + "-"
+                    + comboFromDateBP.getSelectedItem();
+            String toDate = comboToYearBP.getSelectedItem() + "-"
+                    + comboToMonthBP.getSelectedItem() + "-"
+                    + comboToDateBP.getSelectedItem();
+
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, fromDate);
+            pst.setString(2, toDate);
+            rs = pst.executeQuery();
+
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+            while (rs.next()) {
+                String region = rs.getString("Region");
+                int transactionCount = rs.getInt("TransactionCount");
+                dataset.addValue(transactionCount, "Transactions", region);
+            }
+
+            // Create Bar Chart
+            JFreeChart chart = ChartFactory.createBarChart(
+                    "Transactions by Region",
+                    "Region",
+                    "Number of Transactions",
+                    dataset,
+                    PlotOrientation.VERTICAL,
+                    true,
+                    true,
+                    false
+            );
+
+            CategoryPlot plot = (CategoryPlot) chart.getPlot();
+            plot.setRangeGridlinePaint(Color.GRAY);
+
+            NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
+            yAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+
+            // Refresh panel before adding new chart
+            panelBranchP.removeAll();
+            panelBranchP.setLayout(new BorderLayout());
+
+            // Add chart to panel
+            ChartPanel chartPanel = new ChartPanel(chart);
+            panelBranchP.add(chartPanel, BorderLayout.CENTER);
+            panelBranchP.validate();
+
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /*
     ********************************************************************************************************************************************
@@ -3125,22 +3394,28 @@ plot.setBackgroundPaint(Color.LIGHT_GRAY);
     private javax.swing.JButton btnUpdateData;
     private javax.swing.JPasswordField cPassword;
     private javax.swing.JComboBox<String> comboFromDate;
+    private javax.swing.JComboBox<String> comboFromDateBP;
     private javax.swing.JComboBox<String> comboFromDateCustom;
     private javax.swing.JComboBox<String> comboFromDateProductP;
     private javax.swing.JComboBox<String> comboFromMonth;
+    private javax.swing.JComboBox<String> comboFromMonthBP;
     private javax.swing.JComboBox<String> comboFromMonthCustom;
     private javax.swing.JComboBox<String> comboFromMonthProductP;
     private javax.swing.JComboBox<String> comboFromYear;
+    private javax.swing.JComboBox<String> comboFromYearBP;
     private javax.swing.JComboBox<String> comboFromYearCustom;
     private javax.swing.JComboBox<String> comboFromYearProductP;
     private javax.swing.JComboBox<String> comboRole;
     private javax.swing.JComboBox<String> comboToDate;
+    private javax.swing.JComboBox<String> comboToDateBP;
     private javax.swing.JComboBox<String> comboToDateCustom;
     private javax.swing.JComboBox<String> comboToDateProductP;
     private javax.swing.JComboBox<String> comboToMonth;
+    private javax.swing.JComboBox<String> comboToMonthBP;
     private javax.swing.JComboBox<String> comboToMonthCustom;
     private javax.swing.JComboBox<String> comboToMonthProductP;
     private javax.swing.JComboBox<String> comboToYear;
+    private javax.swing.JComboBox<String> comboToYearBP;
     private javax.swing.JComboBox<String> comboToYearCustom;
     private javax.swing.JComboBox<String> comboToYearProductP;
     private com.toedter.calendar.JDateChooser dateChoose;
@@ -3148,6 +3423,7 @@ plot.setBackgroundPaint(Color.LIGHT_GRAY);
     private javax.swing.JLabel dtRange;
     private javax.swing.JTable employeeTable;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -3185,7 +3461,6 @@ plot.setBackgroundPaint(Color.LIGHT_GRAY);
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -3200,7 +3475,16 @@ plot.setBackgroundPaint(Color.LIGHT_GRAY);
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -3216,6 +3500,7 @@ plot.setBackgroundPaint(Color.LIGHT_GRAY);
     private javax.swing.JLabel lblLargestSeg;
     private javax.swing.JPanel panelBSP;
     private javax.swing.JPanel panelBranch;
+    private javax.swing.JPanel panelBranchP;
     private javax.swing.JPanel panelChangepwd;
     private javax.swing.JPanel panelCustomer;
     private javax.swing.JPanel panelDataset;
@@ -3235,7 +3520,6 @@ plot.setBackgroundPaint(Color.LIGHT_GRAY);
     private javax.swing.JLabel pieTitle6;
     private javax.swing.JTable supdatasetTable;
     private javax.swing.JTable tableCustomSeg;
-    private javax.swing.JLabel testingLbl;
     private javax.swing.JPasswordField txtConfirmPassword;
     private javax.swing.JPasswordField txtCurrentPassword;
     private javax.swing.JTextField txtCusId;
