@@ -11,6 +11,7 @@ import code.CustomerTableLoad;
 import code.DataSetLoad;
 
 import code.EmployeeTableLoad;
+import code.ProductSalesSummary;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import code.RegisterForm;
@@ -37,6 +38,7 @@ import javaswingdev.drawer.Drawer;
 import javaswingdev.drawer.DrawerController;
 import javaswingdev.drawer.DrawerItem;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
@@ -76,10 +78,13 @@ public class MainPage extends javax.swing.JFrame {
 
         // show Customer Analysis  pie chart 
         showCustomerSegmentation();
-
+        // show Product Performance  Linechart 
         showProductPerformanceChart();
-
+        // show Branch  Performance  Bar chart
         showBranchTransactionsBarChart();
+
+        // show summery of the analytics on sale report page
+        populateSalesReportSummary();
 
     }
 
@@ -92,6 +97,40 @@ public class MainPage extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jTabb = new javax.swing.JTabbedPane();
+        panelSales = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        lblBSP = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        jLabel64 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        comboFromMonthSum = new javax.swing.JComboBox<>();
+        jLabel65 = new javax.swing.JLabel();
+        jLabel66 = new javax.swing.JLabel();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel69 = new javax.swing.JLabel();
+        comboFromDateSum = new javax.swing.JComboBox<>();
+        jLabel70 = new javax.swing.JLabel();
+        comboToMonthSum = new javax.swing.JComboBox<>();
+        comboFromYearSum = new javax.swing.JComboBox<>();
+        jLabel71 = new javax.swing.JLabel();
+        comboToDateSum = new javax.swing.JComboBox<>();
+        comboToYearSum = new javax.swing.JComboBox<>();
+        jPanel8 = new javax.swing.JPanel();
+        lblTotalRevenue = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        lblTotalQuantity = new javax.swing.JLabel();
+        jLabel73 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        lblTotalTransactions = new javax.swing.JLabel();
+        jLabel74 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        lblCustomerSegmentation = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tableSummery = new javax.swing.JTable();
         panelBSP = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -163,6 +202,12 @@ public class MainPage extends javax.swing.JFrame {
         jLabel51 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
         panelProductPerformance = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        lblTotalRev = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        lblTotalQtyy = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
         panelBranch = new javax.swing.JPanel();
         comboToDateBP = new javax.swing.JComboBox<>();
         jLabel53 = new javax.swing.JLabel();
@@ -181,8 +226,9 @@ public class MainPage extends javax.swing.JFrame {
         jLabel60 = new javax.swing.JLabel();
         jLabel61 = new javax.swing.JLabel();
         panelBranchP = new javax.swing.JPanel();
-        panelSales = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        lblTotalTransac = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         panelManageUsers = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         cPassword = new javax.swing.JPasswordField();
@@ -270,6 +316,417 @@ public class MainPage extends javax.swing.JFrame {
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 1860, 90));
 
         jTabb.setBackground(new java.awt.Color(51, 51, 51));
+
+        panelSales.setBackground(new java.awt.Color(51, 51, 51));
+        panelSales.setForeground(new java.awt.Color(255, 255, 255));
+
+        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblBSP.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblBSP.setForeground(new java.awt.Color(255, 255, 255));
+        lblBSP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBSP.setText("0");
+
+        jLabel62.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel62.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel62.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel62.setText("Best Selling Product");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblBSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(103, Short.MAX_VALUE)
+                .addComponent(lblBSP)
+                .addGap(24, 24, 24))
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel62)
+                    .addContainerGap(117, Short.MAX_VALUE)))
+        );
+
+        jLabel63.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel63.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel63.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel63.setText("Year");
+
+        jLabel64.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel64.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel64.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel64.setText("Day");
+
+        jButton11.setBackground(new java.awt.Color(0, 200, 0));
+        jButton11.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setText("Filter");
+        jButton11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton11.setBorderPainted(false);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        comboFromMonthSum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFromMonthSum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFromMonthSumActionPerformed(evt);
+            }
+        });
+
+        jLabel65.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel65.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel65.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel65.setText("Month");
+
+        jLabel66.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel66.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel66.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel66.setText("Month");
+
+        jLabel67.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel67.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel67.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel67.setText("Sales Summery");
+
+        jLabel68.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel68.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel68.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel68.setText("From");
+
+        jLabel69.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel69.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel69.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel69.setText("To");
+
+        comboFromDateSum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFromDateSum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFromDateSumActionPerformed(evt);
+            }
+        });
+
+        jLabel70.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel70.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel70.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel70.setText("Year");
+
+        comboToMonthSum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboToMonthSum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboToMonthSumActionPerformed(evt);
+            }
+        });
+
+        comboFromYearSum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFromYearSum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFromYearSumActionPerformed(evt);
+            }
+        });
+
+        jLabel71.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel71.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel71.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel71.setText("Day");
+
+        comboToDateSum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboToDateSum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboToDateSumActionPerformed(evt);
+            }
+        });
+
+        comboToYearSum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboToYearSum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboToYearSumActionPerformed(evt);
+            }
+        });
+
+        jPanel8.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblTotalRevenue.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblTotalRevenue.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalRevenue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalRevenue.setText("0");
+
+        jLabel72.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel72.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel72.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel72.setText("Total Revenue");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalRevenue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel72, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(97, Short.MAX_VALUE)
+                .addComponent(lblTotalRevenue)
+                .addGap(24, 24, 24))
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel72)
+                    .addContainerGap(111, Short.MAX_VALUE)))
+        );
+
+        jPanel9.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblTotalQuantity.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblTotalQuantity.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalQuantity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalQuantity.setText("0");
+
+        jLabel73.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel73.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel73.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel73.setText("Total Quantity");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel73, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addComponent(lblTotalQuantity)
+                .addGap(24, 24, 24))
+            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel9Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel73)
+                    .addContainerGap(76, Short.MAX_VALUE)))
+        );
+
+        jPanel10.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblTotalTransactions.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblTotalTransactions.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalTransactions.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalTransactions.setText("0");
+
+        jLabel74.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel74.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel74.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel74.setText("Total Transactions");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalTransactions, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                    .addComponent(jLabel74, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(97, Short.MAX_VALUE)
+                .addComponent(lblTotalTransactions)
+                .addGap(24, 24, 24))
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel74)
+                    .addContainerGap(83, Short.MAX_VALUE)))
+        );
+
+        jPanel11.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblCustomerSegmentation.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblCustomerSegmentation.setForeground(new java.awt.Color(255, 255, 255));
+        lblCustomerSegmentation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCustomerSegmentation.setText("0");
+
+        jLabel75.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel75.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel75.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel75.setText("Customer Segmentation");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblCustomerSegmentation, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(lblCustomerSegmentation)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel11Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel75)
+                    .addContainerGap(251, Short.MAX_VALUE)))
+        );
+
+        tableSummery.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Product ID", "Product Name", "Total Quantity Sold", "Total Revenue", "Total Transactions", "Avg Price per Unit", "Total Sales"
+            }
+        ));
+        jScrollPane5.setViewportView(tableSummery);
+
+        javax.swing.GroupLayout panelSalesLayout = new javax.swing.GroupLayout(panelSales);
+        panelSales.setLayout(panelSalesLayout);
+        panelSalesLayout.setHorizontalGroup(
+            panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSalesLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSalesLayout.createSequentialGroup()
+                        .addComponent(jLabel67)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelSalesLayout.createSequentialGroup()
+                        .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelSalesLayout.createSequentialGroup()
+                                .addComponent(jLabel63)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboFromYearSum, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel65)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboFromMonthSum, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel71)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboFromDateSum, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel68)
+                            .addGroup(panelSalesLayout.createSequentialGroup()
+                                .addComponent(jLabel70)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboToYearSum, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel66)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboToMonthSum, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel64)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboToDateSum, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelSalesLayout.createSequentialGroup()
+                                .addComponent(jLabel69)
+                                .addGap(540, 540, 540)
+                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelSalesLayout.createSequentialGroup()
+                                .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1079, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
+        );
+        panelSalesLayout.setVerticalGroup(
+            panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSalesLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel67)
+                .addGap(18, 18, 18)
+                .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSalesLayout.createSequentialGroup()
+                        .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelSalesLayout.createSequentialGroup()
+                                .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(comboFromDateSum, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(comboFromMonthSum, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(comboFromYearSum, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(comboToDateSum, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboToMonthSum, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboToYearSum, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelSalesLayout.createSequentialGroup()
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addGroup(panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panelSalesLayout.createSequentialGroup()
+                                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(96, Short.MAX_VALUE))
+        );
+
+        jTabb.addTab("tab5", panelSales);
 
         panelBSP.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -916,6 +1373,86 @@ public class MainPage extends javax.swing.JFrame {
 
         panelProductPerformance.setLayout(new java.awt.BorderLayout());
 
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblTotalRev.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblTotalRev.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalRev.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalRev.setText("0");
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Total Revenue");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalRev, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(146, Short.MAX_VALUE)
+                .addComponent(lblTotalRev)
+                .addGap(41, 41, 41))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(36, 36, 36)
+                    .addComponent(jLabel4)
+                    .addContainerGap(123, Short.MAX_VALUE)))
+        );
+
+        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblTotalQtyy.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblTotalQtyy.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalQtyy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalQtyy.setText("0");
+
+        jLabel34.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setText("Total Quantity");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalQtyy, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTotalQtyy)
+                .addGap(41, 41, 41))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(36, 36, 36)
+                    .addComponent(jLabel34)
+                    .addContainerGap(151, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout panelProductLayout = new javax.swing.GroupLayout(panelProduct);
         panelProduct.setLayout(panelProductLayout);
         panelProductLayout.setHorizontalGroup(
@@ -957,7 +1494,11 @@ public class MainPage extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel45)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboToDateProductP, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(comboToDateProductP, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelProductLayout.createSequentialGroup()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelProductPerformance, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68))))
@@ -995,7 +1536,11 @@ public class MainPage extends javax.swing.JFrame {
                                     .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(comboToMonthProductP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(comboToYearProductP, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboToYearProductP, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(76, 76, 76)
+                        .addGroup(panelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelProductLayout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(panelProductPerformance, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1108,6 +1653,46 @@ public class MainPage extends javax.swing.JFrame {
 
         panelBranchP.setLayout(new java.awt.BorderLayout());
 
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblTotalTransac.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTotalTransac.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalTransac.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalTransac.setText("0");
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Total Tansactions");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalTransac, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(94, Short.MAX_VALUE)
+                .addComponent(lblTotalTransac)
+                .addGap(24, 24, 24))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel3)
+                    .addContainerGap(108, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout panelBranchLayout = new javax.swing.GroupLayout(panelBranch);
         panelBranch.setLayout(panelBranchLayout);
         panelBranchLayout.setHorizontalGroup(
@@ -1115,39 +1700,45 @@ public class MainPage extends javax.swing.JFrame {
             .addGroup(panelBranchLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel54)
                     .addGroup(panelBranchLayout.createSequentialGroup()
-                        .addComponent(jLabel53)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboFromYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel60)
-                        .addGap(18, 18, 18)
-                        .addComponent(comboFromMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel58)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboFromDateBP, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel55)
+                        .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel54)
+                            .addGroup(panelBranchLayout.createSequentialGroup()
+                                .addComponent(jLabel53)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboFromYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel60)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboFromMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel58)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboFromDateBP, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel55)
+                            .addGroup(panelBranchLayout.createSequentialGroup()
+                                .addComponent(jLabel56)
+                                .addGap(540, 540, 540)
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(1184, Short.MAX_VALUE))
                     .addGroup(panelBranchLayout.createSequentialGroup()
-                        .addComponent(jLabel56)
-                        .addGap(540, 540, 540)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelBranchLayout.createSequentialGroup()
-                        .addComponent(jLabel57)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboToYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel61)
-                        .addGap(18, 18, 18)
-                        .addComponent(comboToMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel59)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboToDateBP, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(236, 236, 236)
-                        .addComponent(panelBranchP, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                        .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelBranchLayout.createSequentialGroup()
+                                .addComponent(jLabel57)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboToYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel61)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboToMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel59)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboToDateBP, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelBranchP, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99))))
         );
         panelBranchLayout.setVerticalGroup(
             panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1173,44 +1764,23 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(comboToDateBP, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboToMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(comboToYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelBranchP, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelBranchP, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelBranchLayout.createSequentialGroup()
+                        .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(comboToDateBP, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBranchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboToMonthBP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboToYearBP, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(94, 94, 94)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabb.addTab("tab4", panelBranch);
-
-        panelSales.setBackground(new java.awt.Color(51, 51, 51));
-        panelSales.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel5.setText("Sales");
-
-        javax.swing.GroupLayout panelSalesLayout = new javax.swing.GroupLayout(panelSales);
-        panelSales.setLayout(panelSalesLayout);
-        panelSalesLayout.setHorizontalGroup(
-            panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSalesLayout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1320, Short.MAX_VALUE))
-        );
-        panelSalesLayout.setVerticalGroup(
-            panelSalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSalesLayout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(554, Short.MAX_VALUE))
-        );
-
-        jTabb.addTab("tab5", panelSales);
 
         panelManageUsers.setBackground(new java.awt.Color(51, 51, 51));
         panelManageUsers.setForeground(new java.awt.Color(255, 255, 255));
@@ -2113,6 +2683,57 @@ public class MainPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboFromMonthBPActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        populateSalesReportSummary();
+
+        String fromDate = comboFromYearSum.getSelectedItem() + "-" + comboFromMonthSum.getSelectedItem() + "-" + comboFromDateSum.getSelectedItem();
+        String toDate = comboToYearSum.getSelectedItem() + "-" + comboToMonthSum.getSelectedItem() + "-" + comboToDateSum.getSelectedItem();
+
+        showSalesSummaryTable(fromDate, toDate);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void comboFromMonthSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromMonthSumActionPerformed
+               String selectedYear = (String) comboFromYearSum.getSelectedItem();
+        String selectedMonth = (String) comboFromMonthSum.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
+    }//GEN-LAST:event_comboFromMonthSumActionPerformed
+
+    private void comboFromDateSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromDateSumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboFromDateSumActionPerformed
+
+    private void comboToMonthSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToMonthSumActionPerformed
+               String selectedYear = (String) comboToYearSum.getSelectedItem();
+        String selectedMonth = (String) comboToMonthSum.getSelectedItem();
+        if (selectedYear != null && selectedMonth != null) {
+            loadDays(selectedYear, selectedMonth);
+
+        }
+    }//GEN-LAST:event_comboToMonthSumActionPerformed
+
+    private void comboFromYearSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFromYearSumActionPerformed
+              String selectedYear = (String) comboFromYearSum.getSelectedItem();
+        if (selectedYear != null) {
+            showMonth(selectedYear);
+
+        }
+    }//GEN-LAST:event_comboFromYearSumActionPerformed
+
+    private void comboToDateSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToDateSumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboToDateSumActionPerformed
+
+    private void comboToYearSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToYearSumActionPerformed
+            String selectedYear = (String) comboToYearSum.getSelectedItem();
+        if (selectedYear != null) {
+            showMonth(selectedYear);
+
+        }
+    }//GEN-LAST:event_comboToYearSumActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2161,54 +2782,46 @@ public class MainPage extends javax.swing.JFrame {
         ResultSet rs;
 
         try {
-
             conn = database.connect();
             String sql = "SELECT DISTINCT YEAR(Date) as Year FROM supermarket_sales ORDER BY Year";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
-            // remove all items from all tabs combo Year boxes 
-            //** BSP page combo
-            comboFromYear.removeAllItems();
-            comboToYear.removeAllItems();
-            //** cAnalysis page combo     
-            comboFromYearCustom.removeAllItems();
-            comboToYearCustom.removeAllItems();
+            // List of all year combo boxes
+            JComboBox<String>[] yearComboBoxes = new JComboBox[]{
+                comboFromYear, comboToYear,
+                comboFromYearCustom, comboToYearCustom,
+                comboFromYearProductP, comboToYearProductP,
+                comboFromYearBP, comboToYearBP,
+                comboFromYearSum, comboToYearSum
+            };
 
-            // Product performance combo
-            comboFromYearProductP.removeAllItems();
-            comboToYearProductP.removeAllItems();
+            // Clear all combo boxes
+            clearComboBoxes(yearComboBoxes);
 
-            // Branch performance combo
-            comboFromYearBP.removeAllItems();
-            comboToYearBP.removeAllItems();
-
+            // Populate combo boxes with available years
             while (rs.next()) {
                 int year = rs.getInt("Year");
-
-                // Add available years from mysql to all tabs combo Year boxes 
-                //** BSP page combo
-                comboFromYear.addItem(year + "");
-                comboToYear.addItem(year + "");
-
-                //** cAnalysis page combo
-                comboFromYearCustom.addItem(year + "");
-                comboToYearCustom.addItem(year + "");
-
-                //product performance combo
-                comboFromYearProductP.addItem(year + "");
-                comboToYearProductP.addItem(year + "");
-
-                //Branch performance combo
-                comboFromYearBP.addItem(year + "");
-                comboToYearBP.addItem(year + "");
+                addYearToComboBoxes(yearComboBoxes, year);
             }
+
             rs.close();
             pst.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    private void clearComboBoxes(JComboBox<String>[] comboBoxes) {
+        for (JComboBox<String> comboBox : comboBoxes) {
+            comboBox.removeAllItems();
+        }
+    }
+
+    private void addYearToComboBoxes(JComboBox<String>[] comboBoxes, int year) {
+        for (JComboBox<String> comboBox : comboBoxes) {
+            comboBox.addItem(String.valueOf(year));
+        }
     }
 
     // ** Get Month from mysql to  FromMonth Combobox
@@ -2224,46 +2837,34 @@ public class MainPage extends javax.swing.JFrame {
             pst.setInt(1, Integer.parseInt(selectedYear));
             rs = pst.executeQuery();
 
-            // remove all items from all tabs combo Month boxes 
-            //** BSP page combo
-            comboFromMonth.removeAllItems();
-            comboToMonth.removeAllItems();
+            // List of all month combo boxes
+            JComboBox<String>[] monthComboBoxes = new JComboBox[]{
+                comboFromMonth, comboToMonth,
+                comboFromMonthCustom, comboToMonthCustom,
+                comboFromMonthProductP, comboToMonthProductP,
+                comboFromMonthBP, comboToMonthBP,
+                comboFromMonthSum, comboToMonthSum
+            };
 
-            //** cAnalysis page combo
-            comboFromMonthCustom.removeAllItems();
-            comboToMonthCustom.removeAllItems();
+            // Clear all combo boxes
+            clearComboBoxes(monthComboBoxes);
 
-            //** Productperformance page combo
-            comboFromMonthProductP.removeAllItems();
-            comboToMonthProductP.removeAllItems();
-
-            //**  Branch performance page combo
-            comboFromMonthBP.removeAllItems();
-            comboToMonthBP.removeAllItems();
+            // Populate combo boxes with available months
             while (rs.next()) {
                 int month = rs.getInt("Month");
-
-                // Add available Month from mysql to all tabs combo Month boxes 
-                //** BSP page combo
-                comboFromMonth.addItem(String.format("%02d", month));
-                comboToMonth.addItem(String.format("%02d", month));
-
-                //** cAnalysis page combo
-                comboFromMonthCustom.addItem(String.format("%02d", month));
-                comboToMonthCustom.addItem(String.format("%02d", month));
-
-                //** ProductPerformance page combo
-                comboFromMonthProductP.addItem(String.format("%02d", month));
-                comboToMonthProductP.addItem(String.format("%02d", month));
-
-                //** Branch Performance page combo
-                comboFromMonthBP.addItem(String.format("%02d", month));
-                comboToMonthBP.addItem(String.format("%02d", month));
+                addMonthToComboBoxes(monthComboBoxes, month);
             }
+
             rs.close();
             pst.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void addMonthToComboBoxes(JComboBox<String>[] comboBoxes, int month) {
+        for (JComboBox<String> comboBox : comboBoxes) {
+            comboBox.addItem(String.format("%02d", month));
         }
     }
 
@@ -2275,56 +2876,41 @@ public class MainPage extends javax.swing.JFrame {
 
         try {
             conn = database.connect();
-
             String sql = "SELECT DISTINCT DAY(Date) as Day FROM supermarket_sales WHERE YEAR(Date) = ? AND MONTH(Date) = ? ORDER BY Day";
             pst = conn.prepareStatement(sql);
             pst.setInt(1, Integer.parseInt(selectedYear));
             pst.setInt(2, Integer.parseInt(selectedMonth));
             rs = pst.executeQuery();
 
-            // remove all items from all tabs combo Month boxes 
-            //** BSP page combo
-            comboFromDate.removeAllItems();
+            // List of all day combo boxes
+            JComboBox<String>[] dayComboBoxes = new JComboBox[]{
+                comboFromDate, comboToDate,
+                comboFromDateCustom, comboToDateCustom,
+                comboFromDateProductP, comboToDateProductP,
+                comboFromDateBP, comboToDateBP,
+                comboFromDateSum, comboToDateSum
 
-            comboToDate.removeAllItems();
+            };
 
-            //** cAnalysis page combo
-            comboFromDateCustom.removeAllItems();
-            comboToDateCustom.removeAllItems();
+            // Clear all combo boxes
+            clearComboBoxes(dayComboBoxes);
 
-            //** ProductPerformance page combo
-            comboFromDateProductP.removeAllItems();
-            comboToDateProductP.removeAllItems();
-
-            //** Branch Performance page combo
-            comboFromDateBP.removeAllItems();
-            comboToDateBP.removeAllItems();
-
+            // Populate combo boxes with available days
             while (rs.next()) {
                 int dayNumber = rs.getInt("Day");
-
-                // Add available Day from mysql to all tabs combo Day boxes 
-                //** BSP page combo
-                comboFromDate.addItem(dayNumber + "");
-                comboToDate.addItem(dayNumber + "");
-
-                //** cAnalysis page combo
-                comboFromDateCustom.addItem(dayNumber + "");
-                comboToDateCustom.addItem(dayNumber + "");
-
-                //** ProductPerformance page combo
-                comboFromDateProductP.addItem(dayNumber + "");
-                comboToDateProductP.addItem(dayNumber + "");
-
-                //** Branch Performance page combo
-                comboFromDateBP.addItem(dayNumber + "");
-                comboToDateBP.addItem(dayNumber + "");
-
+                addDayToComboBoxes(dayComboBoxes, dayNumber);
             }
+
             rs.close();
             pst.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void addDayToComboBoxes(JComboBox<String>[] comboBoxes, int day) {
+        for (JComboBox<String> comboBox : comboBoxes) {
+            comboBox.addItem(String.format("%02d", day));  // Ensure two-digit format
         }
     }
 
@@ -2674,16 +3260,23 @@ public class MainPage extends javax.swing.JFrame {
 
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
+            double setTotalRev = 0;
+            int setTotalQtyy = 0;
             while (rs.next()) {
                 String productName = rs.getString("ProductName");
                 double totalRevenue = rs.getDouble("TotalRevenue");
                 int totalQuantity = rs.getInt("TotalQuantity");
+
+                setTotalRev += totalRevenue;
+                setTotalQtyy += totalQuantity;
 
                 // Add data to dataset for both metrics
                 dataset.addValue(totalRevenue, "Total Revenue", productName);
                 dataset.addValue(totalQuantity, "Total Quantity", productName);
             }
 
+            lblTotalRev.setText("" + setTotalRev);
+            lblTotalQtyy.setText("" + setTotalQtyy);
             JFreeChart chart = ChartFactory.createLineChart(
                     "Product Performance", // Chart title
 
@@ -2758,11 +3351,17 @@ public class MainPage extends javax.swing.JFrame {
 
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
+            int totalTsCount = 0;
             while (rs.next()) {
                 String region = rs.getString("Region");
                 int transactionCount = rs.getInt("TransactionCount");
                 dataset.addValue(transactionCount, "Transactions", region);
+
+                totalTsCount += transactionCount;
             }
+
+            // set total transaction count on the label
+            lblTotalTransac.setText("" + totalTsCount);
 
             // Create Bar Chart
             JFreeChart chart = ChartFactory.createBarChart(
@@ -2796,6 +3395,175 @@ public class MainPage extends javax.swing.JFrame {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /*
+    ********************************************************************************************************************************************
+                                            Sales Report  page functions
+    ********************************************************************************************************************************************
+     */
+    private void populateSalesReportSummary() {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
+
+        try {
+            conn = database.connect();
+
+            // Get selected date range
+            String fromDate = comboFromYearSum.getSelectedItem() + "-"
+                    + comboFromMonthSum.getSelectedItem() + "-"
+                    + comboFromDateSum.getSelectedItem();
+            String toDate = comboToYearSum.getSelectedItem() + "-"
+                    + comboToMonthSum.getSelectedItem() + "-"
+                    + comboToDateSum.getSelectedItem();
+
+            // Query for Best Selling Product
+            String bestProductSQL = "SELECT ProductName, SUM(Quantity) AS TotalQuantity "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ? "
+                    + "GROUP BY ProductName "
+                    + "ORDER BY TotalQuantity DESC LIMIT 1";
+
+            pst = conn.prepareStatement(bestProductSQL);
+            pst.setString(1, fromDate);
+            pst.setString(2, toDate);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String bestProduct = rs.getString("ProductName");
+                int bestProductQty = rs.getInt("TotalQuantity");
+                lblBSP.setText(bestProduct + " (" + bestProductQty + " units)"); // Set Best Selling Product
+            }
+            rs.close();
+            pst.close();
+
+            // Query for Total Revenue and Total Quantity
+            String revenueQtySQL = "SELECT SUM(TotalPrice) AS TotalRevenue, SUM(Quantity) AS TotalQuantity "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ?";
+            pst = conn.prepareStatement(revenueQtySQL);
+            pst.setString(1, fromDate);
+            pst.setString(2, toDate);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                double totalRevenue = rs.getDouble("TotalRevenue");
+                int totalQuantity = rs.getInt("TotalQuantity");
+                lblTotalRevenue.setText("$" + totalRevenue); // Set Total Revenue
+                lblTotalQuantity.setText(totalQuantity + " units"); // Set Total Quantity
+            }
+            rs.close();
+            pst.close();
+
+            // Query for Total Transactions
+            String transactionSQL = "SELECT COUNT(`TransactionID`) AS TotalTransactions "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ?";
+            pst = conn.prepareStatement(transactionSQL);
+            pst.setString(1, fromDate);
+            pst.setString(2, toDate);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                int totalTransactions = rs.getInt("TotalTransactions");
+                lblTotalTransactions.setText(totalTransactions + " transactions"); // Set Total Transactions
+            }
+            rs.close();
+            pst.close();
+
+            // Query for Customer Segmentation (if segmentation exists)
+            String customerSQL = "SELECT Region, COUNT(CustomerID) AS CustomerCount "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ? "
+                    + "GROUP BY Region";
+            pst = conn.prepareStatement(customerSQL);
+            pst.setString(1, fromDate);
+            pst.setString(2, toDate);
+            rs = pst.executeQuery();
+
+            StringBuilder customerSegments = new StringBuilder("<html>");
+            while (rs.next()) {
+                String region = rs.getString("Region");
+                int count = rs.getInt("CustomerCount");
+                customerSegments.append(region).append(": ").append(count).append(" customers<br>");
+            }
+            customerSegments.append("</html>");
+            lblCustomerSegmentation.setText(customerSegments.toString()); // Set Customer Segmentation
+
+            rs.close();
+            pst.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+    ------***  show data summery
+     */
+    // Method to load sales summary with total sales and region-based sales
+    public ArrayList<ProductSalesSummary> loadSalesSummary(String fromDate, String toDate) {
+        Connection conn;
+        PreparedStatement pst;
+        ResultSet rs;
+        ArrayList<ProductSalesSummary> salesData = new ArrayList<>();
+
+        try {
+            conn = database.connect();
+
+            // Query to fetch the sales summary for each product (with total sales and region sales)
+            String sql = "SELECT ProductID, ProductName, "
+                    + "SUM(Quantity) AS TotalQuantitySold, "
+                    + "SUM(TotalPrice) AS TotalRevenue, "
+                    + "COUNT(DISTINCT TransactionID) AS TotalTransactions, "
+                    + "AVG(PriceperUnit) AS AvgPricePerUnit, "
+                    + "Region "
+                    + "FROM supermarket_sales "
+                    + "WHERE Date BETWEEN ? AND ? "
+                    + "GROUP BY ProductID, ProductName, Region "
+                    + "ORDER BY TotalRevenue DESC";
+
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, fromDate);
+            pst.setString(2, toDate);
+            rs = pst.executeQuery();
+
+            // Process each result row
+            while (rs.next()) {
+                ProductSalesSummary summary = new ProductSalesSummary(
+                        rs.getInt("ProductID"),
+                        rs.getString("ProductName"),
+                        rs.getInt("TotalQuantitySold"),
+                        rs.getFloat("TotalRevenue"),
+                        rs.getInt("TotalTransactions"),
+                        rs.getFloat("AvgPricePerUnit"),
+                        rs.getFloat("TotalRevenue") // Use TotalRevenue for TotalSales if needed
+                );
+                salesData.add(summary);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return salesData;
+    }
+    // Method to show the sales summary data in the table
+
+    public void showSalesSummaryTable(String fromDate, String toDate) {
+        ArrayList<ProductSalesSummary> salesList = loadSalesSummary(fromDate, toDate);
+        DefaultTableModel tb = (DefaultTableModel) tableSummery.getModel();
+        tb.setRowCount(0); // Clear existing rows
+
+        Object[] row = new Object[7]; // Now 7 columns in total (no region column)
+        for (ProductSalesSummary sales : salesList) {
+            row[0] = sales.getProductID();
+            row[1] = sales.getProductName();
+            row[2] = sales.getTotalQuantitySold();
+            row[3] = sales.getTotalRevenue();
+            row[4] = sales.getTotalTransactions();
+            row[5] = sales.getAvgPricePerUnit();
+            row[6] = sales.getTotalRevenue(); // Use TotalRevenue for TotalSales column
+
+            tb.addRow(row);
         }
     }
 
@@ -3203,6 +3971,7 @@ public class MainPage extends javax.swing.JFrame {
      */
     public void Adminheader() {
 
+        System.out.println(jTabb.getTabCount());
         drawer = Drawer.newDrawer(this)
                 .drawerBackground(Color.white)
                 .background(Color.black)
@@ -3233,27 +4002,27 @@ public class MainPage extends javax.swing.JFrame {
 
                     switch (index) {
                         case 0:
-                            jTabb.setSelectedIndex(0);
-
-                            drawer.hide();
-                            break;
-                        case 1:
                             jTabb.setSelectedIndex(1);
 
                             drawer.hide();
                             break;
-                        case 2:
+                        case 1:
                             jTabb.setSelectedIndex(2);
 
                             drawer.hide();
                             break;
-                        case 3:
+                        case 2:
                             jTabb.setSelectedIndex(3);
 
                             drawer.hide();
                             break;
-                        case 4:
+                        case 3:
                             jTabb.setSelectedIndex(4);
+
+                            drawer.hide();
+                            break;
+                        case 4:
+                            jTabb.setSelectedIndex(0);
 
                             drawer.hide();
                             break;
@@ -3328,56 +4097,30 @@ public class MainPage extends javax.swing.JFrame {
                  */
                 .event((int index, DrawerItem item) -> {
 
-                    switch (index) {
-                        case 0:
-                            jTabb.setSelectedIndex(0);
-
+                    if (index == 0) { // Best Selling Products
+                        jTabb.setSelectedIndex(1);
+                    } else if (index == 1) { // Customer Analysis
+                        jTabb.setSelectedIndex(2);
+                    } else if (index == 2) { // Product Performance
+                        jTabb.setSelectedIndex(3);
+                    } else if (index == 3) { // Branch Performance
+                        jTabb.setSelectedIndex(4);
+                    } else if (index == 4) { // Sales
+                        jTabb.setSelectedIndex(0);
+                    } else if (index == 5) { // Change Password
+                        jTabb.setSelectedIndex(6);
+                    } else if (index == 6) { // Logout
+                        int number = JOptionPane.showConfirmDialog(null,
+                                "Are you sure you want to logout? You will be returned to the Login Screen",
+                                "Confirm Logout", JOptionPane.YES_NO_OPTION);
+                        if (number == JOptionPane.YES_OPTION) {
+                            new LoginPage().setVisible(true);
+                            this.dispose();
+                        } else {
                             drawer.hide();
-                            break;
-                        case 1:
-                            jTabb.setSelectedIndex(1);
-
-                            drawer.hide();
-                            break;
-                        case 2:
-                            jTabb.setSelectedIndex(2);
-
-                            drawer.hide();
-                            break;
-                        case 3:
-                            jTabb.setSelectedIndex(3);
-
-                            drawer.hide();
-                            break;
-                        case 4:
-                            jTabb.setSelectedIndex(4);
-
-                            drawer.hide();
-                            break;
-                        case 5:
-                            jTabb.setSelectedIndex(6);
-
-                            drawer.hide();
-                            break;
-                        default:
-
-                            /*
-                    code for the login confirmation
-                    
-                             */
-                            int number = JOptionPane.showConfirmDialog(null, "Are you shure you want to logout ?  You will be returned to Login Screen", "Confirm Logout", JOptionPane.YES_NO_OPTION);
-                            if (number == 0) {
-                                LoginPage loginpage = new LoginPage();
-
-                                loginpage.setVisible(true);
-                                this.dispose();
-
-                            } else {
-
-                                drawer.hide();
-                            }
-                            break;
+                        }
                     }
+                    drawer.hide();
                 })
                 .build();
 
@@ -3397,33 +4140,40 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboFromDateBP;
     private javax.swing.JComboBox<String> comboFromDateCustom;
     private javax.swing.JComboBox<String> comboFromDateProductP;
+    private javax.swing.JComboBox<String> comboFromDateSum;
     private javax.swing.JComboBox<String> comboFromMonth;
     private javax.swing.JComboBox<String> comboFromMonthBP;
     private javax.swing.JComboBox<String> comboFromMonthCustom;
     private javax.swing.JComboBox<String> comboFromMonthProductP;
+    private javax.swing.JComboBox<String> comboFromMonthSum;
     private javax.swing.JComboBox<String> comboFromYear;
     private javax.swing.JComboBox<String> comboFromYearBP;
     private javax.swing.JComboBox<String> comboFromYearCustom;
     private javax.swing.JComboBox<String> comboFromYearProductP;
+    private javax.swing.JComboBox<String> comboFromYearSum;
     private javax.swing.JComboBox<String> comboRole;
     private javax.swing.JComboBox<String> comboToDate;
     private javax.swing.JComboBox<String> comboToDateBP;
     private javax.swing.JComboBox<String> comboToDateCustom;
     private javax.swing.JComboBox<String> comboToDateProductP;
+    private javax.swing.JComboBox<String> comboToDateSum;
     private javax.swing.JComboBox<String> comboToMonth;
     private javax.swing.JComboBox<String> comboToMonthBP;
     private javax.swing.JComboBox<String> comboToMonthCustom;
     private javax.swing.JComboBox<String> comboToMonthProductP;
+    private javax.swing.JComboBox<String> comboToMonthSum;
     private javax.swing.JComboBox<String> comboToYear;
     private javax.swing.JComboBox<String> comboToYearBP;
     private javax.swing.JComboBox<String> comboToYearCustom;
     private javax.swing.JComboBox<String> comboToYearProductP;
+    private javax.swing.JComboBox<String> comboToYearSum;
     private com.toedter.calendar.JDateChooser dateChoose;
     private javax.swing.JLabel dtDateRange;
     private javax.swing.JLabel dtRange;
     private javax.swing.JTable employeeTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -3452,15 +4202,18 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -3471,7 +4224,6 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
@@ -3485,19 +4237,50 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
+    private javax.swing.JLabel jLabel73;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabb;
+    private javax.swing.JLabel lblBSP;
     private javax.swing.JLabel lblCusCount;
+    private javax.swing.JLabel lblCustomerSegmentation;
     private javax.swing.JLabel lblLargestSeg;
+    private javax.swing.JLabel lblTotalQtyy;
+    private javax.swing.JLabel lblTotalQuantity;
+    private javax.swing.JLabel lblTotalRev;
+    private javax.swing.JLabel lblTotalRevenue;
+    private javax.swing.JLabel lblTotalTransac;
+    private javax.swing.JLabel lblTotalTransactions;
     private javax.swing.JPanel panelBSP;
     private javax.swing.JPanel panelBranch;
     private javax.swing.JPanel panelBranchP;
@@ -3520,6 +4303,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel pieTitle6;
     private javax.swing.JTable supdatasetTable;
     private javax.swing.JTable tableCustomSeg;
+    private javax.swing.JTable tableSummery;
     private javax.swing.JPasswordField txtConfirmPassword;
     private javax.swing.JPasswordField txtCurrentPassword;
     private javax.swing.JTextField txtCusId;
