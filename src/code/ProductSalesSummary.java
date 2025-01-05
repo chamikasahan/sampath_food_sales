@@ -27,7 +27,7 @@ public class ProductSalesSummary {
         this.regionSales = regionSales;
     }
 
-    public ProductSalesSummary(int productID, String productName, int totalQuantitySold, float totalRevenue, int totalTransactions, float avgPricePerUnit,  float regionSales) {
+    public ProductSalesSummary(int productID, String productName, int totalQuantitySold, float totalRevenue, int totalTransactions, float avgPricePerUnit) {
         this.productID = productID;
         this.productName = productName;
         this.totalQuantitySold = totalQuantitySold;

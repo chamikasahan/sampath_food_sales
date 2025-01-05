@@ -30,6 +30,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +42,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -611,13 +616,10 @@ public class MainPage extends javax.swing.JFrame {
 
         tableSummery.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Product ID", "Product Name", "Total Quantity Sold", "Total Revenue", "Total Transactions", "Avg Price per Unit", "Total Sales"
+                "Product ID", "Product Name", "Total Quantity Sold", "Total Revenue", "Total Transactions", "Avg Price per Unit"
             }
         ));
         jScrollPane5.setViewportView(tableSummery);
@@ -722,8 +724,8 @@ public class MainPage extends javax.swing.JFrame {
                                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jTabb.addTab("tab5", panelSales);
@@ -798,7 +800,7 @@ public class MainPage extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Total Quantity Sold", "Total Revenue", "Total Transactions", "Customer Count", "Revenue Contribution (%)"
+                "ProductName", "TotalQuantitySold", "TotalRevenue", "TotalTransactions", "CustomerCount", "RevenueContribution"
             }
         ));
         jScrollPane3.setViewportView(BSPTable);
@@ -900,8 +902,8 @@ public class MainPage extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBSPLayout.createSequentialGroup()
-                                .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelBSPLayout.createSequentialGroup()
+                                .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBSPLayout.createSequentialGroup()
                                         .addComponent(jLabel31)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(comboToYear, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -913,19 +915,21 @@ public class MainPage extends javax.swing.JFrame {
                                         .addComponent(jLabel33)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(comboToDate, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBSPLayout.createSequentialGroup()
+                                        .addComponent(jLabel30)
+                                        .addGap(540, 540, 540)
+                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panelBSPLayout.createSequentialGroup()
+                                .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(pieTitle)
                                     .addGroup(panelBSPLayout.createSequentialGroup()
                                         .addComponent(pieTitle3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(dtRange))
                                     .addComponent(pieChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 497, Short.MAX_VALUE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBSPLayout.createSequentialGroup()
-                                .addComponent(jLabel30)
-                                .addGap(540, 540, 540)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 452, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 862, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(60, 60, 60))
                     .addGroup(panelBSPLayout.createSequentialGroup()
                         .addGroup(panelBSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2587,7 +2591,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        printBspReport();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void comboToMonthProductPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboToMonthProductPActionPerformed
@@ -3038,6 +3042,7 @@ public class MainPage extends javax.swing.JFrame {
                         rs.getInt("TotalTransactions"),
                         rs.getInt("CustomerCount"),
                         rs.getFloat("RevenueContribution")
+                        
                 );
                 bestSellingProducts.add(product);
             }
@@ -3063,13 +3068,40 @@ public class MainPage extends javax.swing.JFrame {
             row[3] = product.getTotalTransactions();
             row[4] = product.getCustomerCount();
 
-            row[5] = String.format("%.2f", product.getRevenueContribution()); // Format to 2 decimal places
+            row[5] =  product.getRevenueContribution(); 
             tableModel.addRow(row);
 
         }
 
     }
 
+    /*
+    ---------------- print the report code
+    
+    */
+    public void printBspReport() {
+    try {
+        // Get the table model
+        DefaultTableModel model = (DefaultTableModel) BSPTable.getModel();
+
+        // Pass the new table model to JasperReports
+        JRTableModelDataSource dataSource = new JRTableModelDataSource(model);
+
+        // Load the JasperReport file
+        String reportPath = "E:\\HND IT\\4th semster\\APDP\\SampathFoodCity_Chamika\\src\\jreports\\BSPreport.jasper";
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reportPath, new HashMap<>(), dataSource);
+
+        // Display the JasperReport Viewer
+        JasperViewer.viewReport(jasperPrint, false);
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Error generating report: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        ex.printStackTrace();
+    }
+}
+
+    
+    
     /*
     ********************************************************************************************************************************************
                                              Customer Analysis  page functions
@@ -3511,17 +3543,15 @@ public class MainPage extends javax.swing.JFrame {
         try {
             conn = database.connect();
 
-            // Query to fetch the sales summary for each product (with total sales and region sales)
-            String sql = "SELECT ProductID, ProductName, "
-                    + "SUM(Quantity) AS TotalQuantitySold, "
-                    + "SUM(TotalPrice) AS TotalRevenue, "
-                    + "COUNT(DISTINCT TransactionID) AS TotalTransactions, "
-                    + "AVG(PriceperUnit) AS AvgPricePerUnit, "
-                    + "Region "
-                    + "FROM supermarket_sales "
-                    + "WHERE Date BETWEEN ? AND ? "
-                    + "GROUP BY ProductID, ProductName, Region "
-                    + "ORDER BY TotalRevenue DESC";
+String sql = "SELECT ProductID, ProductName, "
+           + "SUM(Quantity) AS TotalQuantitySold, "
+           + "SUM(TotalPrice) AS TotalRevenue, "
+           + "COUNT(DISTINCT TransactionID) AS TotalTransactions, "
+           + "AVG(PriceperUnit) AS AvgPricePerUnit "
+           + "FROM supermarket_sales "
+           + "WHERE Date BETWEEN ? AND ? "
+           + "GROUP BY ProductID, ProductName "
+           + "ORDER BY TotalRevenue DESC";
 
             pst = conn.prepareStatement(sql);
             pst.setString(1, fromDate);
@@ -3536,8 +3566,8 @@ public class MainPage extends javax.swing.JFrame {
                         rs.getInt("TotalQuantitySold"),
                         rs.getFloat("TotalRevenue"),
                         rs.getInt("TotalTransactions"),
-                        rs.getFloat("AvgPricePerUnit"),
-                        rs.getFloat("TotalRevenue") // Use TotalRevenue for TotalSales if needed
+                        rs.getFloat("AvgPricePerUnit")
+                
                 );
                 salesData.add(summary);
             }
@@ -3561,7 +3591,7 @@ public class MainPage extends javax.swing.JFrame {
             row[3] = sales.getTotalRevenue();
             row[4] = sales.getTotalTransactions();
             row[5] = sales.getAvgPricePerUnit();
-            row[6] = sales.getTotalRevenue(); // Use TotalRevenue for TotalSales column
+        
 
             tb.addRow(row);
         }

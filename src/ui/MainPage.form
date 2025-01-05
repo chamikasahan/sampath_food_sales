@@ -261,9 +261,9 @@
                                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jScrollPane5" alignment="0" min="-2" pref="726" max="-2" attributes="0"/>
+                              <Component id="jScrollPane5" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="96" max="32767" attributes="0"/>
+                          <EmptySpace pref="138" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -886,23 +886,17 @@
                     <Component class="javax.swing.JTable" name="tableSummery">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="7" rowCount="4">
+                          <Table columnCount="6" rowCount="0">
                             <Column editable="true" title="Product ID" type="java.lang.Object"/>
                             <Column editable="true" title="Product Name" type="java.lang.Object"/>
                             <Column editable="true" title="Total Quantity Sold" type="java.lang.Object"/>
                             <Column editable="true" title="Total Revenue" type="java.lang.Object"/>
                             <Column editable="true" title="Total Transactions" type="java.lang.Object"/>
                             <Column editable="true" title="Avg Price per Unit" type="java.lang.Object"/>
-                            <Column editable="true" title="Total Sales" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -978,7 +972,7 @@
                                           <Component id="jButton5" min="-2" pref="196" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
@@ -992,7 +986,17 @@
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="comboToDate" min="-2" pref="148" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="pieTitle" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="540" max="-2" attributes="0"/>
+                                                  <Component id="jButton7" min="-2" pref="116" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="pieTitle" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="pieTitle3" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
@@ -1000,14 +1004,8 @@
                                               </Group>
                                               <Component id="pieChart1" alignment="0" min="-2" pref="347" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="497" max="32767" attributes="0"/>
-                                          <Component id="jScrollPane3" min="-2" pref="775" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="540" max="-2" attributes="0"/>
-                                          <Component id="jButton7" min="-2" pref="116" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace pref="452" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane3" min="-2" pref="862" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
@@ -1274,12 +1272,12 @@
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="6" rowCount="4">
-                            <Column editable="true" title="Product Name" type="java.lang.Object"/>
-                            <Column editable="true" title="Total Quantity Sold" type="java.lang.Object"/>
-                            <Column editable="true" title="Total Revenue" type="java.lang.Object"/>
-                            <Column editable="true" title="Total Transactions" type="java.lang.Object"/>
-                            <Column editable="true" title="Customer Count" type="java.lang.Object"/>
-                            <Column editable="true" title="Revenue Contribution (%)" type="java.lang.Object"/>
+                            <Column editable="true" title="ProductName" type="java.lang.Object"/>
+                            <Column editable="true" title="TotalQuantitySold" type="java.lang.Object"/>
+                            <Column editable="true" title="TotalRevenue" type="java.lang.Object"/>
+                            <Column editable="true" title="TotalTransactions" type="java.lang.Object"/>
+                            <Column editable="true" title="CustomerCount" type="java.lang.Object"/>
+                            <Column editable="true" title="RevenueContribution" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
