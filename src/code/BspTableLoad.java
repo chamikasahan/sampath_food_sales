@@ -18,6 +18,10 @@ public class BspTableLoad {
   
     private float revenueContribution;
 
+    
+        /*
+    -- Constructor for the load Best selling product Table  
+    */
     public BspTableLoad(String productName, int totalQuantitySold, float totalRevenue, int totalTransactions,
                        int customerCount, float revenueContribution) {
         this.productName = productName;

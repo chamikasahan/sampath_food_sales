@@ -8,6 +8,11 @@ package code;
 public class CustomerTableLoad {
     private int customerId, transactions;
 
+    
+        
+        /*
+    -- Constructor for the load Customer analysis Table  
+    */
     public CustomerTableLoad(int customerId, int transactions, float totalSpending) {
         this.customerId = customerId;
         this.transactions = transactions;

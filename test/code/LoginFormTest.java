@@ -7,16 +7,22 @@ package code;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import ui.LoginPage;
 
 /**
  *
  * @author sahan
  */
-public class RegisterFormTest {
+public class LoginFormTest {
     
-    public RegisterFormTest() {
+    public LoginFormTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
     }
     
     @Before
@@ -28,12 +34,9 @@ public class RegisterFormTest {
     }
 
     @Test
-    public void testRegisterForm() {
-        RegisterForm rs = new RegisterForm("sxdc", "dss@gmail.com", 2322232, "1234567", "1234567", "admin");
-        
-        
-        
-       
+    public void testLoginForm() {
+        LoginPage ll = new LoginPage();
+        LoginForm lf = new LoginForm("nimesha", "Employee", "2345678", ll);
     }
     
 }

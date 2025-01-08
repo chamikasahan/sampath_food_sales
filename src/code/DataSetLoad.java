@@ -17,6 +17,10 @@ public class DataSetLoad {
     private float PriceperUnit, TotalPrice;
     private Date Date;
 
+        
+        /*
+    -- Constructor for the Sales page data  Table  
+    */
     public DataSetLoad(int transactionId, int CustomerID, int ProductID,  String ProductName,int Quantity,  float PriceperUnit , Date Date, float TotalPrice, String Region ) {
         this.transactionId = transactionId;
         this.CustomerID = CustomerID;

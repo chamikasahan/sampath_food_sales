@@ -8,8 +8,12 @@ package code;
 import db.database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import ui.LoginPage;
 
 /**
  *
@@ -41,9 +45,9 @@ public class UpdateData {
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Succesflly added Data!");
         
-    } catch(Exception e){
-        
-    }
+    }  catch (SQLException ex) {
+            Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
 }
 }

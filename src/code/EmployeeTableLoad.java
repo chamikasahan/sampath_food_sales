@@ -17,7 +17,7 @@ public class EmployeeTableLoad {
     private String userEmail;
     private String userRole;
     /*
-         **   Constructor for load table 
+         **   Constructor for load Employee table 
      */
 
     public EmployeeTableLoad(int id, String userName, String userEmail, String userRole) {

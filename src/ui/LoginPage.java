@@ -194,7 +194,7 @@ public class LoginPage extends javax.swing.JFrame {
     }
 
     /*
-        ** mthod for login Validation
+        ** method for login Validation
      */
     public void loginValidation() {
 

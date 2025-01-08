@@ -8,10 +8,8 @@ package code;
 import db.database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import ui.MainPage;
 
 /**
  *
@@ -22,30 +20,32 @@ public class AddNewData {
     Connection conn;
     PreparedStatement pst;
 
+    /*
+    -- Constructor for the Admin dasboard Sales dataset page Add data function  
+     */
     public AddNewData(int customerId, int productId, String productName, int productQty, float PricepUnit, Date productDate, float pTotal, String Region) {
 
-            try {
-                conn = database.connect();
-                String sql = "insert into supermarket_sales(CustomerID, ProductID, ProductName, Quantity, PriceperUnit, Date, TotalPrice, Region) values(?,?,?,?,?,?,?,?)";
+        try {
+            conn = database.connect();
+            String sql = "insert into supermarket_sales(CustomerID, ProductID, ProductName, Quantity, PriceperUnit, Date, TotalPrice, Region) values(?,?,?,?,?,?,?,?)";
 
-                pst = conn.prepareStatement(sql);
-                
-                
-                pst.setInt(1, customerId);
-                pst.setInt(2, productId);
-                pst.setString(3, productName);
-                pst.setInt(4, productQty);
-                pst.setFloat(5, PricepUnit);
+            pst = conn.prepareStatement(sql);
+
+            pst.setInt(1, customerId);
+            pst.setInt(2, productId);
+            pst.setString(3, productName);
+            pst.setInt(4, productQty);
+            pst.setFloat(5, PricepUnit);
             pst.setDate(6, new java.sql.Date(productDate.getTime()));
-                        pst.setFloat(7, pTotal);
+            pst.setFloat(7, pTotal);
             pst.setString(8, Region);
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Succesflly added Data!");
-                
-            } catch (Exception e) {
 
-            }
-
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error adding data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
 
     }
 

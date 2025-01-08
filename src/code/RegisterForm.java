@@ -8,6 +8,7 @@ package code;
 import db.database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,20 @@ public class RegisterForm {
     public RegisterForm(String userName, String userEmail, int userRole, String userPassword, String cUserPassword, String textRole) {
         try {
             conn = database.connect();
+            
+            
+               // Check if the username already exists
+    String checkUserSql = "SELECT username FROM signup_details WHERE username = ?";
+    pst = conn.prepareStatement(checkUserSql);
+    pst.setString(1, userName);
+    ResultSet rs = pst.executeQuery();
 
+    if (rs.next()) {
+        // Username already exists
+        JOptionPane.showMessageDialog(null, "Username already exists. Please choose a different username.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    else {
+        
             String sql = "insert into signup_details (username, role, email, password) values(?,?,?,?)";
             pst = conn.prepareStatement(sql);
 
@@ -77,6 +91,9 @@ public class RegisterForm {
             } else {
                 JOptionPane.showMessageDialog(null, "All fields are required", " Error", JOptionPane.ERROR_MESSAGE);
             }
+    }
+    
+
 
         } catch (SQLException ex) {
             Logger.getLogger(Set1stAdmin.class.getName()).log(Level.SEVERE, null, ex);

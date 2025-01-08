@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.9487171000000083"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="startDate" class="java.lang.String"/>
+	<parameter name="endDate" class="java.lang.String"/>
 	<field name="RevenueContribution" class="java.lang.Float"/>
 	<field name="ProductName" class="java.lang.String"/>
 	<field name="TotalQuantitySold" class="java.lang.Integer"/>
@@ -13,82 +15,139 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[Sampath Food Sales]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="0" width="100" height="20"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Best selling Product Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="24" width="31" height="16"/>
+				<text><![CDATA[From]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="119" y="24" width="31" height="16"/>
+				<text><![CDATA[To]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="41" y="24" width="78" height="16"/>
+				<textFieldExpression><![CDATA[$P{startDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="24" width="100" height="16"/>
+				<textFieldExpression><![CDATA[$P{endDate}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="43" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<staticText>
-				<reportElement x="2" y="2" width="79" height="20"/>
-				<textElement>
-					<font size="11" isBold="true" isItalic="false"/>
+				<reportElement x="0" y="-1" width="77" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[ProductName]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="86" y="2" width="100" height="20"/>
-				<textElement>
-					<font size="11" isBold="true"/>
+				<reportElement x="86" y="-1" width="91" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[TotalQuantitySold]]></text>
+				<text><![CDATA[Total QuantitySold]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="187" y="2" width="79" height="20"/>
-				<textElement>
-					<font size="11" isBold="true"/>
+				<reportElement x="183" y="-1" width="78" height="19"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TotalRevenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="268" y="2" width="68" height="40"/>
-				<textElement>
-					<font size="11" isBold="true"/>
+				<reportElement x="266" y="-1" width="87" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TotalTransactions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="360" y="2" width="74" height="40"/>
-				<textElement>
-					<font size="11" isBold="true"/>
+				<reportElement x="359" y="-1" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Customer         Count]]></text>
+				<text><![CDATA[Customer Count]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="441" y="2" width="103" height="40"/>
-				<textElement>
-					<font size="11" isBold="true"/>
+				<reportElement x="445" y="-1" width="110" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Revenue                         Contribution]]></text>
+				<text><![CDATA[Revenue Contribution]]></text>
 			</staticText>
+			<line>
+				<reportElement x="4" y="17" width="551" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="82" y="0" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement x="180" y="0" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement x="262" y="0" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement x="355" y="0" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement x="443" y="0" width="1" height="17"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="24" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="81" height="20"/>
+				<reportElement x="0" y="0" width="77" height="20"/>
 				<textFieldExpression><![CDATA[$F{ProductName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="87" y="0" width="94" height="20"/>
+				<reportElement x="86" y="0" width="91" height="20"/>
 				<textFieldExpression><![CDATA[$F{TotalQuantitySold}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="187" y="0" width="73" height="20"/>
-				<textFieldExpression><![CDATA[$F{TotalRevenue}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="266" y="0" width="88" height="20"/>
-				<textFieldExpression><![CDATA[$F{TotalTransactions}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="360" y="0" width="74" height="20"/>
+				<reportElement x="359" y="0" width="80" height="20"/>
 				<textFieldExpression><![CDATA[$F{CustomerCount}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="444" y="0" width="100" height="20"/>
+				<reportElement x="445" y="0" width="110" height="20"/>
 				<textFieldExpression><![CDATA[$F{RevenueContribution}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="266" y="0" width="87" height="20"/>
+				<textFieldExpression><![CDATA[$F{TotalTransactions}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="183" y="0" width="78" height="20"/>
+				<textFieldExpression><![CDATA[$F{TotalRevenue}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -96,9 +155,14 @@
 		<band height="1" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="1" splitType="Stretch"/>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="216" height="18"/>
+				<text><![CDATA[Generated by Sampath Food Sales System]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="1" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</summary>
 </jasperReport>
