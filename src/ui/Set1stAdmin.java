@@ -216,7 +216,7 @@ public class Set1stAdmin extends javax.swing.JFrame {
         
         
         
-              new RegisterForm(userName, userEmail, userRole, userPassword, cUserPassword,textRole);
+              new RegisterForm(userName, userEmail, userRole, userPassword, cUserPassword,textRole,this, true);
 
     }
 

@@ -9,7 +9,7 @@ import code.AddNewData;
 import code.BspTableLoad;
 import code.CustomerTableLoad;
 import code.DataSetLoad;
-
+import ui.Set1stAdmin;
 import code.EmployeeTableLoad;
 import code.ProductSalesSummary;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -22,8 +22,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,11 +38,9 @@ import javaswingdev.chart.ModelPieChart;
 import javaswingdev.drawer.Drawer;
 import javaswingdev.drawer.DrawerController;
 import javaswingdev.drawer.DrawerItem;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -67,6 +63,9 @@ public class MainPage extends javax.swing.JFrame {
      */
     public MainPage() {
         initComponents();
+        
+        // disable tab click 
+        disableTabClick();
 
         //load the employee table
         loadTable();
@@ -92,6 +91,8 @@ public class MainPage extends javax.swing.JFrame {
         populateSalesReportSummary();
 
     }
+    
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -99,8 +100,8 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jTabb = new javax.swing.JTabbedPane();
         panelSales = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -307,20 +308,17 @@ public class MainPage extends javax.swing.JFrame {
         jLabel8.setText("Sampath Food sales Dashboard");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 20, 550, 70));
 
-        jButton1.setBackground(new java.awt.Color(53, 53, 53));
-        jButton1.setForeground(new java.awt.Color(198, 198, 198));
-        jButton1.setText("        |  |   |      ");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 40));
-
         jPanel6.setBackground(new java.awt.Color(53, 53, 53));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/9057186_menu_hotdog_icon.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 50, 50));
+
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 2270, 90));
 
         jTabb.setBackground(new java.awt.Color(51, 51, 51));
@@ -2449,16 +2447,6 @@ public class MainPage extends javax.swing.JFrame {
     setBounds(0, 0, 1925, 1029);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (drawer.isShow()) {
-            drawer.hide();
-
-        } else {
-            drawer.show();
-
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         deleteEmployee();
 
@@ -2851,6 +2839,16 @@ public class MainPage extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         showInfoDialog();
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+             if (drawer.isShow()) {
+            drawer.hide();
+
+        } else {
+            drawer.show();
+
+        }
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -4072,7 +4070,8 @@ public class MainPage extends javax.swing.JFrame {
         String cUserPassword = cPassword.getText();
         String textRole = " ";
 
-        new RegisterForm(userName, userEmail, userRole, userPassword, cUserPassword, textRole);
+
+        new RegisterForm(userName, userEmail, userRole, userPassword, cUserPassword, textRole, null, false);
 
         showuserDetails();
         txtUserName.setText("");
@@ -4202,6 +4201,8 @@ public class MainPage extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Employee Deleted !");
                 showuserDetails();
+                
+                txtUserName.setText("");
             }
 
         } catch (SQLException e) {
@@ -4298,9 +4299,9 @@ private void showInfoDialog() {
                 .background(Color.black)
                 .headerHeight(160)
                 .closeOnPress(true)
-                //                .backgroundTransparent(0.3f)
+          
                 .leftDrawer(true)
-                .header(new Header())
+               .header(new Header()) 
                 .headerHeight(220)
                 .itemHeight(70)
                 .itemAlignLeft(true)
@@ -4446,6 +4447,17 @@ private void showInfoDialog() {
                 .build();
 
     }
+    
+    public void disableTabClick(){
+        jTabb.setEnabledAt(0, false); 
+jTabb.setEnabledAt(1, false); 
+jTabb.setEnabledAt(2, false); 
+        jTabb.setEnabledAt(3, false); 
+jTabb.setEnabledAt(4, false); 
+jTabb.setEnabledAt(5, false); 
+jTabb.setEnabledAt(6, false); 
+jTabb.setEnabledAt(7, false); 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable BSPTable;
@@ -4492,7 +4504,6 @@ private void showInfoDialog() {
     private javax.swing.JLabel dtDateRange;
     private javax.swing.JLabel dtRange;
     private javax.swing.JTable employeeTable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -4537,6 +4548,7 @@ private void showInfoDialog() {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;

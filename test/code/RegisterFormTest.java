@@ -29,7 +29,7 @@ public class RegisterFormTest {
 
     @Test
     public void testRegisterForm() {
-        RegisterForm rs = new RegisterForm("sxdc", "dss@gmail.com", 2322232, "1234567", "1234567", "admin");
+        RegisterForm rs = new RegisterForm("sxdc", "dss@gmail.com", 2322232, "1234567", "1234567", "admin", null, false);
         
         
         
