@@ -23,11 +23,15 @@ public class AddNewData {
     /*
     -- Constructor for the Admin dasboard Sales dataset page Add data function  
      */
-    public AddNewData(int customerId, int productId, String productName, int productQty, float PricepUnit, Date productDate, float pTotal, String Region) {
+ public AddNewData(int customerId, int productId, String productName, int productQty, float PricepUnit, Date productDate, float pTotal, String Region) {
+        if (customerId == 0 || productId == 0 || productName == null || productName.trim().isEmpty() || productQty == 0 ||
+            PricepUnit == 0 || productDate == null || pTotal == 0 || Region == null || Region.trim().isEmpty()) {
+            throw new IllegalArgumentException("All fields are required and must be valid!");
+        }
 
         try {
             conn = database.connect();
-            String sql = "insert into supermarket_sales(CustomerID, ProductID, ProductName, Quantity, PriceperUnit, Date, TotalPrice, Region) values(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO supermarket_sales(CustomerID, ProductID, ProductName, Quantity, PriceperUnit, Date, TotalPrice, Region) VALUES(?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql);
 
@@ -39,14 +43,11 @@ public class AddNewData {
             pst.setDate(6, new java.sql.Date(productDate.getTime()));
             pst.setFloat(7, pTotal);
             pst.setString(8, Region);
+
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Succesflly added Data!");
-
+               JOptionPane.showMessageDialog(null, "Succesfully Added Data!");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error adding data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            throw new RuntimeException("Error adding data: " + e.getMessage(), e);
         }
-
     }
-
 }

@@ -44,31 +44,41 @@ public class ReadCSVandUpload extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        jButton1.setText("read");
+        jButton1.setText("Read & Upload");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jLabel1.setText("Select CSV File and Upload to Database");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(462, 462, 462)
+                .addGap(366, 366, 366)
                 .addComponent(jButton1)
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(268, 268, 268))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(205, 205, 205)
+                .addGap(71, 71, 71)
+                .addComponent(jLabel1)
+                .addGap(86, 86, 86)
                 .addComponent(jButton1)
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         pack();
@@ -76,71 +86,58 @@ public class ReadCSVandUpload extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ReadCSVAndUpload();
+     
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        Connection conn;
+    private void ReadCSVAndUpload(){
+           Connection conn;
         PreparedStatement pst;
 
         try {
             conn = database.connect();
             JFileChooser jFile = new JFileChooser();
-
             jFile.setDialogTitle("Select CSV file");
-
+            
             int userSelected = jFile.showOpenDialog(null);
-
+            
             if (userSelected == JFileChooser.APPROVE_OPTION) {
-
                 File filePath = jFile.getSelectedFile();
                 String file = filePath.getAbsolutePath();
 
                 try {
                     BufferedReader br = new BufferedReader(new FileReader(file));
-
                     String line;
                     boolean fstLine = true;
-
                     String sql = "insert into supermarket_sales (CustomerID, ProductID, ProductName, Quantity, PriceperUnit, Date, TotalPrice, Region) values(?,?,?,?,?,?,?,?)";
                     pst = conn.prepareStatement(sql);
 
                     while ((line = br.readLine()) != null) {
-
                         if (fstLine) {
                             fstLine = false;
                             continue;
-
                         }
                         String[] val = line.split(",");
-                   if (val.length == 9) {
-
-                            
-//                            pst.setString(1, val[0].trim());  // t id
+                        if (val.length == 9) {
                             pst.setString(1, val[1].trim()); // customer id
                             pst.setString(2, val[2].trim()); // p id
                             pst.setString(3, val[3].trim()); // p name
                             pst.setString(4, val[4].trim()); // quantity
-                            Float price = Float.parseFloat(val[5].toString().trim()); // p p unit
-                            pst.setFloat(5, price);
+                            Float price = Float.parseFloat(val[5].toString().trim()); 
+                            pst.setFloat(5, price);// p p unit
                             
-                            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy"); 
+                            // convert the date
+                            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                             java.util.Date javaDate = sdf.parse(val[6]);
-
                             long j1 = javaDate.getTime();
-
                             java.sql.Date date = new java.sql.Date(j1);
-
                             pst.setDate(6, date);  // date
-   
-                           
-                                                       Float total = Float.parseFloat(val[7].toString().trim());
+                            Float total = Float.parseFloat(val[7].toString().trim());
                             pst.setFloat(7, total);   //total
                             pst.setString(8, val[8]);  //region
-                           
                             pst.executeUpdate();
-
                         }
-                     
                     }
-
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, e);
                 } catch (SQLException ex) {
@@ -151,12 +148,10 @@ public class ReadCSVandUpload extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "invalid file");
             }
-
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
@@ -195,5 +190,6 @@ public class ReadCSVandUpload extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

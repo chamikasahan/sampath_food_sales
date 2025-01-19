@@ -7,11 +7,13 @@ package ui;
 
 import code.AddNewData;
 import code.BspTableLoad;
+import code.ChangePassword;
 import code.CustomerTableLoad;
 import code.DataSetLoad;
 import ui.Set1stAdmin;
 import code.EmployeeTableLoad;
 import code.ProductSalesSummary;
+import code.ReadCSVandUpload;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import code.RegisterForm;
@@ -27,6 +29,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -63,7 +66,7 @@ public class MainPage extends javax.swing.JFrame {
      */
     public MainPage() {
         initComponents();
-        
+
         // disable tab click 
         disableTabClick();
 
@@ -91,8 +94,6 @@ public class MainPage extends javax.swing.JFrame {
         populateSalesReportSummary();
 
     }
-    
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -293,6 +294,7 @@ public class MainPage extends javax.swing.JFrame {
         btnAddData = new javax.swing.JButton();
         btnUpdateData = new javax.swing.JButton();
         btnDeleteData = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -2344,6 +2346,16 @@ public class MainPage extends javax.swing.JFrame {
         }
     });
 
+    jButton1.setBackground(new java.awt.Color(0, 0, 0));
+    jButton1.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
+    jButton1.setForeground(new java.awt.Color(255, 255, 255));
+    jButton1.setText("Add CSV to database");
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton1ActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout panelDatasetLayout = new javax.swing.GroupLayout(panelDataset);
     panelDataset.setLayout(panelDatasetLayout);
     panelDatasetLayout.setHorizontalGroup(
@@ -2382,15 +2394,13 @@ public class MainPage extends javax.swing.JFrame {
                     .addComponent(dateChoose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addComponent(btnClearData, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(97, 97, 97))
     );
     panelDatasetLayout.setVerticalGroup(
         panelDatasetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(panelDatasetLayout.createSequentialGroup()
-            .addGap(104, 104, 104)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatasetLayout.createSequentialGroup()
             .addContainerGap(61, Short.MAX_VALUE)
             .addComponent(jLabel28)
@@ -2436,6 +2446,12 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(btnUpdateData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnDeleteData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(37, 37, 37))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatasetLayout.createSequentialGroup()
+            .addGap(104, 104, 104)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(75, 75, 75))
     );
 
     jTabb.addTab("tab6", panelDataset);
@@ -2841,7 +2857,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-             if (drawer.isShow()) {
+        if (drawer.isShow()) {
             drawer.hide();
 
         } else {
@@ -2849,6 +2865,12 @@ public class MainPage extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ReadCSVandUpload rcsv = new ReadCSVandUpload();
+
+        rcsv.show();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3127,6 +3149,10 @@ public class MainPage extends javax.swing.JFrame {
         PreparedStatement pst;
         ResultSet rs;
         ArrayList<BspTableLoad> bestSellingProducts = new ArrayList<>();
+        LocalDate currentDate = LocalDate.now();
+        if (LocalDate.parse(fromDate).isAfter(currentDate) || LocalDate.parse(toDate).isAfter(currentDate)) {
+            throw new IllegalArgumentException("Dates cannot be in the future.");
+        }
 
         try {
             conn = database.connect();
@@ -3334,7 +3360,10 @@ public class MainPage extends javax.swing.JFrame {
         PreparedStatement pst;
         ResultSet rs;
         ArrayList<CustomerTableLoad> topCustomer = new ArrayList<>();
-
+        LocalDate currentDate = LocalDate.now();
+        if (LocalDate.parse(fromDate).isAfter(currentDate) || LocalDate.parse(toDate).isAfter(currentDate)) {
+            throw new IllegalArgumentException("Dates cannot be in the future.");
+        }
         try {
             conn = database.connect();
             String sql = "SELECT CustomerID, "
@@ -3695,7 +3724,10 @@ public class MainPage extends javax.swing.JFrame {
         PreparedStatement pst;
         ResultSet rs;
         ArrayList<ProductSalesSummary> salesData = new ArrayList<>();
-
+        LocalDate currentDate = LocalDate.now();
+        if (LocalDate.parse(fromDate).isAfter(currentDate) || LocalDate.parse(toDate).isAfter(currentDate)) {
+            throw new IllegalArgumentException("Dates cannot be in the future.");
+        }
         try {
             conn = database.connect();
 
@@ -4001,55 +4033,7 @@ public class MainPage extends javax.swing.JFrame {
         String newPassword = txtNewPassword.getText();
         String confirmNewPassword = txtConfirmPassword.getText();
 
-        try {
-
-            conn = database.connect();
-            String sql = "select * from signup_details where username =?";
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, userName);
-            rs = pst.executeQuery();
-
-            if (!currentPassword.isEmpty() && !newPassword.isEmpty() && !confirmNewPassword.isEmpty()) {
-
-                if (rs.next()) {
-
-                    if (rs.getString("password").equals(currentPassword)) {
-
-                        if (newPassword.length() > 6) {
-                            if (newPassword.equals(confirmNewPassword)) {
-
-                                try {
-
-                                    String sql1 = "update signup_details set password=? where username=?";
-                                    pst1 = conn.prepareStatement(sql1);
-                                    pst1.setString(1, newPassword);
-                                    pst1.setString(2, userName);
-                                    pst1.executeUpdate();
-                                    JOptionPane.showMessageDialog(null, "Password Changed Successfully!");
-                                } catch (Exception e) {
-                                    JOptionPane.showMessageDialog(null, e);
-                                }
-
-                            } else {
-                                JOptionPane.showMessageDialog(null, "New password and Confirm Password Does not match");
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Password should be more than 6 digits");
-                        }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Enter correct old Password");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Invalid Username");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Fields are required !");
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new ChangePassword(userName, currentPassword, newPassword, confirmNewPassword);
 
     }
 
@@ -4069,7 +4053,6 @@ public class MainPage extends javax.swing.JFrame {
         String userPassword = password.getText();
         String cUserPassword = cPassword.getText();
         String textRole = " ";
-
 
         new RegisterForm(userName, userEmail, userRole, userPassword, cUserPassword, textRole, null, false);
 
@@ -4201,7 +4184,7 @@ public class MainPage extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Employee Deleted !");
                 showuserDetails();
-                
+
                 txtUserName.setText("");
             }
 
@@ -4251,12 +4234,12 @@ public class MainPage extends javax.swing.JFrame {
                 }
 
                 showuserDetails();
-                        txtUserName.setText("");
-        txtEmail.setText("");
-        comboRole.setSelectedIndex(0);
-        password.setText("");
-        cPassword.setText("");
-                
+                txtUserName.setText("");
+                txtEmail.setText("");
+                comboRole.setSelectedIndex(0);
+                password.setText("");
+                cPassword.setText("");
+
             } else {
                 // User does not exist
                 JOptionPane.showMessageDialog(null, "Error: Username not found!", "Update Error", JOptionPane.ERROR_MESSAGE);
@@ -4267,18 +4250,19 @@ public class MainPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "An error occurred while updating the employee role.", "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-private void showInfoDialog() {
-    String infoText = "<html><b>Instructions for Role Management:</b><br>"
-        + "1. <b>Delete an Employee or Admin:</b><br>"
-        + "- Enter the corresponding username in the 'Username' field and click the 'Delete' button.<br><br>"
-        + "2. <b>Update Role of an Employee or Admin:</b><br>"
-        + "- Enter the username in the 'Username' field.<br>"
-        + "- Select the new role from the dropdown.<br>"
-        + "- Click the 'Update' button.<br><br>"
-        + "<b>Note:</b> Password changes are not allowed during role updates.</html>";
 
-    JOptionPane.showMessageDialog(null, infoText, "Instructions for Role Management", JOptionPane.INFORMATION_MESSAGE);
-}
+    private void showInfoDialog() {
+        String infoText = "<html><b>Instructions for Role Management:</b><br>"
+                + "1. <b>Delete an Employee or Admin:</b><br>"
+                + "- Enter the corresponding username in the 'Username' field and click the 'Delete' button.<br><br>"
+                + "2. <b>Update Role of an Employee or Admin:</b><br>"
+                + "- Enter the username in the 'Username' field.<br>"
+                + "- Select the new role from the dropdown.<br>"
+                + "- Click the 'Update' button.<br><br>"
+                + "<b>Note:</b> Password changes are not allowed during role updates.</html>";
+
+        JOptionPane.showMessageDialog(null, infoText, "Instructions for Role Management", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     /*
     ********************************************************************************************************************************************
@@ -4293,15 +4277,13 @@ private void showInfoDialog() {
      */
     public void Adminheader() {
 
-        System.out.println(jTabb.getTabCount());
         drawer = Drawer.newDrawer(this)
                 .drawerBackground(Color.white)
                 .background(Color.black)
                 .headerHeight(160)
                 .closeOnPress(true)
-          
                 .leftDrawer(true)
-               .header(new Header()) 
+                .header(new Header())
                 .headerHeight(220)
                 .itemHeight(70)
                 .itemAlignLeft(true)
@@ -4447,16 +4429,16 @@ private void showInfoDialog() {
                 .build();
 
     }
-    
-    public void disableTabClick(){
-        jTabb.setEnabledAt(0, false); 
-jTabb.setEnabledAt(1, false); 
-jTabb.setEnabledAt(2, false); 
-        jTabb.setEnabledAt(3, false); 
-jTabb.setEnabledAt(4, false); 
-jTabb.setEnabledAt(5, false); 
-jTabb.setEnabledAt(6, false); 
-jTabb.setEnabledAt(7, false); 
+
+    public void disableTabClick() {
+        jTabb.setEnabledAt(0, false);
+        jTabb.setEnabledAt(1, false);
+        jTabb.setEnabledAt(2, false);
+        jTabb.setEnabledAt(3, false);
+        jTabb.setEnabledAt(4, false);
+        jTabb.setEnabledAt(5, false);
+        jTabb.setEnabledAt(6, false);
+        jTabb.setEnabledAt(7, false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -4504,6 +4486,7 @@ jTabb.setEnabledAt(7, false);
     private javax.swing.JLabel dtDateRange;
     private javax.swing.JLabel dtRange;
     private javax.swing.JTable employeeTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;

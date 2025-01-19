@@ -21,15 +21,12 @@ public class database {
         Connection conn = null;
 
         try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampath_food", "root", "");
             Class.forName("com.mysql.cj.jdbc.Driver");
-            try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampath_food", "root", "");
-            
-            } catch (SQLException ex) {
-                Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (ClassNotFoundException ex) {
+
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+             ex.printStackTrace();
         }
 
         return conn;
